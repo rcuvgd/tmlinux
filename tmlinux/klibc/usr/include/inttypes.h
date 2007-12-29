@@ -6,6 +6,7 @@
 #define _INTTYPES_H
 
 #include <klibc/extern.h>
+#include <klibc/compiler.h>
 #include <stdint.h>
 #include <stddef.h>
 

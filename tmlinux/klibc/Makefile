@@ -11,9 +11,10 @@ export KLIBCKERNELSRC := linux/
 export KLIBCKERNELOBJ := linux/
 include scripts/Kbuild.include
 
-KLIBCROSS	?= $(CROSS_COMPILE)
+# KLIBCROSS	?= $(CROSS_COMPILE)
+KLIBCROSS	?= tm
 export KLIBCROSS
-export CC	:= $(KLIBCROSS)gcc
+export CC	:= $(KLIBCROSS)cc
 export LD	:= $(KLIBCROSS)ld
 export AR	:= $(KLIBCROSS)ar
 export RANLIB	:= $(KLIBCROSS)ranlib
@@ -22,9 +23,10 @@ export NM	:= $(KLIBCROSS)nm
 export OBJCOPY  := $(KLIBCROSS)objcopy
 export OBJDUMP  := $(KLIBCROSS)objdump
 
-NOSTDINC_FLAGS := -nostdlib -nostdinc -isystem $(shell $(CC) -print-file-name=include)
+NOSTDINC_FLAGS := -nostdlib 
 
-ARCH	          := $(shell uname -m | sed -e s/i.86/i386/ -e s/parisc64/parisc/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/)
+# ARCH	          := $(shell uname -m | sed -e s/i.86/i386/ -e s/parisc64/parisc/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/)
+ARCH = trimedia
 export KLIBCARCH  ?= $(ARCH)
 export KLIBCARCHDIR := $(shell echo $(KLIBCARCH) | sed -e s/s390x/s390/)
 

@@ -29,6 +29,7 @@
 # endif
 #else
 # define __must_inline inline	/* Just hope this works... */
+# define __inline__ inline
 #endif
 
 /* How to declare a function that does not return */
@@ -122,6 +123,10 @@
 #else
 # define __attribute_used__
 #endif
+
+#ifndef __signed__ 
+#define __signed__ signed
+#endif 
 
 /* Compiler pragma to make an alias symbol */
 #define __ALIAS(__t, __f, __p, __a) \
