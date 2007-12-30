@@ -16,7 +16,14 @@ char *NAME(const char *str, TIMEX * ts)
 {
 	int n;
 	char *s, *s0;
+#ifndef __TCS__
 	__typeof__(ts->FSEC) fs;	/* Fractional seconds */
+#else
+	/*
+	 * I am very sure that uintmax_t should be enough;
+	 */
+	uintmax_t fs;
+#endif 
 
 	ts->tv_sec = strntoumax(str, &s, 10, ~(size_t) 0);
 	fs = 0;

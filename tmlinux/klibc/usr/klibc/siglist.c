@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <unistd.h>
 
+#ifndef __TCS__ 
 const char *const sys_siglist[NSIG] = {
 #ifdef SIGABRT
 	[SIGABRT] = "Aborted",
@@ -119,3 +120,10 @@ const char *const sys_siglist[NSIG] = {
 	[SIGCONT] = "Continue",
 #endif
 };
+
+#else
+/*
+ * TriMedia has its own sys_siglist
+ */
+#include <klibc/archsiglist.h>
+#endif 

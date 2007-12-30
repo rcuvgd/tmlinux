@@ -84,10 +84,12 @@ INTERP_O := $(call objectify,$(INTERP_O))
 
 SOLIBHASH = $(shell cat $(SOLIB).hash)
 
+ifndef __TCS__
 # Generate syscall stubs
 klib-y += syscalls/
 # Generate socket calls stubs
 klib-y += socketcalls/
+endif
 
 #####
 # Readable errormessages extracted from src..
@@ -105,15 +107,26 @@ klib-o-files = $(shell cat $(obj)/klib.list \
 ######
 # Build static library: libc.a
 targets += libc.a __static_init.o
+ifndef __TCS__
 quiet_cmd_libc = KLIBCAR $@
       cmd_libc = rm -f $@;						\
                  $(KLIBCAR) cq $@					\
 		 $(call objectify,__static_init.o) $(klib-o-files);	\
                  $(KLIBCRANLIB) $@
+else
+quiet_cmd_libc = KLIBCAR $@
+      cmd_libc = rm -f $@;						\
+                 $(KLIBCAR) cr $@					\
+		 $(call objectify,__static_init.o) $(klib-o-files)
+endif
 
 $(LIBC): $(call objectify,__static_init.o) $(obj)/klib.list FORCE
 	$(call if_changed,libc)
 
+#
+#TriMedia has no mmu, so no share library.
+#
+ifndef __TCS__
 ######
 # Build shared library
 targets += libc.so __shared_init.o
@@ -129,7 +142,6 @@ quiet_cmd_libcso = KLIBCLD $@
 
 $(SOLIB): $(call objectify,__shared_init.o) $(obj)/klib.list FORCE
 	$(call if_changed,libcso)
-
 
 #####
 # Build sha1 hash values
@@ -151,6 +163,7 @@ quiet_cmd_sohash = GEN     $@
                      ln -f $@ $(obj)/klibc-$(SOLIBHASH).so
 $(SOHASH): $(SOLIB) $(SOLIB).hash
 	$(call cmd,sohash)
+endif
 
 
 #####

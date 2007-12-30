@@ -6,6 +6,7 @@
 #include "userdb.h"
 #include <paths.h>
 
+#ifndef __TCS__
 const struct passwd __root_user = {
 	.pw_name    = "root",
 	.pw_passwd  = "",
@@ -15,3 +16,14 @@ const struct passwd __root_user = {
 	.pw_dir     = "/",
 	.pw_shell   = _PATH_BSHELL
 };
+#else
+const struct passwd __root_user = {
+	"root",
+	"",
+	0,
+	0,
+	"root",
+	"/",
+	_PATH_BSHELL
+};
+#endif 

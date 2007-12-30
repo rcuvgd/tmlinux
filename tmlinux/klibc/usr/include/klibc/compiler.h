@@ -128,8 +128,15 @@
 #define __signed__ signed
 #endif 
 
+#ifndef __TCS__
 /* Compiler pragma to make an alias symbol */
 #define __ALIAS(__t, __f, __p, __a) \
   __t __f __p __attribute__((weak, alias(#__a)));
+#else
+/*
+ * FIXME: I don't know how to implement alias in TCS
+ */
+#define __ALIAS(__t,__f,__p,__a)
+#endif 
 
 #endif

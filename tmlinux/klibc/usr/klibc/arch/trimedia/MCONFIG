@@ -1,1 +1,42 @@
+# -*- makefle -*-
+#
+# arch/trimedia/MCONFIG 
+#
+# Speicial rules for this architecture. Note that this is actually
+# included from the main Makefile, and that pathnames should be 
+# accordingly
+include linux/.config
+
+__TCS__ = true
+
+KLIBCOPTFLAGS += -O3
 KLIBCBITSIZE  = 32
+
+# Extra linkflags when building the shared version of the library
+# This address needs to be reachable using normal inter-module
+# calls, and work on the memory models for this architecture
+# for trimedia has no mme, so let it blank
+KLIBCSHAREDFLAGS =
+
+# Arch specific flags
+target-$(CONFIG_TM1300) 	:= tm1
+target-$(CONFIG_PNX1500) 	:= pnx1500
+target-$(CONFIG_PNX1700) 	:= pnx1700
+TARGET := $(target-y)
+
+host-$(CONFIG_OLD_TMSIM)   	:= tmsim
+host-$(CONFIG_TTISIM)        	:= ttisim
+host-$(CONFIG_NOHOST)   	:= nohost
+HOST   := $(host-y)
+
+endian-$(CONFIG_LITTLE_ENDIAN)  := -el
+endian-$(CONFIG_BIG_ENDIAN) 	:= -eb
+ENDIAN := $(endian-y)
+
+float-$(CONFIG_FP32)   		:= -fp32
+float-$(CONFIG_FP64) 		:= -fp64
+FLOAT  := $(float-y)
+
+KLIBCARCHREQFLAGS =  -host $(HOST) -target $(TARGET) $(ENDIAN) $(FLOAT)
+
+EXTRA_KLIBCAFLAGS = -x
