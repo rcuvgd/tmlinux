@@ -9,7 +9,11 @@ void *bsearch(const void *key, const void *base, size_t nmemb,
 {
 	while (nmemb) {
 		size_t mididx = nmemb / 2;
+#ifndef __TCS__
 		const void *midobj = base + mididx * size;
+#else
+		const unsigned char* midobj = (unsigned char*)base + mididx * size;
+#endif 
 		int diff = cmp(key, midobj);
 
 		if (diff == 0)

@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <unistd.h>
 
+#ifndef __TCS__ 
 const char *const sys_sigabbrev[NSIG] = {
 #ifdef SIGABRT
 	[SIGABRT] = "ABRT",
@@ -119,3 +120,9 @@ const char *const sys_sigabbrev[NSIG] = {
 	[SIGCONT] = "CONT",
 #endif
 };
+#else
+/*
+ * TriMedia has its own sys_sigabbrev 
+ */
+#include <klibc/archsigabbrev.h>
+#endif 

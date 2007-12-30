@@ -261,12 +261,26 @@ quiet_cmd_cc_i_c = CPP     $@
 
 # Compile assembler sources (.S)
 # ---------------------------------------------------------------------------
+ifndef __TCS__
 
 quiet_cmd_as_o_S = KLIBCAS $@
       cmd_as_o_S = $(KLIBCCC) $(klibcaflags) -c $< -o $@
 
 %.o: %.S FORCE
 	$(call if_changed_dep,as_o_S)
+
+else
+#
+# assemly files of tmcc is *.s not *.S
+#
+
+quiet_cmd_as_o_s = KLIBCAS $@
+      cmd_as_o_s = touch $(depfile) ; \
+			$(KLIBCCC) $(klibcaflags) -c $< -o $@
+
+%.o: %.s FORCE
+	$(call if_changed_dep,as_o_s)
+endif
 
 targets += $(real-objs-y)
 

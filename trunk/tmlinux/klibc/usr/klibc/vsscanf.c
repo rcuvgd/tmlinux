@@ -117,7 +117,20 @@ int vsscanf(const char *buffer, const char *format, va_list ap)
 			case '*':
 				flags |= FL_SPLAT;
 				break;
+#ifndef __TCS__
 			case '0'...'9':
+#else
+			case  '0':
+			case  '1':
+			case  '2':
+			case  '3':
+			case  '4':
+			case  '5':
+			case  '6':
+			case  '7':
+			case  '8':
+			case  '9':
+#endif 
 				width = (ch - '0');
 				state = st_width;
 				flags |= FL_WIDTH;

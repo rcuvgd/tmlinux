@@ -1,0 +1,21 @@
+#
+# klibc .o files for trimedia 
+#
+include ./linux/.config
+
+target-$(CONFIG_TM1300) 	:= tm1
+target-$(CONFIG_PNX1500) 	:= pnx1500
+target-$(CONFIG_PNX1700) 	:= pnx1700
+TARGET := $(target-y)
+
+klib-y := crt0.o
+klib-y += target/$(TARGET)/syscall.o
+klib-y += target/$(TARGET)/setjmp.o
+
+#
+# FIXME: I don't know how to deal with libgcc
+#
+
+always  := crt0.o
+targets := crt0.o
+

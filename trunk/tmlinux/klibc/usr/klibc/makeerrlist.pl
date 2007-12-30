@@ -79,12 +79,16 @@ parse_file('linux/errno.h');
 
 if ( $type eq '-errlist' ) {
     print  "#include <errno.h>\n";
+    print  "#ifndef __TCS__\n";
     printf "const int sys_nerr = %d;\n", $maxerr+1;
     printf "const char * const sys_errlist[%d] = {\n", $maxerr+1;
     foreach $e ( sort(keys(%errors)) ) {
 	printf "  [%s] = \"%s\",\n", $errors{$e}, $errmsg{$e};
     }
     print "};\n";
+    print  "#else\n";
+    print  "#include <klibc/archerrlist.h>\n";
+    print  "#endif\n";
 } elsif ( $type eq '-errnos' ) {
     print  "#include <errno.h>\n";
     printf "const int sys_nerr = %d;\n", $maxerr+1;

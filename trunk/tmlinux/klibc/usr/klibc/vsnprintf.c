@@ -39,7 +39,11 @@ enum ranks {
 #define SIZE_T_RANK	rank_long
 #define PTRDIFF_T_RANK	rank_long
 
+#ifndef __TCS__
 #define EMIT(x) ({ if (o<n){*q++ = (x);} o++; })
+#else
+#define EMIT(x) do{ if (o<n){*q++ = (x);} o++; }while(0)
+#endif 
 
 static size_t
 format_int(char *q, size_t n, uintmax_t val, enum flags flags,

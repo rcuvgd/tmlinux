@@ -2,5 +2,5 @@
 # Kbuild file to build basic kbuild programs
 #
 
-hostprogs-y := fixdep
+hostprogs-y := fixdep convert-depfile
 always      := $(hostprogs-y)
