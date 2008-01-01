@@ -181,7 +181,7 @@ int vsnprintf(char *buffer, size_t n, const char *format, va_list ap)
 	int prec = -1;
 	int base;
 	size_t sz;
-	enum flags flags = 0;
+	enum flags flags = (enum flags)0;
 	enum {
 		st_normal,	/* Ground state */
 		st_flags,	/* Special flags */
@@ -198,7 +198,7 @@ int vsnprintf(char *buffer, size_t n, const char *format, va_list ap)
 		case st_normal:
 			if (ch == '%') {
 				state = st_flags;
-				flags = 0;
+				flags = (enum flags)0;
 				rank = rank_int;
 				width = 0;
 				prec = -1;

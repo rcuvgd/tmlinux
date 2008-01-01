@@ -16,6 +16,8 @@ int NAME(const char *path, const char *arg0, ...)
 	const char *arg;
 	char *const *envp;
 
+	memset(&cap,0,sizeof(va_list));
+
 	va_start(ap, arg0);
 	va_copy(cap, ap);
 
