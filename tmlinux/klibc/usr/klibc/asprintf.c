@@ -13,6 +13,8 @@ int asprintf(char **bufp, const char *format, ...)
 	int bytes;
 	char *p;
 
+	memset(&ap1,0,sizeof(va_list));
+
 	va_start(ap, format);
 	va_copy(ap1, ap);
 

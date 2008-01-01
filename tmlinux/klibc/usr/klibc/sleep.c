@@ -16,5 +16,5 @@ unsigned int sleep(unsigned int seconds)
 	else if (errno == EINTR)
 		return ts.tv_sec;
 	else
-		return -1;
+		return (unsigned int)-1;
 }

@@ -9,7 +9,7 @@
  * insane amounts of padding around dev_t's.
  */
 struct stat {
-	__stdev64	(st_dev);
+	__stdev64	(st_dev)
 	unsigned char	__pad0[2];
 
 	unsigned long	__st_ino;
@@ -20,7 +20,7 @@ struct stat {
 	unsigned long	st_uid;
 	unsigned long	st_gid;
 
-	__stdev64	(st_rdev);
+	__stdev64	(st_rdev)
 	unsigned char	__pad3[2];
 
 	long long	st_size;

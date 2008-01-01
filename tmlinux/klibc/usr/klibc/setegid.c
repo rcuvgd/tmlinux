@@ -6,5 +6,5 @@
 
 int setegid(gid_t egid)
 {
-	return setregid(-1, egid);
+	return setregid((gid_t)-1, egid);
 }

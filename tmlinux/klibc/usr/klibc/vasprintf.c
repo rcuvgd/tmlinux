@@ -12,6 +12,8 @@ int vasprintf(char **bufp, const char *format, va_list ap)
 	int bytes;
 	char *p;
 
+	memset(&ap1,0,sizeof(va_list));
+
 	va_copy(ap1, ap);
 
 	bytes = vsnprintf(NULL, 0, format, ap1) + 1;

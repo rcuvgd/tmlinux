@@ -76,7 +76,7 @@ int vsscanf(const char *buffer, const char *format, va_list ap)
 	int rank = rank_int;	/* Default rank */
 	unsigned int width = UINT_MAX;
 	int base;
-	enum flags flags = 0;
+	enum flags flags = (enum flags)0;
 	enum {
 		st_normal,	/* Ground state */
 		st_flags,	/* Special flags */
@@ -88,7 +88,7 @@ int vsscanf(const char *buffer, const char *format, va_list ap)
 	} state = st_normal;
 	char *sarg = NULL;	/* %s %c or %[ string argument */
 	enum bail bail = bail_none;
-	int sign;
+	//int sign;
 	int converted = 0;	/* Successful conversions */
 	unsigned long matchmap[((1 << CHAR_BIT) + (LONG_BIT - 1)) / LONG_BIT];
 	int matchinv = 0;	/* Is match map inverted? */
@@ -99,7 +99,7 @@ int vsscanf(const char *buffer, const char *format, va_list ap)
 		case st_normal:
 			if (ch == '%') {
 				state = st_flags;
-				flags = 0;
+				flags = (enum flags)0;
 				rank = rank_int;
 				width = UINT_MAX;
 			} else if (isspace((unsigned char)ch)) {
@@ -190,33 +190,33 @@ int vsscanf(const char *buffer, const char *format, va_list ap)
 				case 'p':	/* Pointer */
 					rank = rank_ptr;
 					base = 0;
-					sign = 0;
+					//sign = 0;
 					goto scan_int;
 
 				case 'i':	/* Base-independent integer */
 					base = 0;
-					sign = 1;
+					//sign = 1;
 					goto scan_int;
 
 				case 'd':	/* Decimal integer */
 					base = 10;
-					sign = 1;
+					//sign = 1;
 					goto scan_int;
 
 				case 'o':	/* Octal integer */
 					base = 8;
-					sign = 0;
+					//sign = 0;
 					goto scan_int;
 
 				case 'u':	/* Unsigned decimal integer */
 					base = 10;
-					sign = 0;
+					//sign = 0;
 					goto scan_int;
 
 				case 'x':	/* Hexadecimal integer */
 				case 'X':
 					base = 16;
-					sign = 0;
+					//sign = 0;
 					goto scan_int;
 
 				case 'n':	/* # of characters consumed */
