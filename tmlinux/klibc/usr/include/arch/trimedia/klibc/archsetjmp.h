@@ -5,18 +5,18 @@
 #ifndef _KLIBC_ARCHSETJMP_H
 #define _KLIBC_ARCHSETJMP_H
 
-struct __jmp_buf {
-	/*
-	 *FIXME: should put the callee-saved register here!
-	 */
-	unsigned long __r8;
-	unsigned long __r9;
-	unsigned long __r10;
-	unsigned long __r11;
-	unsigned long __r12;
-	unsigned long __r13;
-	unsigned long __r14;
-	unsigned long __r15;
+struct __jmp_buf
+{
+	unsigned long rp;
+	unsigned long fp;
+	unsigned long sp;
+	unsigned long dpc;
+	unsigned long spc;
+	unsigned long pcsw;
+	unsigned long r6;
+	unsigned long r7;
+	unsigned long r8;
+	unsigned long callee_save_regs[32-9+1];
 };
 
 typedef struct __jmp_buf jmp_buf[1];

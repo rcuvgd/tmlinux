@@ -11,6 +11,7 @@ TARGET := $(target-y)
 klib-y := crt0.o
 klib-y += target/$(TARGET)/syscall.o
 klib-y += target/$(TARGET)/setjmp.o
+klib-y += target/$(TARGET)/longjmp.o
 
 #
 # FIXME: I don't know how to deal with libgcc
