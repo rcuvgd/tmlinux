@@ -27,6 +27,7 @@ TARGET := $(target-y)
 host-$(CONFIG_OLD_TMSIM)   	:= tmsim
 host-$(CONFIG_TTISIM)        	:= ttisim
 host-$(CONFIG_NOHOST)   	:= nohost
+host-$(CONFIG_WINNT)   		:= winnt 
 HOST   := $(host-y)
 
 endian-$(CONFIG_LITTLE_ENDIAN)  := -el
