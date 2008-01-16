@@ -8,7 +8,7 @@ target-$(CONFIG_PNX1500) 	:= pnx1500
 target-$(CONFIG_PNX1700) 	:= pnx1700
 TARGET := $(target-y)
 
-klib-y := crt0.o
+klib-y := crt0.o syscalls.o
 klib-y += target/$(TARGET)/syscall.o
 klib-y += target/$(TARGET)/setjmp.o
 klib-y += target/$(TARGET)/longjmp.o

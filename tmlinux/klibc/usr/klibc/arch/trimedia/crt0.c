@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <ops/custom_ops.h>
 
-#define DEBUG
+#undef DEBUG
 
 void _start(void)
 {
@@ -34,7 +34,6 @@ void _start(void)
 	}
 #endif
 
-	/*prepare_argument*/
 	ret=main(argc,argv,env);
 #ifdef DEBUG 
 	printf("main returns %d\n",ret);
