@@ -1,0 +1,10 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+This page summaries the notes for tmlinux developers
+
+
+= Details =
+
+  # Do not use tmlinux on LCP-1500 board without DP, It has proved that it can not work correctly. Please see issue 5 for more details
