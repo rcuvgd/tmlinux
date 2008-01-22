@@ -7,7 +7,8 @@ export KLIBCSRC := usr/klibc
 export VERSION := $(shell cat $(KLIBCSRC)/version)
 export KLIBCINC := usr/include
 export KLIBCOBJ := usr/klibc
-export KLIBCKERNELSRC := linux/
+export KBUILD_SRC := 1
+export KLIBCKERNELSRC := /home/guohr/workdir/camelguo/linux/trunk/
 export KLIBCKERNELOBJ := linux/
 include scripts/Kbuild.include
 
@@ -25,7 +26,6 @@ export OBJDUMP  := $(KLIBCROSS)objdump
 
 NOSTDINC_FLAGS := -nostdlib 
 
-# ARCH	          := $(shell uname -m | sed -e s/i.86/i386/ -e s/parisc64/parisc/ -e s/sun4u/sparc64/ -e s/arm.*/arm/ -e s/sa110/arm/)
 ARCH = trimedia
 export KLIBCARCH  ?= $(ARCH)
 export KLIBCARCHDIR := $(shell echo $(KLIBCARCH) | sed -e s/s390x/s390/)

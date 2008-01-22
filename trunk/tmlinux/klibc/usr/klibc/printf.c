@@ -7,6 +7,7 @@
 
 #define BUFFER_SIZE	16384
 
+#if 0
 int printf(const char *format, ...)
 {
 	va_list ap;
@@ -17,3 +18,4 @@ int printf(const char *format, ...)
 	va_end(ap);
 	return rv;
 }
+#endif 

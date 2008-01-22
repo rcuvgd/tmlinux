@@ -38,7 +38,7 @@ float-$(CONFIG_FP32)   		:= -fp32
 float-$(CONFIG_FP64) 		:= -fp64
 FLOAT  := $(float-y)
 
-KLIBCSYMRENAME    = -Dmalloc=klibc_malloc -Dfree=klibc_free -Dmemcpy=klibc_memcpy -Dmemset=klibc_memset -Dstrlen=klibc_strlen -Dprintf=klibc_printf -Dvfprintf=klibc_vfprintf
+KLIBCSYMRENAME    = -Dmalloc=klibc_malloc -Dfree=klibc_free -Dmemcpy=klibc_memcpy -Dmemset=klibc_memset -Dstrlen=klibc_strlen -Dexit=klibc_exit -Dsleep=klibc_sleep
 
 KLIBCARCHREQFLAGS =  -host $(HOST) -target $(TARGET) $(ENDIAN) $(FLOAT) $(KLIBCSYMRENAME) 
 
