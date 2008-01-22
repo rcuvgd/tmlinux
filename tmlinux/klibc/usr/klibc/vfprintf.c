@@ -9,6 +9,7 @@
 
 #define BUFFER_SIZE	32768
 
+#if 0
 int vfprintf(FILE * file, const char *format, va_list ap)
 {
 	int rv;
@@ -24,3 +25,4 @@ int vfprintf(FILE * file, const char *format, va_list ap)
 
 	return _fwrite(buffer, rv, file);
 }
+#endif 
