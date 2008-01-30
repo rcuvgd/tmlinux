@@ -7,4 +7,4 @@ This page summaries the notes for tmlinux developers
 = Details =
 
   # Do not use tmlinux on LCP-1500 board without DP, It has proved that it can not work correctly. Please see issue 5 for more details
-  # Do not enable SLOB memory allocator of tmlinux, which has not been proven on machine without MMU.
+  # Do not enable SLOB memory allocator of tmlinux, which has not been proven on machine without MMU.*may be it was caused by the incorrect implementation of SWITCH_STACK*
