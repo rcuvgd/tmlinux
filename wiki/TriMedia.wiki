@@ -3,11 +3,3 @@
 = Introduction =
 
 An kind of CPU which architecture is VLIW. Please visit http://www.nxp.com for details.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
