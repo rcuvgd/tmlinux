@@ -47,10 +47,10 @@ TCS=/opt/NXP/TCS510 ./creat-tcs.sh
 ==Build your application:==  
   === 1. Note about tmlinux applications ===
   Now, you can compile your exist application, but before compiling them, please note that:
-*INPUT/OUTPUT FUNCTIONS CANNOT WORK
+* INPUT/OUTPUT FUNCTIONS CANNOT WORK
   Until now, tmlinux can only run on trimedia simulator. In another words, it can not run on any real boards. Because of lacking real output devices, this linux kernel directs stdout/stderr to /dev/null, which means that these output functions (such as `printf()`, `puts()`) will output nothing. Because of lacking real input devices, this linux kernel will wait forever when application calls input functions (such as `gets()`, `getchar()`)
 
-*WITHOUT `PRINTF()`, HOW CAN I SEE APPLICATION RUNNING
+* WITHOUT `PRINTF()`, HOW CAN I SEE APPLICATION RUNNING
   As I said before, tmlinux's `printf()` just output information to /dev/null. To see application running, I use *TCS*'s `printf()` instead of tmlinux's `printf()`. So, in the following code,
 {{{
 #include <stdio.h>
