@@ -7,14 +7,36 @@
 
 
 ==Preparation:== 
-  # === Get and install TCS Linux edition.===
+  === 1. Get and install TCS Linux edition.===
 
-   First of all, you should install TCS linux edition on your linux machines. Please goto [http://www.tcshelp.com] to get it. Of couse, you should have the license for it. 
-   It the following section, let's support the installation directory of your TCS is _*/opt/NXP/TCS510/*_ 
+  First of all, you should install TCS linux edition on your linux machines. Please goto [http://www.tcshelp.com] to get it. Of couse, you should have the license for it. 
+  In the following section, let's support the installation directory of your TCS is _*/opt/NXP/TCS510/*_ 
 
-  # === Checkout sysroots from this project's svn.===
-  # === Setup application building evironment.===
-  # === Create TCS evironment for building your applciations.===
+  === 2. Checkout sysroots from this project's svn.===
+  Now make your work directory (suppose it is _*/home/guohr/worktest/*_), at this directory, use the following command to get the sysroots:
+  {{{
+cd /home/guohr/worktest/
+svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
+  }}}
+  === 3. Setup application building evironment.===
+  Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
+  {{{
+export PATH=$PATH:/opt/NXP/TCS510/bin/
+export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2/
+  }}}
+  
+  To validate the environment, at shell, use the following command, the result will like this:
+  {{{
+guohr@ghr-notebook-02:~/worktest/tmlinux-app> tmcc -V
+tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
+tmcc warning : no work
+  }}}
+  {{{
+guohr@ghr-notebook-02:~/worktest/tmlinux-app>trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc -V
+tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
+tmcc warning : no work
+  }}}
+  === 4. Create TCS evironment for building your applciations.===
 
 ==Build your application:==
   # === Build your applications.===
