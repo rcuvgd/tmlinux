@@ -1,6 +1,6 @@
 = Introduction =
 
-  This page describes how to compile your application and run it on tmlinux.
+  This page describes how to compile your applications and run them on tmlinux.
 
 
 = Details =
