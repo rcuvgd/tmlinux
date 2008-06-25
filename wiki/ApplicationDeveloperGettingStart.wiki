@@ -8,6 +8,10 @@
 
 ==Preparation:== 
   # === Get and install TCS Linux edition.===
+
+   First of all, you should install TCS linux edition on your linux machines. Please goto [http://www.tcshelp.com] to get it. Of couse, you should have the license for it. 
+   It the following section, let's support the installation directory of your TCS is _*/opt/NXP/TCS510/*_ 
+
   # === Checkout sysroots from this project's svn.===
   # === Setup application building evironment.===
   # === Create TCS evironment for building your applciations.===
