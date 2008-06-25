@@ -5,10 +5,13 @@
 
 = Details =
 
-  
-  # == Get and install TCS Linux edition.==
-  # == Checkout sysroots from this project's svn.==
-  # == Setup application building evironment.==
-  # == Create TCS evironment for building your applciations.==
-  # == Build your applications.==
-  # == Run your applications.==
+
+==Preparation:== 
+  # === Get and install TCS Linux edition.===
+  # === Checkout sysroots from this project's svn.===
+  # === Setup application building evironment.===
+  # === Create TCS evironment for building your applciations.===
+
+==Build your application:==
+  # === Build your applications.===
+  # === Run your applications.===
