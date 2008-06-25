@@ -9,7 +9,7 @@
 ==Preparation:== 
   === 1. Get and install TCS Linux edition.===
 
-  First of all, you should install TCS linux edition on your linux machines. Please goto [http://www.tcshelp.com] to get it. Of couse, you should have the license for it. 
+  First of all, you should install TCS Linux edition on your Linux machines. Please goto [http://www.tcshelp.com] to get it. Of course, you should have the license for it. 
   In the following section, let's support the installation directory of your TCS is _*/opt/NXP/TCS510/*_ 
 
   === 2. Checkout sysroots from this project's svn.===
@@ -18,7 +18,7 @@
 cd /home/guohr/worktest/
 svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
   }}}
-  === 3. Setup application building evironment.===
+  === 3. Setup application building environment.===
   Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
   {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
@@ -36,7 +36,13 @@ guohr@ghr-notebook-02:~/worktest/tmlinux-app>trimedia-gss-linux-tcs-pnx1500el_fp
 tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
-  === 4. Create TCS evironment for building your applciations.===
+  === 4. Create TCS environment for building your applications.===
+  To create the whole TCS environment for building tmlinux applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* and then use the following command:
+  {{{
+cd /home/guohr/worktest/tmlinux-app/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
+TCS=/opt/NXP/TCS510 ./creat-tcs.sh
+  }}}
+  Please set TCS with your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
 
 ==Build your application:==
   # === Build your applications.===
