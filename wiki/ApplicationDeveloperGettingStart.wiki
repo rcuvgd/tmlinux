@@ -66,5 +66,11 @@ main(void)
   But *PLEASE DO NOTE THAT:* high frequent `printf()` may cause the TCS system suspend, so try to avoid this situation.
 
   === 2. Build your applications===
+  Ok, you can compile your applications. It is as simple as compiling the simplest 'hello world' application, Just replace your compiler with *trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc*
+  {{{
+trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc hello.c -o hello.out
+  }}}
+
+  Please see TmlinuxAppExample for examples.
   
 == Run your applications==
