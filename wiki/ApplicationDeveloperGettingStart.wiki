@@ -71,6 +71,16 @@ main(void)
 trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc hello.c -o hello.out
   }}}
 
+  There are some test cases for tmlinux application in svn. Please use the following command to check them out and just type make to compile them.
+  {{{
+/*suppose you are in /home/guohr/worktest directory*/
+svn checkout http://tmlinux.googlecode.com/svn/trunk/app-test/
+cd app-test
+make
+  }}} 
+
+  If successful, you will get some *.out binary applications in *_app-test_* directory.
+
   Please see TmlinuxAppExample for examples.
   
 == Run your applications==
@@ -78,5 +88,3 @@ trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc hello.c -o hello.out
  * put your binary applications into the target root file system.
  * convert the target root file system to initramfs cpio file.
  * Build your linux kernel with the target root file system embedded.
-
-
