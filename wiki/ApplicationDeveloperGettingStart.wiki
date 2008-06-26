@@ -152,6 +152,7 @@ select "General setup -> Initramfs source file(s)"
 set "/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
 save and quite
 }}}
+  while `/home/guohr/worktest/initramfs_list` is the full path of that initramfs list file and `/home/guohr/worktest/export` is the target root directory in which contains your applications.
 
   Tips: you can edit *.config* file located at linux-obj directly. Just set
 {{{
