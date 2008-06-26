@@ -162,4 +162,26 @@ CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktes
 
   === 3. Build linux kernel image ===
 
+  At *_linux-obj_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
+{{{
+guohr@ghr-notebook-01:~/worktest/linux-obj$ make
+  CHK     include/linux/version.h
+  GEN     include/asm-trimedia/asm-offsets.h
+  CHK     include/linux/compile.h
+  CHK     usr/initramfs_list
+  GEN     usr/initramfs_data.h
+  GEN     usr/initramfs_len.h
+  CC      usr/initramfs_data.o
+  LD      usr/built-in.o
+  GEN     .version
+  CHK     include/linux/compile.h
+  UPD     include/linux/compile.h
+  CC      init/version.o
+  LD      init/built-in.o
+  LD      vmlinux
+  SYSMAP  System.map
+}}}
+
+  If success, the linux image is `arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out`
+
   === 4. Run this linux system and see your application running ===
