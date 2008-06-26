@@ -121,6 +121,10 @@ Fatal error: exception Errormsg.Error
 
   === 2. Arrange target root file system and create initramfs cpio file ===
 
+  To build your linux system(kernel and target root filesystem), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.
+
+
+
   === 3. Build linux kernel image ===
 
   === 4. Run this linux system and see your application running ===
