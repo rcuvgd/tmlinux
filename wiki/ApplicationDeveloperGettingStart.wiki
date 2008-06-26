@@ -123,7 +123,27 @@ Fatal error: exception Errormsg.Error
 
   To build your linux system(kernel and target root filesystem), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.
 
+  Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
+  E.g:
+{{{
+mkdir export
+cp app-test/hello.out ./export/init -fr
+}}}
+  Do not forget to assign runnable permission to the binary applications
+{{{
+chmod a+x ./export/init
+}}}
 
+  Because regular users can not make device node files and the basic target root filesystem needs them, I suggest that you write a initramfs list file (in this example, it is named *_initramfs_list_* and located at *_/home/guohr/worktest directory_*) which contains the device node files information:
+{{{
+# This is a very simple, default initramfs
+
+dir /dev 0755 0 0
+nod /dev/console 0600 0 0 c 5 1
+nod /dev/zero 0600 0 0 c 1 5
+dir /root 0700 0 0
+}}}
+ 
 
   === 3. Build linux kernel image ===
 
