@@ -144,6 +144,20 @@ nod /dev/zero 0600 0 0 c 1 5
 dir /root 0700 0 0
 }}}
  
+  Now change to *_linux-obj_* directory at the work directory. And use `make menuconfig` to change the *CONFIG_INITRAMFS_SOURCE* option.
+{{{
+cd linux-obj
+make menuconfig
+select "General setup -> Initramfs source file(s)"
+set "/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
+save and quite
+}}}
+
+  Tips: you can edit *.config* file located at linux-obj directly. Just set
+{{{
+CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
+}}}
+  and then save and quite.
 
   === 3. Build linux kernel image ===
 
