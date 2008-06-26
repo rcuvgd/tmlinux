@@ -20,7 +20,7 @@ svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
   }}}
   === 3. Setup application building environment.===
   Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
-  {{{
+    {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2/
   }}}
@@ -79,7 +79,7 @@ cd app-test
 make
   }}} 
 
-  If successful, you will get some *.out binary applications in *_app-test_* directory.
+  If successful, you will get some .out binary applications in *_app-test_* directory.
 
   Please see TmlinuxAppExample for examples.
   
@@ -87,4 +87,29 @@ make
   You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
  * put your binary applications into the target root file system.
  * convert the target root file system to initramfs cpio file.
- * Build your linux kernel with the target root file system embedded.
+ * Build your linux kernel with this initramfs cpio file embedded.
+
+  === 1. Install cil (C intermedia language) ===
+
+  Note that: before continue, you need to install OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
+  {{{
+./configure
+make world
+make opt
+make install
+  }}}
+
+  Before build linux kernel image, you need to setup and install cil in your linux machine, which is used to process GNU C extenstion options when compiling linux kernel.
+  
+  Use the following command to check it out and compile, setup it.
+  {{{
+svn checkout http://tmlinux.googlecode.com/svn/trunk/cil
+cd cil/
+./configure  
+  }}}
+
+  === 2. Arrange target root file system and create initramfs cpio file ===
+
+  === 3. Build linux kernel image ===
+
+  === 4. Run this linux system and see your application running ===
