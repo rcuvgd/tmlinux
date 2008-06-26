@@ -87,7 +87,7 @@ make
   You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
  * put your binary applications into the target root file system.
  * convert the target root file system to initramfs cpio file.
- * Build your linux kernel with this initramfs cpio file embedded.
+ * Build your Linux kernel with this initramfs cpio file embedded.
 
   === 1. Install cil (C intermedia language) ===
 
@@ -99,7 +99,7 @@ make opt
 make install
   }}}
 
-  Before build linux kernel image, you need to setup and install cil in your linux machine, which is used to process GNU C extenstion options when compiling linux kernel.
+  Before build Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
   
   Use the following command to check it out and compile, setup it.
   {{{
@@ -121,7 +121,7 @@ Fatal error: exception Errormsg.Error
 
   === 2. Arrange target root file system and create initramfs cpio file ===
 
-  To build your linux system(kernel and target root filesystem), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.
+  To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.
 
   Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
   E.g:
@@ -160,7 +160,7 @@ CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktes
 }}}
   and then save and quite.
 
-  === 3. Build linux kernel image ===
+  === 3. Build Linux kernel image ===
 
   At *_linux-obj_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
 {{{
@@ -182,6 +182,13 @@ guohr@ghr-notebook-01:~/worktest/linux-obj$ make
   SYSMAP  System.map
 }}}
 
-  If success, the linux image is `arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out`
+  If success, the Linux image is `arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out`
 
-  === 4. Run this linux system and see your application running ===
+  === 4. Run this Linux system and see your application running ===
+
+  Congratulations, you now get the runnable Linux image, at shell, type `./run.sh` to run it.
+
+  The information below traces the tasks switching track. the `(1)` is the previous task process ID and the `(13)` is the next task process ID. It tells you that Linux kernel switch from `task(1)` to `task(13)`. 
+{{{
+switch_to: from (1) to (13)
+}}}
