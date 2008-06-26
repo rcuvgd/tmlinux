@@ -27,19 +27,19 @@ export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2
   
   To validate the environment, at shell, use the following command, the result will like this:
   {{{
-guohr@ghr-notebook-02:~/worktest/tmlinux-app> tmcc -V
+guohr@ghr-notebook-02:~/worktest> tmcc -V
 tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
   {{{
-guohr@ghr-notebook-02:~/worktest/tmlinux-app>trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc -V
+guohr@ghr-notebook-02:~/worktest>trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc -V
 tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
   === 4. Create TCS environment for building your applications.===
   To create the whole TCS environment for building tmlinux applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* and then use the following command:
   {{{
-cd /home/guohr/worktest/tmlinux-app/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
+cd /home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
 TCS=/opt/NXP/TCS510 ./creat-tcs.sh
   }}}
   Please set TCS with your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
@@ -112,7 +112,7 @@ export PATH=$PATH:/home/guohr/worktest/cil/obj/x86_LINUX/
 
   To validate the environment, type the following command and you will get the following message:
 {{{
-camelguo@ghr-notebook-02:~/workdir/tmlinux-app/cil> cilly.asm.exe
+guohr@ghr-notebook-01:~/worktest/cil> cilly.asm.exe
 
 Error: No arguments for CIL
 
