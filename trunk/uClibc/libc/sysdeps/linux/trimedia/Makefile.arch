@@ -1,0 +1,15 @@
+# Makefile for uClibc
+#
+#
+# Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+#
+target-$(CONFIG_TM1300)         := tm1
+target-$(CONFIG_PNX1500)        := pnx1500
+target-$(CONFIG_PNX1700)        := pnx1700
+TARGET := $(target-y)
+
+CSRC := brk.c ptrace.c sigset.c clone.c vfork.c setjmp.c fork.c
+SSRC := target/$(TARGET)/syscall.s target/$(TARGET)/__setjmp.s target/$(TARGET)/__longjmp.s target/$(TARGET)/internal_clone.s target/$(TARGET)/syscall_clone.s 
+
+include $(top_srcdir)libc/sysdeps/linux/Makefile.commonarch
+

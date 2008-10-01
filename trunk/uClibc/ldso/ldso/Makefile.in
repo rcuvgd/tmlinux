@@ -1,0 +1,69 @@
+# Makefile for uClibc
+#
+# Copyright (C) 2000-2005 Erik Andersen <andersen@uclibc.org>
+#
+# Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+#
+
+CFLAGS-ldso := -DNOT_IN_libc -DIS_IN_rtld $(SSP_DISABLE_FLAGS) -D_GNU_SOURCE
+
+# This stuff will not work with -fomit-frame-pointer
+CFLAGS-ldso += -fno-omit-frame-pointer
+
+CFLAGS-ldso += -I$(top_srcdir)ldso/ldso/$(TARGET_ARCH) -I$(top_srcdir)ldso/include -I$(top_srcdir)ldso/ldso
+CFLAGS-ldso += -DUCLIBC_RUNTIME_PREFIX=\"$(RUNTIME_PREFIX)\" -DUCLIBC_LDSO=\"$(UCLIBC_LDSO)\"
+
+ifeq ($(SUPPORT_LD_DEBUG),y)
+CFLAGS-ldso += -D__SUPPORT_LD_DEBUG__
+endif
+
+ifeq ($(SUPPORT_LD_DEBUG_EARLY),y)
+CFLAGS-ldso += -D__SUPPORT_LD_DEBUG_EARLY__
+endif
+
+ifeq ($(DODEBUG),y)
+# Not really much point in including debugging info, since gdb
+# can't really debug ldso, since gdb requires help from ldso to
+# debug things....
+CFLAGS-ldso += -Os -g
+endif
+
+CFLAGS-ldso/ldso/$(TARGET_ARCH)/ := $(CFLAGS-ldso)
+
+CFLAGS-ldso.c := -DLDSO_ELFINTERP=\"$(TARGET_ARCH)/elfinterp.c\"
+
+ifneq ($(SUPPORT_LD_DEBUG),y)
+LDFLAGS-ld-uClibc.so := $(LDFLAGS)
+else
+LDFLAGS-ld-uClibc.so := $(LDFLAGS_NOSTRIP) -z defs
+endif
+LDFLAGS-ld-uClibc.so += -e _start -z now -Bsymbolic --export-dynamic --sort-common --discard-locals --discard-all --no-undefined
+
+ldso_FULL_NAME := ld-uClibc-$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBLEVEL).so
+
+ld-uClibc_DIR := $(top_srcdir)ldso/ldso
+ld-uClibc_OUT := $(top_builddir)ldso/ldso
+
+ld-uClibc_CSRC := $(ld-uClibc_DIR)/ldso.c
+ld-uClibc_COBJ := $(patsubst $(ld-uClibc_DIR)/%.c,$(ld-uClibc_OUT)/%.o,$(ld-uClibc_CSRC))
+
+ld-uClibc_SSRC := $(wildcard $(ld-uClibc_DIR)/$(TARGET_ARCH)/*.S)
+ld-uClibc_SOBJ := $(patsubst $(ld-uClibc_DIR)/$(TARGET_ARCH)/%.S,$(ld-uClibc_OUT)/$(TARGET_ARCH)/%.o,$(ld-uClibc_SSRC))
+
+ld-uClibc_OBJS := $(ld-uClibc_COBJ) $(ld-uClibc_SOBJ)
+
+ld-uClibc-so-y := $(ld-uClibc_OBJS:.o=.oS)
+
+lib-so-y += $(ldso)
+objclean-y += ld-uClibc_clean
+
+$(ldso:.$(MAJOR_VERSION)=): $(ld-uClibc_OUT)/ld-uClibc_so.a
+	$(call link.so,$(ldso_FULL_NAME),$(MAJOR_VERSION))
+
+$(ld-uClibc_OUT)/ld-uClibc_so.a: $(ld-uClibc-so-y)
+	$(Q)$(RM) $@
+	$(do_strip)
+	$(do_ar)
+
+ld-uClibc_clean:
+	$(RM) $(ld-uClibc_OUT)/*.{o,os,a} $(ld-uClibc_OUT)/*/*.{o,os}
