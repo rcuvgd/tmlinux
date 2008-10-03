@@ -4,7 +4,10 @@ This page describes how to compile the whole platform of tmlinux (includding lin
 
 = Details =
 
-==Preparation== 
+==Preparation==
+===0. Environment setup==
+In the following section, let's suppose the workdir is _*/home/guohr/worktest*_ and the TCS installation directory is _*/opt/NXP/TCS510*_
+ 
 ===1. Get and Install TCS Linux edition===
 First of all, you should install TCS Linux edition on your Linux machines. Please goto [http://www.tcshelp.com] to get it. Of course, you should have the license for it. 
 In the following section, let's suppose the installation directory of your TCS is _*/opt/NXP/TCS510/*_
