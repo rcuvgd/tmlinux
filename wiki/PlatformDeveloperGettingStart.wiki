@@ -57,9 +57,15 @@ Fatal error: exception Errormsg.Error
 *Note that:*
 Due to the limit of max upload size of google code, I put the Linux kernel of tmlinux to [http://www.gulessoft.com/en/compay/contribution/125.html gulessoft official site] and will move to this project site as soon as google increase the limit.
 
-Download Linux kernel of tmlinux using the following command:
+Download Linux kernel of tmlinux using the following command: (DO NOT forget to verify it using md5sum)
 {{{
 wget -c http://www.gulessoft.com/download/tmlinux/linux-2.6.14-tmlinux-1.0.tar.bz2 
+}}}
+
+unpack the Linux kernel
+{{{
+tar xvfjp linux-2.6.14-tmlinux-1.0.tar.bz2
+mv linux-2.6.14-tmlinux-1.0 linux
 }}}
 
 ==Build uClibc==
