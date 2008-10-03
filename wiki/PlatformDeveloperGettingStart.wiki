@@ -62,7 +62,7 @@ Download Linux kernel of tmlinux using the following command: (DO NOT forget to 
 wget -c http://www.gulessoft.com/download/tmlinux/linux-2.6.14-tmlinux-1.0.tar.bz2 
 }}}
 
-unpack the Linux kernel
+Unpack the Linux kernel
 {{{
 tar xvfjp linux-2.6.14-tmlinux-1.0.tar.bz2
 mv linux-2.6.14-tmlinux-1.0 linux
