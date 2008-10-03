@@ -92,7 +92,7 @@ make
 
   === 1. Install cil (C intermedia language) ===
 
-  Note that: before continue, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
+  Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
   {{{
 ./configure
 make world
@@ -100,7 +100,7 @@ make opt
 make install
   }}}
 
-  Before build Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
+  Before building Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
   
   Use the following command to check it out and compile, setup it.
   {{{
