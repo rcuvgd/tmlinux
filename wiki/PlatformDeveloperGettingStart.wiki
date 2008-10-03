@@ -10,6 +10,34 @@ First of all, you should install TCS Linux edition on your Linux machines. Pleas
 In the following section, let's suppose the installation directory of your TCS is _*/opt/NXP/TCS510/*_
 
 ===2. Install CIL (C intermedia language)===
+Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
+  {{{
+./configure
+make world
+make opt
+make install
+  }}}
+
+Before building Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
+  
+Use the following command to check it out and compile, setup it.
+  {{{
+svn checkout http://tmlinux.googlecode.com/svn/trunk/cil
+cd cil/
+./configure
+make  
+export PATH=$PATH:/home/guohr/worktest/cil/obj/x86_LINUX/
+  }}}
+
+To validate the environment, type the following command and you will get the following message:
+{{{
+guohr@ghr-notebook-01:~/worktest/cil> cilly.asm.exe
+
+Error: No arguments for CIL
+
+Fatal error: exception Errormsg.Error
+}}}
+
 ==Build Linux Kernel==
 ==Build uClibc==
 ==Generate sysroot==
