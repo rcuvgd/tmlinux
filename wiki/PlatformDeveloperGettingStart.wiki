@@ -1,9 +1,6 @@
-#summary One-sentence summary of this page.
-
 = Introduction =
 
 This page describes how to compile the whole platform of tmlinux (includding linux kernel, uclibc and so on) and how to populate sysroot for application developer.
-
 
 = Details =
 
