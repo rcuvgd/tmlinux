@@ -12,6 +12,17 @@ In the following section, let's suppose the workdir is _*/home/guohr/worktest*_ 
 First of all, you should install TCS Linux edition on your Linux machines. Please goto [http://www.tcshelp.com] to get it. Of course, you should have the license for it. 
 In the following section, let's suppose the installation directory of your TCS is _*/opt/NXP/TCS510/*_
 
+To make sure the TCS tools(such as tmcc, tmld) are in the PATH environment
+  {{{
+export PATH=$PATH:/opt/NXP/TCS510/bin/
+  }}}
+  {{{
+guohr@ghr-notebook-02:~/worktest> tmcc -V
+tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
+tmcc warning : no work
+  }}}
+
+
 ===2. Install CIL (C intermedia language)===
 Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
   {{{
