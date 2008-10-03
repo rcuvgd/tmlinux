@@ -54,6 +54,6 @@ Fatal error: exception Errormsg.Error
 
 ==Build Linux Kernel==
 ===1. checkout Linux kernel of tmlinux===
-Note that: Due to the limit of max upload size of google code, I put the Linux kernel of tmlinux to [gulessoft official http://www.gulessoft.com/en/compay/contribution/125.html] site and will move to this project site as soon as google increase the limit.
+Note that: Due to the limit of max upload size of google code, I put the Linux kernel of tmlinux to [http://www.gulessoft.com/en/compay/contribution/125.html gulessoft official site] and will move to this project site as soon as google increase the limit.
 ==Build uClibc==
 ==Generate sysroot==
