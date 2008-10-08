@@ -69,6 +69,7 @@ mv linux-2.6.14-tmlinux-1.0 linux
 }}}
 
 ===2. Configure Linux kernel===
+*Note that:* Because of lacking storage device, I have to put the root filesystem into RAM using *initramfs* mechanism. So you have to arrange the root filesystem correctly, or else the kernel image can not load the `init` program as you want. About more details of initramfs, please refer the files in *_Documentation/early-userspace/_* of linux kernel source distribution.
 
 ===3. Build Linux kernel===
 
