@@ -71,6 +71,19 @@ mv linux-2.6.14-tmlinux-1.0 linux
 ===2. Configure Linux kernel===
 *Note that:* Because of lacking storage device, I have to put the root filesystem into RAM using *initramfs* mechanism. So you have to arrange the root filesystem correctly, or else the kernel image can not load the `init` program as you want. About more details of initramfs, please refer the files in *_Documentation/early-userspace/_* of linux kernel source distribution.
 
+First configure the linux kernel using default configuration files by the following command (at *_/home/guohr/worktest/linux/_* directory).
+{{{
+make ttisim_defconfig
+}}}
+
+Then adjust the configuration if necessary by the following command
+{{{
+make menuconfig
+}}}
+
+====Some important configuration options you may need to adjust====
+*Options about initramfs:* In most time, you have to adjust the `General setup -> Initramfs source file` to populate your root filesystem. Please refer ApplicationDeveloperGettingStart Arrange target root file system and create initramfs cpio file for detail information.
+
 ===3. Build Linux kernel===
 
 ==Build uClibc==
