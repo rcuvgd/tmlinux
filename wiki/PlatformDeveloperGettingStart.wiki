@@ -68,5 +68,9 @@ tar xvfjp linux-2.6.14-tmlinux-1.0.tar.bz2
 mv linux-2.6.14-tmlinux-1.0 linux
 }}}
 
+===2. Configure Linux kernel===
+
+===3. Build Linux kernel===
+
 ==Build uClibc==
 ==Generate sysroot==
