@@ -102,5 +102,4 @@ ttisim -ms 67108864 arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out
 
 *Note about memory size:* By default, the memory size of ttisim is 64M and the memory size  for Linux kernel is 56M. You can change the ttisim memory size when running kernel by changing the argument of `-ms` option. You can change the memory size for linux kernel by setting `Boot options -> System memory size(Mbytes)`.
 
-==Build uClibc==
-==Generate sysroot==
+==Build uClibc and generate sysroot==
