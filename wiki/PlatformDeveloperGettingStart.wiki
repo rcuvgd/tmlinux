@@ -92,5 +92,14 @@ To build linux kernel image, use the following command at *_/home/guohr/worktest
 make
 }}}
 
+After building kernel, the `TMLinux-pnx1500-ttisim-fp64-el.out` at _/home/guohr/worktest/linux/arch/trimedia/boot/_ is the executable Linux kernel image and the initramfs is built into it.
+
+To run Linux kernel, use the following command:
+{{{
+ttisim -ms 67108864 arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out
+}}}
+
+*Note about memory size:* By default, the memory size of ttisim is 64M and the memory size  for Linux kernel is 56M. You can change the ttisim memory size when running kernel by changing the argument of `-ms` option. You can change the memory size for linux kernel by setting `Boot options -> System memory size(Mbytes)`.
+
 ==Build uClibc==
 ==Generate sysroot==
