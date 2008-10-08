@@ -82,7 +82,8 @@ make menuconfig
 }}}
 
 ====Some important configuration options you may need to adjust====
-*Options about initramfs:* In most time, you have to adjust the `General setup -> Initramfs source file` to populate your root filesystem. Please refer ApplicationDeveloperGettingStart Arrange target root file system and create initramfs cpio file for detail information.
+*Options about initramfs:* In most time, you have to adjust the `General setup -> Initramfs source file` to populate your root filesystem. Please refer ApplicationDeveloperGettingStart `Arrange target root file system and create initramfs cpio file` for detail information.
+*Options about dynamically loading application:* To enable dynamically loading application, you must enable `Boot options -> Enable Load applications dynamically`.
 
 ===3. Build Linux kernel===
 
