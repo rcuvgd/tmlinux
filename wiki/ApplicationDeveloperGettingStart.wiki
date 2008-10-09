@@ -122,7 +122,9 @@ Fatal error: exception Errormsg.Error
 
   === 2. Arrange target root file system and create initramfs cpio file ===
 
-  To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.
+  ~~To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.~~
+  
+  In most cases, you do not need to download [http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 tmlinux-kernel-obj-lastest.tar.bz2], you can get it from the platform developers or build it yourself. For how to build it, please refer PlatformDeveloperGettingStart
 
   Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
   E.g:
