@@ -5,5 +5,89 @@ This page describes how to build tmlinux platform running on real hardware board
 = Details =
 
 ==1. Configure, build Linux kernel==
-==2. Configure, build uClibc==
-==3. Generate sysroots for application developers==
+The kernel configuration option *`Processor type and features -> Host`* is used to determine *nohost* or *tmsim* or *winnt*.
+
+checkout linux kernel like in PlatformDeveloperGettingStart
+
+Before configuring and compiling the linux kernel, you should make sure the linux kernel is clean, you can use *`make mrproper`* to clean the whole kernel.
+
+After configuring linux kernel using
+{{{
+make ttisim_defconfig
+}}}
+you can use `make menuconfig` to change it to *nohost* and then compile the whole linux kernel.
+
+==2. Create sysroots skeleton==
+
+Checkout sysroots like in PlatformDeveloperGettingStart. 
+
+And then use the following commands to create sysroots skeleton for nohost:
+{{{
+cd /home/guohr/worktest/sysroots
+mkdir pnx1500_nohost_uclibc
+cp pnx1500_ttisim_uclibc/tcs/ pnx1500_nohost_uclibc/ -fr
+cp pnx1500_ttisim_uclibc/tmconfig pnx1500_nohost_uclibc/
+mkdir pnx1500_nohost_uclibc/sysroot
+mkdir pnx1500_nohost_uclibc/x86_linux2
+cp pnx1500_ttisim_uclibc/x86-linux2/trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh pnx1500_nohost_uclibc/x86_linux2/
+}}}
+
+Set up TCS build environment using the following commands:
+{{{
+cd /home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/tcs/5.1.0
+TCS=/opt/NXP/TCS510 ./creat-tcs.sh
+}}}
+
+Set up toolchain wrapper for pnx1500_nohost_uclibc by the following way:
+===a.Edit toolchain wrapper===
+Edit *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/x86_linux2/trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh_* and change the following
+{{{
+TARGET_FUNDAMENTAL_CFLAGS=' -target pnx1500 -host ttisim -el -fp64'
+TARGET_FUNDAMENTAL_AFLAGS=' -target pnx1500 -host ttisim -el -fp64'
+}}}
+to
+{{{
+TARGET_FUNDAMENTAL_CFLAGS=' -target pnx1500 -host nohost -el -fp64'
+TARGET_FUNDAMENTAL_AFLAGS=' -target pnx1500 -host nohost -el -fp64'
+}}}
+
+===b. Create toolchain wrapper links===
+Create necessary toolchain wrapper links using the following commands:
+{{{
+cd /home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/x86_linux2
+ln -sf trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc
+ln -sf trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-ar
+ln -sf trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-cc
+ln -sf trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-wrapper.sh trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-strip
+}}}
+
+==3. Configure, build uClibc and generate sysroots==
+Checkout uClibc like in PlatformDeveloperGettingStart and configure uclibc using *`make menuconfig`* by the following ways (In this example):
+
+change
+{{{
+Target Architecture Features and Options -> tmcc compiler include search path
+}}}
+to *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/tcs/5.1.0_*
+
+change
+{{{
+Target Architecture Features and Options -> Linux Kernel header location
+}}}
+to *_/home/guohr/worktest/linux_*
+
+change
+{{{
+Libary Installation Options -> uClibc runtime library directory
+}}}
+to *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/sysroot_*
+
+change 
+{{{
+Libary Installation Options -> uClibc development environment directory
+}}}
+to *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/sysroot/usr/_*
+
+Now you can build and install the uClibc like in PlatformDeveloperGettingStart.
+
+The *_/home/guohr/worktest/sysroots/_* includes sysroot for the `pnx1500_nohost_uclibc`, you can deliver it to application developers.
