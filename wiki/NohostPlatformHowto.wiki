@@ -1,6 +1,6 @@
 = Introduction =
 
-This page describes how to build tmlinux platform running on real hardware board (standalone mode, with -nohost option). Before continue, please ensure you have read the DeveloperPlatformGettingStart carefully.
+This page describes how to build tmlinux platform running on real hardware board (standalone mode, with -nohost option). Before continue, please ensure you have read the PlatformDeveloperGettingStart carefully.
 
 = Details =
 
