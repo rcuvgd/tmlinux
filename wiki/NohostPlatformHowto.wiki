@@ -1,0 +1,9 @@
+= Introduction =
+
+This page describes how to build tmlinux platform running on real hardware board (standalone mode, with -nohost option). Before continue, please ensure you have read the DeveloperPlatformGettingStart carefully.
+
+= Details =
+
+==1. Configure, build Linux kernel==
+==2. Configure, build uClibc==
+==3. Generate sysroots for application developers==
