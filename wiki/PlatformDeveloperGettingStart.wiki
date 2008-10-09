@@ -103,3 +103,21 @@ ttisim -ms 67108864 arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out
 *Note about memory size:* By default, the memory size of ttisim is 64M and the memory size  for Linux kernel is 56M. You can change the ttisim memory size when running kernel by changing the argument of `-ms` option. You can change the memory size for linux kernel by setting `Boot options -> System memory size(Mbytes)`.
 
 ==Build uClibc and generate sysroot==
+===1. Checkout sysroots and uClibc===
+Checkout sysroots and uClibc using the following commands:
+{{{
+svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots
+svn checkout http://tmlinux.googlecode.com/svn/trunk/uClibc
+}}}
+
+===2. Setup TCS for tmlinux build environment===
+To create the whole TCS environment for building tmlinux uClibc and applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* and then use the following command:
+{{{
+cd /home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
+TCS=/opt/NXP/TCS510 ./creat-tcs.sh
+}}}
+Please set TCS using your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
+
+===3. Configure, build and install uClibc===
+
+==Build application of tmlinux==
