@@ -119,5 +119,42 @@ TCS=/opt/NXP/TCS510 ./creat-tcs.sh
 Please set TCS using your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
 
 ===3. Configure, build and install uClibc===
+To build uClibc, you need to set the following configuration options correctly using the following command:
+{{{
+make menuconfig
+}}}
+
+====TCS include search path====
+{{{
+Target Architecture Features and Options -> tmcc compiler include search path
+}}}
+In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_*
+
+====Linux location====
+{{{
+Target Architecture Features and Options -> Linux Kernel header location
+}}}
+In this example, it is *_/home/guohr/worktest/linux_*
+
+====uClibc installation directories====
+{{{
+Libary Installation Options -> uClibc runtime library directory
+}}}
+In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot_*.
+{{{
+Libary Installation Options -> uClibc development environment directory
+}}}
+In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot/usr/_*
+
+Build and install uClibc using the following commands:
+{{{
+make 
+make install
+}}}
+
+
+After installing uClibc, it is the time to deliver sysroots to application developers:
+For how to build applications, please refer ApplicationDeveloperGettingStart;
+For how to build busybox, please refer BusyboxBuildGuide.
 
 ==Build application of tmlinux==
