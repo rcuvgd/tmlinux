@@ -22,13 +22,13 @@ svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
   === 3. Setup application building environment.===
   Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
 
-*To build pnx1500 application*:
+*For PNX1500:*
     {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2/
   }}}
 
-*To build pnx1005 application*:
+*For PNX1005*:
     {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/x86-linux2/
@@ -40,17 +40,34 @@ guohr@ghr-notebook-02:~/worktest> tmcc -V
 tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
+
+*For PNX1500:*
   {{{
 guohr@ghr-notebook-02:~/worktest>trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc -V
 tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
+
+*For PNX1005:*
+  {{{
+guohr@ghr-notebook-02:~/worktest>trimedia-gss-linux-tcs-pnx1005el_fp64-uclibc-gcc -V
+tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
+tmcc warning : no work
+  }}}
+
   === 4. Create TCS environment for building your applications.===
-  To create the whole TCS environment for building tmlinux applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* and then use the following command:
+  To create the whole TCS environment for building tmlinux applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* (for building pnx1500 application) or *_sysroots/sysroots/pnx1005_ttisim_uclibc/tcs/5.1.0_* (for building pnx1005 application) and then use the following command:
+*For PNX1500:*
   {{{
 cd /home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
 TCS=/opt/NXP/TCS510 ./creat-tcs.sh
   }}}
+*For PNX1005:*
+  {{{
+cd /home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/tcs/5.1.0
+TCS=/opt/NXP/TCS510 ./creat-tcs.sh
+  }}}
+
   Please set TCS with your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
 
 ==Build your application:==  
@@ -75,9 +92,14 @@ main(void)
   But *PLEASE DO NOTE THAT:* high frequent `printf()` may cause the TCS system suspend, so try to avoid this situation.
 
   === 2. Build your applications===
-  Ok, you can compile your applications. It is as simple as compiling the simplest 'hello world' application, Just replace your compiler with *trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc*
+  Ok, you can compile your applications. It is as simple as compiling the simplest 'hello world' application, Just replace your compiler with *trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc* (for building pnx1500 applications) or *trimedia-gss-linux-tcs-pnx1005el_fp64-uclibc-gcc* (for building pnx1005 applications)
+*For building pnx1500 applications:*
   {{{
 trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc hello.c -o hello.out
+  }}}
+*For building pnx1005 applications:*
+  {{{
+trimedia-gss-linux-tcs-pnx1005el_fp64-uclibc-gcc hello.c -o hello.out
   }}}
 
   There are some test cases for tmlinux application in svn. Please use the following command to check them out and just type make to compile them.
@@ -130,9 +152,9 @@ Fatal error: exception Errormsg.Error
 
   === 2. Arrange target root file system and create initramfs cpio file ===
 
-  ~~To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2, and then unpack it.~~
+  To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 (for building pnx1500 applications) or http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-pnx1005-20081104-01.tar.bz2 (for building pnx1005 applications), and then unpack it.
   
-  In most cases, you do not need to download [http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 tmlinux-kernel-obj-lastest.tar.bz2], you can get it from the platform developers or build it yourself. For how to build it, please refer PlatformDeveloperGettingStart
+  If you want to build pnx1500 applications, in most cases, you do not need to download [http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 tmlinux-kernel-obj-lastest.tar.bz2], you can get it from the platform developers or build it yourself. For how to build it, please refer PlatformDeveloperGettingStart
 
   Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
   E.g:
