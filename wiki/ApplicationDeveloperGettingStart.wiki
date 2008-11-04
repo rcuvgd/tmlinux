@@ -21,9 +21,17 @@ svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
   }}}
   === 3. Setup application building environment.===
   Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
+
+*To build pnx1500 application*:
     {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2/
+  }}}
+
+*To build pnx1005 application*:
+    {{{
+export PATH=$PATH:/opt/NXP/TCS510/bin/
+export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/x86-linux2/
   }}}
   
   To validate the environment, at shell, use the following command, the result will like this:
