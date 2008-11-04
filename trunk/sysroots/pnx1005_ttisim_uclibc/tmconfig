@@ -1,0 +1,378 @@
+# <copyright>
+# ===================================================================
+# Copyright (c) 2006-2007 NXP B.V.. All rights are reserved.
+# Reproduction in whole or in part is prohibited without the prior
+# written consent of the copyright owner.
+# 
+# This software and any compilation or derivative thereof is and
+# shall remain the proprietary information of NXP B.V. and is
+# highly confidential in nature. Any and all use hereof is restricted
+# and is subject to the terms and conditions set forth in the
+# software license agreement concluded with NXP B.V..
+# 
+# Under no circumstances is this software or any derivative thereof
+# to be combined with any Open Source Software, exposed to, or in any
+# way licensed under any Open License Terms without the express prior
+# written permission of NXP B.V..
+# 
+# For the purpose of the above, the term Open Source Software means
+# any software that is licensed under Open License Terms. Open
+# License Terms means terms in any license that require as a
+# condition of use, modification and/or distribution of a work
+# 
+#          1. the making available of source code or other materials
+#             preferred for modification, or
+# 
+#          2. the granting of permission for creating derivative
+#             works, or
+# 
+#          3. the reproduction of certain notices or license terms
+#             in derivative works or accompanying documentation, or
+# 
+#          4. the granting of a royalty-free license to any party
+#             under Intellectual Property Rights
+# 
+# regarding the work and/or any work that contains, is combined with,
+# requires or otherwise is based on the work
+# 
+# This software is provided for ease of recompilation only.
+# Modification and reverse engineering of this software are strictly
+# prohibited.
+# ===================================================================
+# </copyright>
+
+# TriMedia configuration file for tmcc.
+# tmcc reads and expands this.
+# tmcc expands several macro-like strings used below,
+# including $CORE, $ENDIAN, $FP, $HOST, and $TCS,
+# but it does not have a full macro-expansion facility.
+# The default endianness must be -eb (bigendian) or -el (littleendian);
+# an explicit command line -eb or -el option overrides it.
+
+# Default execution core, host, and target.
+# Explicit command line options -core, -host and -target override these.
+CORE_DEFAULT=tm32
+HOST_DEFAULT=tmsim
+TARGET_DEFAULT=tm1
+TMCAL_DEFAULT=jtag,pci,tmsim
+ENDIANNESS=-el
+
+CORE=tm32
+TARGET_DEFAULT=tm1
+TMCAL_DEFAULT=jtag,pci,tmsim
+HOST_DEFAULT=tmsim
+CORE_END
+
+CORE=tm3260
+TARGET_DEFAULT=tm3260Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+CORE_END
+
+CORE=tm5250
+TARGET_DEFAULT=tm5250Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+CORE_END
+
+CORE=tm2270
+TARGET_DEFAULT=tm2270Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+CORE_END
+
+CORE=tm3270
+TARGET_DEFAULT=tm3270Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+CORE_END
+
+CORE=tm3271
+TARGET_DEFAULT=tm3271Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+CORE_END
+
+
+CORE=tm3282
+TARGET_DEFAULT=tm3282Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+CORE_END
+
+CORE=tm32Config1
+TARGET_DEFAULT=tm32Config1Minimal
+TMCAL_DEFAULT=tmsim
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+CORE_END
+
+TLIBDEVROOT=$TCS/libdev
+TCOMMROOT=$TCS/tmComm
+# Host-specific configuration.
+# Currently supported hosts.
+HOSTS=WinNT,MipsVxworks,ExternalHost,Win95,tmsim,nohost,Linux,ttisim
+
+TARGET=pnx8535
+CORE=tm2270
+TMCAL_DEFAULT=tmsim,pci,ejtag,ethernet
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx8542
+CORE=tm2270
+TMCAL_DEFAULT=tmsim,pci,ejtag
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx8543
+CORE=tm2270
+TMCAL_DEFAULT=tmsim,pci,ejtag
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx8550
+TMCAL_DEFAULT=pci,ejtag,ethernet,tmsim
+CORE=tm3260
+HOST_DEFAULT=WinNT
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx4103
+CORE=tm3270
+TMCAL_DEFAULT=tmsim,pci,ejtag
+HOST_DEFAULT=nohost
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx5100
+CORE=tm3271
+TMCAL_DEFAULT=tmsim,pci,ejtag
+HOST_DEFAULT=nohost
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx1500
+TMCAL_DEFAULT=pci,jtag,tmsim
+CORE=tm3260
+HOST_DEFAULT=WinNT
+BOARD_LIST=
+TARGET_END
+
+TARGET=pnx1700
+TMCAL_DEFAULT=pci,jtag,tmsim
+CORE=tm5250
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm1
+TMCAL_DEFAULT=tmsim,pci,jtag
+HOST_DEFAULT=tmsim
+CORE=tm32
+BOARD_LIST=
+TARGET_END
+
+
+TARGET=tm3260Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm3260
+HOST_DEFAULT=ttisim
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm5250Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm5250
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm2270Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm2270
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm2270Qtrn
+TMCAL_DEFAULT=tmsim,pci,jtag,ejtag,ethernet
+CORE=tm2270
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm3270Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm3270
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm3271Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm3271
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+
+TARGET=tm3282Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm3282
+HOST_DEFAULT=ttisim
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm32Config1Minimal
+TMCAL_DEFAULT=tmsim
+CORE=tm32Config1
+HOST_DEFAULT=ttisim
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm3270Emulator
+TMCAL_DEFAULT=tmsim,pci,jtag,ejtag,ethernet
+CORE=tm3270
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+TARGET=tm3270Emulator2
+TMCAL_DEFAULT=tmsim,pci,jtag,ejtag,ethernet
+CORE=tm3271
+HOST_DEFAULT=WinNT
+NONALRESET_DEFAULT=1
+BOARD_LIST=
+TARGET_END
+
+#WinNT host-specific.
+HOST=WinNT
+ENDIANNESS=-el
+HOST_DLL=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.dll,$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/libtmman.dll
+HOST_OBJ=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.o -bdownload _TMManShared $TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/libtmman.a
+IO=-u _DPConsoleDriver -u _HostIODriver
+STDIO=-u _HostStdio
+HOST_END
+
+# MipsVxworks host-specific
+HOST=MipsVxworks
+ENDIANNESS=-el
+HOST_DLL=
+HOST_OBJ=
+IO=
+STDIO=
+HOST_END
+
+# tmsim host-specific.
+HOST=tmsim
+ENDIANNESS=-el
+HOST_DLL=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.dll
+HOST_OBJ=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.o
+IO=-u _DPConsoleDriver -u _HostIODriver
+STDIO=-u _HostStdio
+HOST_END
+
+# Linux TM1 host-specific.
+HOST=Linux
+ENDIANNESS=-el
+HOST_DLL=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.dll,$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/libtmman.dll
+HOST_OBJ=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.o -bdownload _TMManShared $TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/libtmman.a
+IO=-u _DPConsoleDriver -u _HostIODriver
+STDIO=-u _HostStdio
+HOST_END
+
+# nohost host-specific.
+HOST=nohost
+ENDIANNESS=-el
+HOST_DLL=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.dll
+HOST_OBJ=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.o
+IO=-u _HostIODriver
+STDIO=
+HOST_END
+
+# ttisim host-specific.
+HOST=ttisim
+ENDIANNESS=-el
+HOST_DLL=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.dll
+HOST_OBJ=$TCOMMROOT/$CORE/$HOST/$ENDIAN/$FP/host_comm.o
+IO=-u _DPConsoleDriver -u _HostIODriver
+STDIO=-u _HostStdio
+HOST_END
+
+# tmcc phase pathnames.
+# Phase names can be changed by editing assignments below
+# or with a command line "-<phase>=..." option.
+TMCFE=$TCS/bin/tmcfe
+TMCCOM=$TCS/bin/tmccom
+TMIPA=$TCS/bin/tmipa
+TMSCHED=$TCS/bin/tmsched
+TMAS=$TCS/bin/tmas
+TMLD=$TCS/bin/tmld
+TMSTRIP=$TCS/bin/tmstrip
+
+# Include directory pathname can be changed by editing assignment below.
+# This must be a single directory only, not a path with several directories.
+# To add multiple include directories, change TMCFE_ARGS.
+
+INCLUDE=
+
+# Machine description file, runtime startoff and library pathnames.
+# These can be changed by editing assignments below.
+
+
+BOOT=$TCS/lib/$CORE/$ENDIAN/$FP/boot.o
+
+APPMAIN=
+LD_APP_DLL_ARG=$TCS/lib/ld_app_dll.arg
+LD_DYNBOOT_ARG=$TCS/lib/ld_dynboot.arg
+LIBAM=$TCS/lib/$CORE/$ENDIAN/$FP/libam.a $TCOMMROOT/$CORE/$ENDIAN/$FP/hostcall.a $TCOMMROOT/$CORE/$ENDIAN/$FP/libIODriver.a
+LIBC=$TCS/lib/$CORE/$ENDIAN/$FP/libc.a
+LIBC_DINKUMWARE=$TCS/lib_dink/$CORE/$ENDIAN/$FP/libc.a
+LIBCPLUS=$TCS/lib/$CORE/$ENDIAN/$FP/libmodena.a $TCS/lib/$CORE/$ENDIAN/$FP/libC++.a
+LIBCPLUS_DINKUMWARE=$TCS/lib_dink/$CORE/$ENDIAN/$FP/libC++.a
+LIBEDG=$TCS/lib_dink/$CORE/$ENDIAN/$FP/libedg.a
+LIBDEV=$TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/libdev.a
+LIBDEV_APP_DLL_ARG=$TLIBDEVROOT/dynamic/$TARGET/ld_app_dll.arg
+LIBDEV_DYNBOOT_ARG=$TLIBDEVROOT/dynamic/$TARGET/ld_dynboot.arg
+LIBIO=$TCOMMROOT/$CORE/$ENDIAN/$FP/libio.a
+DBMON=$TCS/lib/$CORE/$ENDIAN/$FP/dbmon.o $TCOMMROOT/$CORE/$ENDIAN/$FP/tmcal_manager.o 
+TMCAL_CHANNEL_DIR=$TCOMMROOT/$CORE/$ENDIAN/$FP/
+DBMONDEV=$TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/dbmonIntf.o $TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/tmcalIntf.o
+LIBPROF=$TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/libprof.a
+LIBSTUBS=$TCS/lib/$CORE/$ENDIAN/$FP/libstubs.a
+MACHINE=$TCS/lib/$CORE.md
+RESET=$TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/reset$NONALRESET.o
+TMPROF=$TLIBDEVROOT/lib/$CORE/$TARGET/$ENDIAN/$FP/tmprof.o
+
+# Default arguments passed to phases by tmcc.
+# Additional args can be supplied with a command line "-<phase> ... --" option.
+TMCFE_ARGS= 
+TMIPA_ARGS= 
+TMCCOM_ARGS= 
+TMSCHED_ARGS= 
+TMAS_ARGS=
+TMLD_ARGS=
+TMSTRIP_ARGS=
+
+# end of tmconfig
