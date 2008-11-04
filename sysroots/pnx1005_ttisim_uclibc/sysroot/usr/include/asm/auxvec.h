@@ -1,0 +1,4 @@
+#ifndef _ASM_TRIMEDIA_AUXVEC_H__
+#define _ASM_TRIMEDIA_AUXVEC_H__
+
+#endif /* _ASM_TRIMEDIA_AUXVEC_H__ */
