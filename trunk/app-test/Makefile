@@ -1,6 +1,6 @@
 CC= trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-gcc
 
-TARGET_LOCATION=/home/guohr/workdir/gulessoft/export/
+TARGET_LOCATION=/home/guohr/workdir/tmlinux/export/
 
 SRC  = clone.c  	\
        fork.c    	\
@@ -14,6 +14,8 @@ SRC  = clone.c  	\
        getopt_long.c    \
        setjmp-simple.c  \
        setjmptest.c   \
+       server.c   \
+       client.c   \
        vfork.c
 
 APPS = $(patsubst %.c,%.out,$(SRC)) 
