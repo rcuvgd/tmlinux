@@ -55,7 +55,7 @@ if [ ! -d "$wrp_sysroot" ]; then
 	exit 1
 fi
 TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig"
-STDINC_FLAG="-nostdinc -I$wrp_sysroot/tcs/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/"
+STDINC_FLAG="-nostdinc -I$wrp_sysroot/tcs/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
 STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc -lpthread"
 
 DYNAPP_FLAG="-btype app"
@@ -104,6 +104,18 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dread=tmlinux_read  		\
 	-Dreaddir=tmlinux_readdir  	\
 	-Dperror=tmlinux_perror 	\
+	-Dfclose=tmlinux_fclose 	\
+	-Dfopen=tmlinux_fopen 		\
+	-Dfgets=tmlinux_fgets 		\
+	-Dlseek=tmlinux_lseek 		\
+	-Dabort=tmlinux_abort 		\
+	-Draise=tmlinux_raise 		\
+	-Dstrtoul=tmlinux_strtoul 	\
+	-Drewind=tmlinux_rewind 	\
+	-Daccess=tmlinux_access 	\
+	-Dstrtok=tmlinux_strtok 	\
+	-Dfscanf=tmlinux_fscanf 	\
+	-Dsigprocmask=tmlinux_sigprocmask \
 	-Dwrite=tmlinux_write "
 
 #
