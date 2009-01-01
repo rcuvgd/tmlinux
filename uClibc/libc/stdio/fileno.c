@@ -21,9 +21,23 @@ int attribute_hidden __fileno_unlocked(register FILE *stream)
 	return -1;
 }
 
+#ifndef __TCS__
 weak_alias(__fileno_unlocked,fileno_unlocked);
+#else
+int attribute_hidden fileno_unlocked(register FILE *stream)
+{
+	return __fileno_unlocked(stream);
+}
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fileno_unlocked,fileno);
+#else
+int attribute_hidden fileno(register FILE *stream)
+{
+	return __fileno_unlocked(stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

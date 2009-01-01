@@ -196,4 +196,11 @@ char attribute_hidden *strchr (const char *s, int c_in)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias(strchr, index)
+#else
+char attribute_hidden *index(const char *s, int c_in)
+{
+	return strchr(s,c_in);
+}
+#endif 

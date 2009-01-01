@@ -14,4 +14,12 @@ ssize_t attribute_hidden __getline(char **__restrict lineptr, size_t *__restrict
 {
 	return getdelim(lineptr, n, '\n', stream);
 }
+#ifndef __TCS__
 strong_alias(__getline,getline)
+#else
+ssize_t attribute_hidden getline(char **__restrict lineptr, size_t *__restrict n,
+				FILE *__restrict stream)
+{
+	return __getline(lineptr,n,stream);
+}
+#endif

@@ -16,14 +16,28 @@ int __feof_unlocked(register FILE *stream)
 	return __FEOF_UNLOCKED(stream);
 }
 
+#ifndef __TCS__
 weak_alias(__feof_unlocked,feof_unlocked);
+#else
+/*int feof_unlocked(register FILE *stream)*/
+/*{*/
+/*return __feof_unlocked(stream);*/
+/*}*/
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__feof_unlocked,feof);
+#else
+int tmlinux_feof(register FILE *stream)
+{
+	return __feof_unlocked(stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__
 
-int feof(register FILE *stream)
+int tmlinux_feof(register FILE *stream)
 {
 	int retval;
 	__STDIO_AUTO_THREADLOCK_VAR;

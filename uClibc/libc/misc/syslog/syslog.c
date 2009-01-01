@@ -261,7 +261,15 @@ getout:
 		sigaction (SIGPIPE, &oldaction,
 			(struct sigaction *) NULL);
 }
+#ifndef __TCS__
 strong_alias(__vsyslog,vsyslog)
+#else
+void attribute_hidden
+vsyslog( int pri, const char *fmt, va_list ap )
+{
+	__vsyslog(pri,fmt,ap);
+}
+#endif
 
 void attribute_hidden
 __syslog(int pri, const char *fmt, ...)
@@ -272,7 +280,19 @@ __syslog(int pri, const char *fmt, ...)
 	__vsyslog(pri, fmt, ap);
 	va_end(ap);
 }
+#ifndef __TCS__
 strong_alias(__syslog,syslog)
+#else
+void attribute_hidden
+syslog(int pri, const char *fmt, ...)
+{
+	va_list ap;
+
+	va_start(ap, fmt);
+	__vsyslog(pri, fmt, ap);
+	va_end(ap);
+}
+#endif
 
 /*
  * OPENLOG -- open system log
@@ -325,7 +345,15 @@ retry:
 
     UNLOCK;
 }
+#ifndef __TCS__
 strong_alias(__openlog,openlog)
+#else
+void attribute_hidden
+openlog( const char *ident, int logstat, int logfac )
+{
+	__openlog(ident,logstat,logfac);
+}
+#endif
 
 /*
  * CLOSELOG -- close the system log
@@ -335,7 +363,15 @@ __closelog( void )
 {
 	closelog_intern(1);
 }
+#ifndef __TCS__
 strong_alias(__closelog,closelog)
+#else
+void attribute_hidden
+closelog( void )
+{
+	__closelog();
+}
+#endif
 
 /* setlogmask -- set the log mask level */
 int setlogmask(int pmask)

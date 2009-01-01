@@ -108,11 +108,40 @@ wint_t attribute_hidden __fgetwc_unlocked(register FILE *stream)
 	return wi;
 }
 
+#ifndef __TCS__
 weak_alias(__fgetwc_unlocked,fgetwc_unlocked);
+#else
+wint_t attribute_hidden fgetwc_unlocked(register FILE *stream)
+{
+	return __fgetwc_unlocked(stream);
+}
+#endif 
+#ifndef __TCS__
 weak_alias(__fgetwc_unlocked,getwc_unlocked);
+#else
+wint_t attribute_hidden getwc_unlocked(register FILE *stream)
+{
+	return __fgetwc_unlocked(stream);
+}
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fgetwc_unlocked,fgetwc);
+#else
+wint_t attribute_hidden fgetwc(register FILE *stream)
+{
+	return __fgetwc_unlocked(stream);
+}
+#endif 
+#ifndef __TCS__
 weak_alias(__fgetwc_unlocked,getwc);
+#else
+wint_t attribute_hidden getwc(register FILE *stream)
+{
+	return __fgetwc_unlocked(stream);
+}
+#endif 
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__
@@ -131,6 +160,13 @@ wint_t fgetwc(register FILE *stream)
 	return retval;
 }
 
+#ifndef __TCS__
 weak_alias(fgetwc,getwc);
+#else
+wint_t getwc(register FILE *stream)
+{
+	return fgetwc(stream);
+}
+#endif 
 
 #endif

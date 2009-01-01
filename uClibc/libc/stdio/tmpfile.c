@@ -47,5 +47,12 @@ FILE * tmpfile (void)
     return f;
 }
 #ifdef __UCLIBC_HAS_LFS__
+#ifndef __TCS__
 weak_alias(tmpfile, tmpfile64);
+#else
+FILE * tmpfile64 (void)
+{
+	return tmpfile();
+}
+#endif 
 #endif

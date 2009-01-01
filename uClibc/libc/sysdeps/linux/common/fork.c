@@ -14,6 +14,13 @@
 #ifdef __NR_fork
 #define __NR___libc_fork __NR_fork
 _syscall0(pid_t, __libc_fork);
+#ifndef __TCS__
 weak_alias(__libc_fork, fork);
+#else
+pid_t fork(void)
+{
+	return __libc_fork();
+}
+#endif
 #endif
 #endif

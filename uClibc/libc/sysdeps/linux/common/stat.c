@@ -30,5 +30,12 @@ int stat(const char *file_name, struct stat *buf)
 }
 
 #if ! defined __NR_stat64 && defined __UCLIBC_HAS_LFS__
+#ifndef __TCS__
 weak_alias(stat, stat64);
+#else
+int stat64(const char *file_name, struct stat *buf)
+{
+	return stat(file_name,buf);
+}
+#endif
 #endif

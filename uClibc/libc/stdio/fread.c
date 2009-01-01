@@ -83,9 +83,25 @@ size_t attribute_hidden __fread_unlocked(void * __restrict ptr, size_t size, siz
 	return 0;
 }
 
+#ifndef __TCS__
 weak_alias(__fread_unlocked,fread_unlocked);
+#else
+size_t attribute_hidden fread_unlocked(void * __restrict ptr, size_t size, size_t nmemb,
+						FILE * __restrict stream)
+{
+	return __fread_unlocked(ptr,size,nmemb,stream);
+}
+#endif
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fread_unlocked,fread);
+#else
+size_t attribute_hidden fread(void * __restrict ptr, size_t size, size_t nmemb,
+						FILE * __restrict stream)
+{
+	return __fread_unlocked(ptr,size,nmemb,stream);
+}
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

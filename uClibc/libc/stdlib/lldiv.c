@@ -58,6 +58,14 @@ lldiv (long long int numer, long long int denom)
 
 #if __WORDSIZE != 64
 #undef imaxdiv
+#ifndef __TCS__
 weak_alias (lldiv, imaxdiv);
+#else
+lldiv_t
+imaxdiv(long long int numer, long long int denom)
+{
+	return lldiv(numer,denom);
+}
+#endif
 #endif
 

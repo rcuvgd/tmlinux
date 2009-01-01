@@ -13,6 +13,9 @@ int _errno = 0;
 int _h_errno = 0;
 #endif
 
+/*
+ * FIXME:Incorrect implementation for TCS
+ */
 #ifndef __TCS__
 weak_alias (_errno, errno)
 weak_alias(_h_errno, h_errno);

@@ -391,8 +391,8 @@ extern void __stdio_init_mutex(pthread_mutex_t *m) attribute_hidden;
 
 #ifdef __UCLIBC_HAS_THREADS__
 # define __CLEARERR(__stream)	(clearerr)(__stream)
-# define __FERROR(__stream)		(ferror)(__stream)
-# define __FEOF(__stream)		(feof)(__stream)
+# define __FERROR(__stream)		(tmlinux_ferror)(__stream)
+# define __FEOF(__stream)		(tmlinux_feof)(__stream)
 #else
 # define __CLEARERR(__stream)	__CLEARERR_UNLOCKED(__stream)
 # define __FERROR(__stream)		__FERROR_UNLOCKED(__stream)

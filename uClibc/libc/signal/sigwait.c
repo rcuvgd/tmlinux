@@ -34,4 +34,11 @@ int attribute_hidden __sigwait (const sigset_t *set, int *sig)
 }
 
 /* psm: keep this weak, because the one in libpthread.so could overwrite it */
+#ifndef __TCS__
 weak_alias(__sigwait, sigwait)
+#else
+int attribute_hidden sigwait (const sigset_t *set, int *sig)
+{
+	return __sigwait(set,sig);
+}
+#endif

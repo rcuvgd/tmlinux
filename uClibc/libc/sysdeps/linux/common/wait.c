@@ -12,4 +12,11 @@ __pid_t wait (__WAIT_STATUS_DEFN stat_loc)
 {
       return __wait4 (WAIT_ANY, stat_loc, 0, (struct rusage *) NULL);
 }
+#ifndef __TCS__
 weak_alias(wait,__libc_wait)
+#else
+__pid_t __libc_wait(__WAIT_STATUS_DEFN stat_loc)
+{
+	return wait(stat_loc);
+}
+#endif

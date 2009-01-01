@@ -14,9 +14,23 @@ wint_t __getwchar_unlocked(void)
 	return __fgetwc_unlocked(stdin);
 }
 
+#ifndef __TCS__
 weak_alias(__getwchar_unlocked,getwchar_unlocked);
+#else
+wint_t getwchar_unlocked(void)
+{
+	return __getwchar_unlocked();
+}
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__getwchar_unlocked,getwchar);
+#else
+wint_t getwchar(void)
+{
+	return __getwchar_unlocked();
+}
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

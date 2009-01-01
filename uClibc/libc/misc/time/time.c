@@ -749,7 +749,14 @@ time_t mktime(struct tm *timeptr)
 
 /* Another name for `mktime'.  */
 /* time_t timelocal(struct tm *tp) */
+#ifndef __TCS__
 weak_alias(mktime,timelocal);
+#else
+time_t timelocal(struct tm *timeptr)
+{
+	return mktime(timeptr);
+}
+#endif 
 
 #endif
 /**********************************************************************/

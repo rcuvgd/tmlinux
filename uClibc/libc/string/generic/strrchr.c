@@ -51,4 +51,11 @@ char attribute_hidden *strrchr (const char *s, int c)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias (strrchr, rindex)
+#else
+char attribute_hidden *rindex(const char *s, int c)
+{
+	return strrchr(s,c);
+}
+#endif

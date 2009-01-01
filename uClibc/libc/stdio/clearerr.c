@@ -16,9 +16,23 @@ void __clearerr_unlocked(register FILE *stream)
 	__CLEARERR_UNLOCKED(stream);
 }
 
+#ifndef __TCS__
 weak_alias(__clearerr_unlocked,clearerr_unlocked);
+#else
+/*void clearerr_unlocked(register FILE *stream)*/
+/*{*/
+/*__clearerr_unlocked(stream);*/
+/*}*/
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__clearerr_unlocked,clearerr);
+#else
+void clearerr(register FILE *stream)
+{
+	return __clearerr_unlocked(stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

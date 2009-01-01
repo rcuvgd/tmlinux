@@ -8,6 +8,7 @@
 #include "_stdio.h"
 #include <stdarg.h>
 
+#ifndef __TCS__
 int fprintf(FILE * __restrict stream, const char * __restrict format, ...)
 {
 	va_list arg;
@@ -19,3 +20,16 @@ int fprintf(FILE * __restrict stream, const char * __restrict format, ...)
 
 	return rv;
 }
+#else
+int fprintf(FILE * __restrict stream, const char * __restrict format, ...)
+{
+	va_list arg;
+	int rv;
+
+	va_start(arg, format);
+	rv = vprintf(format, arg);
+	va_end(arg);
+
+	return rv;
+}
+#endif

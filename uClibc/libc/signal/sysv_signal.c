@@ -61,4 +61,14 @@ __sysv_signal (sig, handler)
   return oact.sa_handler;
 }
 
+#ifndef __TCS__
 weak_alias (__sysv_signal, sysv_signal)
+#else
+__sighandler_t
+sysv_signal (sig, handler)
+     int sig;
+     __sighandler_t handler;
+{
+	return __sysv_signal(sig,handler);
+}
+#endif

@@ -260,6 +260,18 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _perror=_tmlinux_perror 		\
 		-symbolrename _mkdir=_tmlinux_mkdir 		\
 		-symbolrename _unlink=_tmlinux_unlink 		\
+		-symbolrename _fclose=_tmlinux_fclose 		\
+		-symbolrename _fopen=_tmlinux_fopen 		\
+		-symbolrename _fgets=_tmlinux_fgets 		\
+		-symbolrename _lseek=_tmlinux_lseek 		\
+		-symbolrename _abort=_tmlinux_abort 		\
+		-symbolrename _raise=_tmlinux_raise 		\
+		-symbolrename _strtoul=_tmlinux_strtoul 	\
+		-symbolrename _rewind=_tmlinux_rewind 		\
+		-symbolrename _access=_tmlinux_access 		\
+		-symbolrename _strtok=_tmlinux_strtok 		\
+		-symbolrename _fscanf=_tmlinux_fscanf 		\
+		-symbolrename _sigprocmask=_tmlinux_sigprocmask \
 		-symbolrename _write=_tmlinux_write  
 
 	CPU_CFLAGS-$(CONFIG_PNX1500) += -target pnx1500

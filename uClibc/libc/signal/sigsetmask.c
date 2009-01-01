@@ -37,4 +37,11 @@ __sigsetmask (int mask)
   return sigset_get_old_mask (&oset);
 }
 
+#ifndef __TCS__
 weak_alias (__sigsetmask, sigsetmask)
+#else
+int sigsetmask (int mask)
+{
+	return __sigsetmask(mask);
+}
+#endif

@@ -118,6 +118,13 @@ int fgetc(register FILE *stream)
 	}
 }
 
+#ifndef __TCS__
 weak_alias(fgetc,getc);
+#else
+int getc(register FILE *stream)
+{
+	return fgetc(stream);
+}
+#endif 
 
 #endif
