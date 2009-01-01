@@ -25,4 +25,11 @@ uid_t attribute_hidden __geteuid(void)
 	return (getuid());
 }
 #endif
+#ifndef __TCS__
 strong_alias(__geteuid,geteuid)
+#else
+uid_t attribute_hidden geteuid(void)
+{
+	return __geteuid(); 
+}
+#endif 

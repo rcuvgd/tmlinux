@@ -1288,7 +1288,14 @@ __locale_t __newlocale(int category_mask, const char *locale, __locale_t base)
 	return base;
 }
 
+#ifndef __TCS__
 weak_alias(__newlocale, newlocale)
+#else
+__locale_t newlocale(int category_mask, const char *locale, __locale_t base)
+{
+	return __newlocale(category_mask,locale,base);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -1322,7 +1329,14 @@ __locale_t __duplocale(__locale_t dataset)
 	return r;
 }
 
+#ifndef __TCS__
 weak_alias(__duplocale, duplocale)
+#else
+__locale_t duplocale(__locale_t dataset)
+{
+	return __duplocale(dataset);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -1341,7 +1355,14 @@ void __freelocale(__locale_t dataset)
 	free(dataset);				/* Free locale */
 }
 
+#ifndef __TCS__
 weak_alias(__freelocale, freelocale)
+#else
+void freelocale(__locale_t dataset)
+{
+	return __freelocale(dataset);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -1371,7 +1392,14 @@ __locale_t __uselocale(__locale_t dataset)
 	return old;
 }
 
+#ifndef __TCS__
 weak_alias(__uselocale, uselocale)
+#else
+__locale_t uselocale(__locale_t dataset)
+{
+	return __uselocale(dataset);
+}
+#endif
 
 #endif
 /**********************************************************************/

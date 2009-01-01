@@ -12,4 +12,11 @@
 
 #define __NR___libc_lseek __NR_lseek
 _syscall3(__off_t, __libc_lseek, int, fildes, __off_t, offset, int, whence);
+#ifndef __TCS__
 weak_alias(__libc_lseek, lseek);
+#else
+__off_t lseek(int fildes,__off_t offset,int whence)
+{
+	return __libc_lseek(fildes,offset,whence);
+}
+#endif

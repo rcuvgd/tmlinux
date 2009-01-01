@@ -20,4 +20,11 @@ int attribute_hidden __execve(const char * filename, char *const * argv, char *c
 {
 	return __syscall_execve(filename, argv, envp);
 }
+#ifndef __TCS__
 strong_alias(__execve,execve)
+#else
+int attribute_hidden execve(const char * filename, char *const * argv, char *const * envp)
+{
+	return __execve(filename,argv,envp);
+}
+#endif

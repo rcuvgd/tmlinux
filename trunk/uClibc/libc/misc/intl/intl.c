@@ -38,7 +38,15 @@ char *__uClibc_dgettext(const char *domainname,
 	return (char *) msgid;
 }
 
+#ifndef __TCS__
 weak_alias(__uClibc_dgettext, __dgettext)
+#else
+char *__dgettext(const char *domainname,
+						const char *msgid)
+{
+	return __uClibc_dgettext(domainname,msgid);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -50,7 +58,15 @@ char *__uClibc_dcgettext(const char *domainname,
 	return (char *) msgid;
 }
 
+#ifndef __TCS__
 weak_alias(__uClibc_dcgettext, __dcgettext)
+#else
+char *__dcgettext(const char *domainname,
+						 const char *msgid, int category)
+{
+	return __uClibc_dcgettext(domainname,msgid,category);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -67,7 +83,14 @@ char *__uClibc_textdomain(const char *domainname)
 	return (char *) default_str;
 }
 
+#ifndef __TCS__
 weak_alias(__uClibc_textdomain, __textdomain)
+#else
+char *__textdomain(const char *domainname)
+{
+	return __uClibc_textdomain(domainname);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -93,7 +116,14 @@ char *__uClibc_bindtextdomain(const char *domainname, const char *dirname)
 	return (char *) dir;
 }
 
+#ifndef __TCS__
 weak_alias(__uClibc_bindtextdomain, __bindtextdomain)
+#else
+char *__bindtextdomain(const char *domainname, const char *dirname)
+{
+	return __uClibc_bindtextdomain(domainname,dirname);
+}
+#endif
 
 #endif
 /**********************************************************************/

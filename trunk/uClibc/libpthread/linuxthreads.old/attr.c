@@ -168,14 +168,28 @@ int __pthread_attr_setguardsize(pthread_attr_t *attr, size_t guardsize)
 
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_setguardsize, pthread_attr_setguardsize)
+#else
+int pthread_attr_setguardsize(pthread_attr_t *attr, size_t guardsize)
+{
+	return __pthread_attr_setguardsize(attr,guardsize);
+}
+#endif
 
 int __pthread_attr_getguardsize(const pthread_attr_t *attr, size_t *guardsize)
 {
   *guardsize = attr->__guardsize;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_getguardsize, pthread_attr_getguardsize)
+#else
+int pthread_attr_getguardsize(const pthread_attr_t *attr, size_t *guardsize)
+{
+	return __pthread_attr_getguardsize(attr,guardsize);
+}
+#endif
 
 int __pthread_attr_setstackaddr(pthread_attr_t *attr, void *stackaddr)
 {
@@ -183,7 +197,14 @@ int __pthread_attr_setstackaddr(pthread_attr_t *attr, void *stackaddr)
   attr->__stackaddr_set = 1;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_setstackaddr, pthread_attr_setstackaddr)
+#else
+int pthread_attr_setstackaddr(pthread_attr_t *attr, void *stackaddr)
+{
+	return __pthread_attr_setstackaddr(attr,stackaddr);
+}
+#endif
 
 int __pthread_attr_getstackaddr(const pthread_attr_t *attr, void **stackaddr)
 {
@@ -193,7 +214,14 @@ int __pthread_attr_getstackaddr(const pthread_attr_t *attr, void **stackaddr)
   *stackaddr = attr->__stackaddr;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_getstackaddr, pthread_attr_getstackaddr)
+#else
+int pthread_attr_getstackaddr(const pthread_attr_t *attr, void **stackaddr)
+{
+	return __pthread_attr_getstackaddr(attr,stackaddr);
+}
+#endif
 
 int __pthread_attr_setstacksize(pthread_attr_t *attr, size_t stacksize)
 {
@@ -204,11 +232,25 @@ int __pthread_attr_setstacksize(pthread_attr_t *attr, size_t stacksize)
   attr->__stacksize = stacksize;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_setstacksize, pthread_attr_setstacksize)
+#else
+int pthread_attr_setstacksize(pthread_attr_t *attr, size_t stacksize)
+{
+	return __pthread_attr_setstacksize(attr,stacksize);
+}
+#endif
 
 int __pthread_attr_getstacksize(const pthread_attr_t *attr, size_t *stacksize)
 {
   *stacksize = attr->__stacksize;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_attr_getstacksize, pthread_attr_getstacksize)
+#else
+int pthread_attr_getstacksize(const pthread_attr_t *attr, size_t *stacksize)
+{
+	return __pthread_attr_getstacksize(attr,stacksize);
+}
+#endif

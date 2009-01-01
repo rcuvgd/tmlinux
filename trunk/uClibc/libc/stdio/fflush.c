@@ -126,9 +126,23 @@ int attribute_hidden __fflush_unlocked(register FILE *stream)
 #endif /* __STDIO_BUFFERS */
 }
 
+#ifndef __TCS__
 weak_alias(__fflush_unlocked,fflush_unlocked);
+#else
+int attribute_hidden fflush_unlocked(register FILE *stream)
+{
+	return __fflush_unlocked(stream);
+}
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fflush_unlocked,fflush);
+#else
+int attribute_hidden fflush(register FILE *stream)
+{
+	return __fflush_unlocked(stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

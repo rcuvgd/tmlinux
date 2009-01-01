@@ -74,4 +74,12 @@ ssize_t attribute_hidden __getdelim(char **__restrict lineptr, size_t *__restric
 	return pos;
 }
 
+#ifndef __TCS__
 strong_alias(__getdelim,getdelim)
+#else
+ssize_t attribute_hidden getdelim(char **__restrict lineptr, size_t *__restrict n,
+				   int delimiter, register FILE *__restrict stream)
+{
+	return __getdelim(lineptr,n,delimiter,stream);
+}
+#endif

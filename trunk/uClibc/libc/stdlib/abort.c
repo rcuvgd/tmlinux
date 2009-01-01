@@ -59,7 +59,7 @@ Cambridge, MA 02139, USA.  */
 #elif defined(__sh__)
 #define ABORT_INSTRUCTION asm ("trapa #0xff")
 #elif defined(__trimedia__)
-#define ABORT_INSTRUCTION _trimedia_exit(-1)
+#define ABORT_INSTRUCTION exit(-1)
 #elif defined(__x86_64__)
 #define ABORT_INSTRUCTION asm ("hlt")
 #else

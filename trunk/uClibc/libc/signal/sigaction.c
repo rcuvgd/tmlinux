@@ -102,6 +102,24 @@ __sigaction_internal (int sig, const struct sigaction *act, struct sigaction *oa
 
 #endif
 
+#ifndef __TCS__
 strong_alias(__sigaction_internal,__libc_sigaction)
 weak_alias(__sigaction_internal,__sigaction)
 weak_alias(__sigaction_internal,sigaction)
+#else
+int attribute_hidden
+__libc_sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
+{
+	return __sigaction_internal(sig,act,oact);
+}
+int attribute_hidden
+__sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
+{
+	return __sigaction_internal(sig,act,oact);
+}
+int attribute_hidden
+sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
+{
+	return __sigaction_internal(sig,act,oact);
+}
+#endif

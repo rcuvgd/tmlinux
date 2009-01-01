@@ -16,14 +16,28 @@ int __ferror_unlocked(register FILE *stream)
 	return __FERROR_UNLOCKED(stream);
 }
 
+#ifndef __TCS__
 weak_alias(__ferror_unlocked,ferror_unlocked);
+#else
+/*int ferror_unlocked(register FILE *stream)*/
+/*{*/
+/*return __ferror_unlocked(stream);*/
+/*}*/
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__ferror_unlocked,ferror);
+#else
+int tmlinux_ferror(register FILE *stream)
+{
+	return __ferror_unlocked(stream);
+}
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__
 
-int ferror(register FILE *stream)
+int tmlinux_ferror(register FILE *stream)
 {
 	int retval;
 	__STDIO_AUTO_THREADLOCK_VAR;

@@ -37,9 +37,26 @@ wchar_t attribute_hidden *__fgetws_unlocked(wchar_t *__restrict ws, int n,
 	return ws;
 }
 
+#ifndef __TCS__
 weak_alias(__fgetws_unlocked,fgetws_unlocked);
+#else
+wchar_t attribute_hidden *fgetws_unlocked(wchar_t *__restrict ws, int n,
+						   FILE *__restrict stream)
+{
+	return __fgetws_unlocked(ws,n,stream);
+}
+#endif 
+
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fgetws_unlocked,fgetws);
+#else
+wchar_t attribute_hidden *fgetws(wchar_t *__restrict ws, int n,
+						   FILE *__restrict stream)
+{
+	return __fgetws_unlocked(ws,n,stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

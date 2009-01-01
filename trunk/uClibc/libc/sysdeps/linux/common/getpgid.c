@@ -16,4 +16,11 @@ pid_t __getpgid(pid_t pid)
 {
 	return (__syscall_getpgid(pid));
 }
+#ifndef __TCS__
 weak_alias(__getpgid, getpgid);
+#else
+pid_t getpgid(pid_t pid)
+{
+	return __getpgid(pid);
+}
+#endif

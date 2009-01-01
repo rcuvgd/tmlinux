@@ -17,4 +17,12 @@ int attribute_hidden __raise(int signo)
 }
 
 /* psm: keep this weak, because the one in libpthread.so could overwrite it */
+#ifndef __TCS__
 weak_alias(__raise, raise)
+#else
+int attribute_hidden raise(int signo)
+{
+	return __raise(signo);
+}
+
+#endif

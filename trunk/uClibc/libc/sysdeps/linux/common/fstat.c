@@ -30,5 +30,12 @@ int fstat(int fd, struct stat *buf)
 }
 
 #if ! defined __NR_fstat64 && defined __UCLIBC_HAS_LFS__
+#ifndef __TCS__
 weak_alias(fstat, fstat64);
+#else
+int fstat64(int fd, struct stat *buf)
+{
+	return fstat(fd,buf);
+}
+#endif
 #endif

@@ -24,10 +24,20 @@
 #ifdef __UCLIBC_HAS_IPV6__
 const struct in6_addr __in6addr_any =
 { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } };
+#ifndef __TCS__
 weak_alias (__in6addr_any, in6addr_any)
+#else
+const struct in6_addr in6addr_any =
+{ { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 } } };
+#endif 
 const struct in6_addr __in6addr_loopback =
 { { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 } } };
+#ifndef __TCS__
 weak_alias(__in6addr_loopback, in6addr_loopback);
+#else
+const struct in6_addr in6addr_loopback =
+{ { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 } } };
+#endif
 #endif /* __UCLIBC_HAS_IPV6__ */
 
 

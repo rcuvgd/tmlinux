@@ -71,6 +71,9 @@ extern void weak_function __pthread_initialize_minimal(void);
  * Note: Apparently we must initialize __environ to ensure that the weak
  * environ symbol is also included.
  */
+/*
+ *FIXME: How to achieve it for TCS
+ */
 char **__environ = 0;
 weak_alias(__environ, environ);
 

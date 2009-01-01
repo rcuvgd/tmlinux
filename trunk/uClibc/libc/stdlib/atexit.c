@@ -124,7 +124,14 @@ int old_atexit(aefuncp func)
                         &__dso_handle == NULL ? NULL : __dso_handle);
 }
 #ifndef L_atexit
+#ifndef __TCS__
 weak_alias(old_atexit,atexit);
+#else
+int atexit(aefuncp func)
+{
+	return old_atexit(func);
+}
+#endif
 #endif
 #endif
 

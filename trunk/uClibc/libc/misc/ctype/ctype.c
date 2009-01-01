@@ -302,7 +302,14 @@ int __tolower_l(int c, __locale_t l)
 	return __UCLIBC_CTYPE_IN_TO_DOMAIN(c) ? l->__ctype_tolower[c] : c;
 }
 
+#ifndef __TCS__
 weak_alias(__tolower_l, tolower_l)
+#else
+int tolower_l(int c, __locale_t l)
+{
+	return __tolower_l(c,l);
+}
+#endif
 
 #endif
 /**********************************************************************/
@@ -342,7 +349,14 @@ int __toupper_l(int c, __locale_t l)
 	return __UCLIBC_CTYPE_IN_TO_DOMAIN(c) ? l->__ctype_toupper[c] : c;
 }
 
+#ifndef __TCS__
 weak_alias(__toupper_l, toupper_l)
+#else
+int toupper_l(int c, __locale_t l)
+{
+	return __toupper_l(c,l);
+}
+#endif
 
 #endif
 /**********************************************************************/

@@ -13,4 +13,11 @@
 
 #define __NR___libc_msync __NR_msync
 _syscall3(int, __libc_msync, void *, addr, size_t, length, int, flags);
+#ifndef __TCS__
 weak_alias(__libc_msync, msync);
+#else
+int msync(void* addr,size_t length,int flags)
+{
+	return __libc_msync(addr,length,flags);
+}
+#endif 

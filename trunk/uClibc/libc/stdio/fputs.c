@@ -22,9 +22,25 @@ int attribute_hidden __fputs_unlocked(register const char * __restrict s,
 	return ((__fwrite_unlocked(s, 1, n, stream) == n) ? n : EOF);
 }
 
+#ifndef __TCS__
 weak_alias(__fputs_unlocked,fputs_unlocked);
+#else
+int attribute_hidden fputs_unlocked(register const char * __restrict s,
+					 FILE * __restrict stream)
+{
+	return __fputs_unlocked(s,stream);
+}
+#endif
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fputs_unlocked,fputs);
+#else
+int attribute_hidden fputs(register const char * __restrict s,
+					 FILE * __restrict stream)
+{
+	return __fputs_unlocked(s,stream);
+}
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

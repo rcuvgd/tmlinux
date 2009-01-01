@@ -8,7 +8,9 @@
 #include "_stdio.h"
 #include <stdarg.h>
 
+#if 0
 int vprintf(const char * __restrict format, va_list arg)
 {
 	return vfprintf(stdout, format, arg);
 }
+#endif 

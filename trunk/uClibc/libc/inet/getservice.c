@@ -108,7 +108,14 @@ extern void attribute_hidden __setservent(int f)
     serv_stayopen |= f;
     UNLOCK;
 }
+#ifndef __TCS__
 strong_alias(__setservent,setservent)
+#else
+extern void attribute_hidden setservent(int f)
+{
+	__setservent(f);
+}
+#endif
 
 extern void attribute_hidden __endservent(void)
 {
@@ -120,7 +127,14 @@ extern void attribute_hidden __endservent(void)
     serv_stayopen = 0;
     UNLOCK;
 }
+#ifndef __TCS__
 strong_alias(__endservent,endservent)
+#else
+extern void attribute_hidden endservent(void)
+{
+	__endservent();
+}
+#endif
 
 extern int attribute_hidden __getservent_r(struct servent * result_buf,
 		 char * buf, size_t buflen,

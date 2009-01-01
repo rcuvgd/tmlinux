@@ -19,9 +19,23 @@ int attribute_hidden __getchar_unlocked(void)
 	return __GETC_UNLOCKED_MACRO(stream);
 }
 
+#ifndef __TCS__
 weak_alias(__getchar_unlocked,getchar_unlocked);
+#else
+int attribute_hidden getchar_unlocked(void)
+{
+	return __getchar_unlocked();
+}
+#endif
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__getchar_unlocked,getchar);
+#else
+int attribute_hidden getchar(void)
+{
+	return __getchar_unlocked();
+}
+#endif
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

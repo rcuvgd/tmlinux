@@ -271,14 +271,28 @@ int __isnanf ( float x )
    z.fval = x;
    return (((z.lval&FEXP_MASK) == FEXP_MASK) && ((z.lval&FFRAC_MASK) != 0));
 }
+#ifndef __TCS__
 weak_alias (__isnanf, isnanf);
+#else
+int isnanf ( float x )
+{
+	return __isnanf(x);
+}
+#endif
 
 int __isnan ( double x )
 {
 	int class = __fpclassify(x);
 	return ( class == FP_NAN );
 }
+#ifndef __TCS__
 weak_alias (__isnan, isnan);
+#else
+int isnan ( double x )
+{
+	return __isnan(x);
+}
+#endif
 
 #if 0
 int __isnanl ( long double x )
