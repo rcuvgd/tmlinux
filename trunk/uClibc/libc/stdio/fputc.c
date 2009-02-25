@@ -12,6 +12,13 @@
 #undef putc
 #undef putc_unlocked
 
+#ifdef __TCS__
+/*
+ * FIXME: to avoid symbol duplication with TCS
+ * */
+#define fputc   tmlinux_fputc
+#endif 
+
 #ifdef __DO_UNLOCKED
 
 int attribute_hidden __fputc_unlocked_internal(int c, register FILE *stream)

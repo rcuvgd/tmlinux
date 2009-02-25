@@ -7,6 +7,11 @@
 
 #include "_stdio.h"
 
+#ifdef __TCS__
+#undef feof
+#define feof   tmlinux_feof
+#endif 
+
 #ifdef __DO_UNLOCKED
 
 int __feof_unlocked(register FILE *stream)
@@ -28,7 +33,7 @@ weak_alias(__feof_unlocked,feof_unlocked);
 #ifndef __TCS__
 weak_alias(__feof_unlocked,feof);
 #else
-int tmlinux_feof(register FILE *stream)
+int feof(register FILE *stream)
 {
 	return __feof_unlocked(stream);
 }
@@ -37,7 +42,7 @@ int tmlinux_feof(register FILE *stream)
 
 #elif defined __UCLIBC_HAS_THREADS__
 
-int tmlinux_feof(register FILE *stream)
+int feof(register FILE *stream)
 {
 	int retval;
 	__STDIO_AUTO_THREADLOCK_VAR;

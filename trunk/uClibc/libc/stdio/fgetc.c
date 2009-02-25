@@ -12,6 +12,13 @@
 #undef getc
 #undef getc_unlocked
 
+#ifdef __TCS__
+/*
+ * FIXME: to avoid symbol duplication with TCS
+ * */
+#define fgetc   tmlinux_fgetc
+#endif 
+
 #ifdef __DO_UNLOCKED
 
 int attribute_hidden __fgetc_unlocked_internal(FILE *stream)

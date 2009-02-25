@@ -7,6 +7,14 @@
 
 #include "_stdio.h"
 
+#ifdef __TCS__
+/*
+ * FIXME: to avoid symbol duplication with TCS
+ * */
+#undef ferror
+#define ferror  tmlinux_ferror 
+#endif 
+
 #ifdef __DO_UNLOCKED
 
 int __ferror_unlocked(register FILE *stream)
@@ -28,7 +36,7 @@ weak_alias(__ferror_unlocked,ferror_unlocked);
 #ifndef __TCS__
 weak_alias(__ferror_unlocked,ferror);
 #else
-int tmlinux_ferror(register FILE *stream)
+int ferror(register FILE *stream)
 {
 	return __ferror_unlocked(stream);
 }
