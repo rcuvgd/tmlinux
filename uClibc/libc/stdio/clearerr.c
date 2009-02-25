@@ -7,6 +7,14 @@
 
 #include "_stdio.h"
 
+#ifdef __TCS__
+/*
+ * FIXME: To avoid symbol duplication with TCS
+ * */
+#undef clearerr
+#define clearerr  tmlinux_clearerr
+#endif 
+
 #ifdef __DO_UNLOCKED
 
 void __clearerr_unlocked(register FILE *stream)

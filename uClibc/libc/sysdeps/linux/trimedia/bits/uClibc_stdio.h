@@ -389,146 +389,40 @@ extern void __stdio_init_mutex(pthread_mutex_t *m) attribute_hidden;
 #define __FEOF_UNLOCKED(__stream)	((__stream)->__modeflags & __FLAG_EOF)
 #define __FERROR_UNLOCKED(__stream)	((__stream)->__modeflags & __FLAG_ERROR)
 
+/*
+ * FIXME: to avoid symbole duplication with TCS
+ */
 #ifdef __UCLIBC_HAS_THREADS__
-# define __CLEARERR(__stream)	(clearerr)(__stream)
-# define __FERROR(__stream)		(ferror)(__stream)
-# define __FEOF(__stream)		(feof)(__stream)
+/* Clear the error and EOF indicators for STREAM.  */
+extern void tmlinux_clearerr (FILE *__stream) __THROW;
+/* Return the EOF indicator for STREAM.  */
+extern int tmlinux_feof (FILE *__stream) __THROW;
+/* Return the error indicator for STREAM.  */
+extern int tmlinux_ferror (FILE *__stream) __THROW;
+# define __CLEARERR(__stream)		(tmlinux_clearerr)(__stream)
+# define __FERROR(__stream)		(tmlinux_ferror)(__stream)
+# define __FEOF(__stream)		(tmlinux_feof)(__stream)
 #else
-# define __CLEARERR(__stream)	__CLEARERR_UNLOCKED(__stream)
+# define __CLEARERR(__stream)		__CLEARERR_UNLOCKED(__stream)
 # define __FERROR(__stream)		__FERROR_UNLOCKED(__stream)
 # define __FEOF(__stream)		__FEOF_UNLOCKED(__stream)
 #endif
 
 extern int __fgetc_unlocked(FILE *__stream);
 extern int __fputc_unlocked(int __c, FILE *__stream);
+extern int tmlinux_fgetc(FILE *stream);
+extern int tmlinux_fputc(int c, FILE *stream);
 
 /* First define the default definitions.  They overriden below as necessary. */
-#define __FGETC_UNLOCKED(__stream)		(__fgetc_unlocked)((__stream))
-#define __FGETC(__stream)				(fgetc)((__stream))
+#define __FGETC_UNLOCKED(__stream) 	(__fgetc_unlocked)((__stream))
+#define __FGETC(__stream)		(tmlinux_fgetc)((__stream))
 #define __GETC_UNLOCKED_MACRO(__stream)	(__fgetc_unlocked)((__stream))
-#define __GETC_UNLOCKED(__stream)		(__fgetc_unlocked)((__stream))
-#define __GETC(__stream)				(fgetc)((__stream))
+#define __GETC_UNLOCKED(__stream)	(__fgetc_unlocked)((__stream))
+#define __GETC(__stream)		(tmlinux_fgetc)((__stream))
 
 #define __FPUTC_UNLOCKED(__c, __stream)	(__fputc_unlocked)((__c),(__stream))
-#define __FPUTC(__c, __stream)			(fputc)((__c),(__stream))
+#define __FPUTC(__c, __stream)		(tmlinux_fputc)((__c),(__stream))
 #define __PUTC_UNLOCKED_MACRO(__c, __stream) (__fputc_unlocked)((__c),(__stream))
 #define __PUTC_UNLOCKED(__c, __stream)	(__fputc_unlocked)((__c),(__stream))
-#define __PUTC(__c, __stream)			(fputc)((__c),(__stream))
+#define __PUTC(__c, __stream)		(tmlinux_fputc)((__c),(__stream))
 
-
-#ifdef __STDIO_GETC_MACRO
-
-extern FILE *__stdin;			/* For getchar() macro. */
-
-# undef  __GETC_UNLOCKED_MACRO
-# define __GETC_UNLOCKED_MACRO(__stream)					\
-		( ((__stream)->__bufpos < (__stream)->__bufgetc_u)	\
-		  ? (*(__stream)->__bufpos++)						\
-		  : __fgetc_unlocked(__stream) )
-
-# if 0
-	/* Classic macro approach.  getc{_unlocked} can have side effects. */
-#  undef  __GETC_UNLOCKED
-#  define __GETC_UNLOCKED(__stream)		__GETC_UNLOCKED_MACRO((__stream))
-#  ifndef __UCLIBC_HAS_THREADS__
-#   undef  __GETC
-#   define __GETC(__stream)				__GETC_UNLOCKED_MACRO((__stream))
-#  endif
-
-# else
-	/* Using gcc extension for safety and additional inlining. */
-#  undef  __FGETC_UNLOCKED
-#  define __FGETC_UNLOCKED(__stream)		\
-		(__extension__ ({					\
-			FILE *__S = (__stream);			\
-			__GETC_UNLOCKED_MACRO(__S);		\
-		}) )
-
-#  undef  __GETC_UNLOCKED
-#  define __GETC_UNLOCKED(__stream)		__FGETC_UNLOCKED((__stream))
-
-#  ifdef __UCLIBC_HAS_THREADS__
-#   undef  __FGETC
-#   define __FGETC(__stream)				\
-		(__extension__ ({					\
-			FILE *__S = (__stream);			\
-			((__S->__user_locking )			\
-			 ? __GETC_UNLOCKED_MACRO(__S)	\
-			 : (fgetc)(__S));				\
-		}) )
-
-#   undef  __GETC
-#   define __GETC(__stream)				__FGETC((__stream))
-
-#  else 
-
-#   undef  __FGETC
-#   define __FGETC(__stream)			__FGETC_UNLOCKED((__stream))
-#   undef  __GETC
-#   define __GETC(__stream)				__FGETC_UNLOCKED((__stream))
-
-#  endif
-# endif
-
-#else
-
-#endif /* __STDIO_GETC_MACRO */
-
-
-#ifdef __STDIO_PUTC_MACRO
-
-extern FILE *__stdout;			/* For putchar() macro. */
-
-# undef  __PUTC_UNLOCKED_MACRO
-# define __PUTC_UNLOCKED_MACRO(__c, __stream)						\
-		( ((__stream)->__bufpos < (__stream)->__bufputc_u)	\
-		  ? (*(__stream)->__bufpos++) = (__c)				\
-		  : __fputc_unlocked((__c),(__stream)) )
-
-# if 0
-	/* Classic macro approach.  putc{_unlocked} can have side effects.*/
-#  undef  __PUTC_UNLOCKED
-#  define __PUTC_UNLOCKED(__c, __stream) \
-									__PUTC_UNLOCKED_MACRO((__c), (__stream))
-#  ifndef __UCLIBC_HAS_THREADS__
-#   undef  __PUTC
-#   define __PUTC(__c, __stream)	__PUTC_UNLOCKED_MACRO((__c), (__stream))
-#  endif
-
-# else
-	/* Using gcc extension for safety and additional inlining. */
-
-#  undef  __FPUTC_UNLOCKED
-#  define __FPUTC_UNLOCKED(__c, __stream)		\
-		(__extension__ ({						\
-			FILE *__S = (__stream);				\
-			__PUTC_UNLOCKED_MACRO((__c),__S);	\
-		}) )
-
-#  undef  __PUTC_UNLOCKED
-#  define __PUTC_UNLOCKED(__c, __stream)	__FPUTC_UNLOCKED((__c), (__stream))
-
-#  ifdef __UCLIBC_HAS_THREADS__
-#   undef  __FPUTC
-#   define __FPUTC(__c, __stream)				\
-		(__extension__ ({						\
-			FILE *__S = (__stream);				\
-			((__S->__user_locking)				\
-			 ? __PUTC_UNLOCKED_MACRO((__c),__S)	\
-			 : (fputc)((__c),__S));				\
-		}) )
-
-#   undef  __PUTC
-#   define __PUTC(__c, __stream)		__FPUTC((__c), (__stream))
-
-#  else
-
-#   undef  __FPUTC
-#   define __FPUTC(__c, __stream) 		__FPUTC_UNLOCKED((__c),(__stream))
-#   undef  __PUTC
-#   define __PUTC(__c, __stream) 		__FPUTC_UNLOCKED((__c),(__stream))
-
-#  endif
-# endif
-
-#endif /* __STDIO_PUTC_MACRO */

@@ -719,19 +719,10 @@ extern int fsetpos64 (FILE *__stream, __const fpos64_t *__pos);
 __BEGIN_NAMESPACE_STD
 /* Clear the error and EOF indicators for STREAM.  */
 extern void clearerr (FILE *__stream) __THROW;
-#ifndef __TCS__
 /* Return the EOF indicator for STREAM.  */
 extern int feof (FILE *__stream) __THROW;
 /* Return the error indicator for STREAM.  */
 extern int ferror (FILE *__stream) __THROW;
-#else
-/* Return the EOF indicator for STREAM.  */
-extern int feof (FILE *__stream) __THROW;
-extern int tmlinux_feof (FILE *__stream) __THROW;
-/* Return the error indicator for STREAM.  */
-extern int ferror (FILE *__stream) __THROW;
-extern int tmlinux_ferror (FILE *__stream) __THROW;
-#endif
 __END_NAMESPACE_STD
 
 #ifdef __USE_MISC
