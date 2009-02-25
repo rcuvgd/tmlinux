@@ -320,10 +320,6 @@ extern int fprintf (FILE *__restrict __stream,
    This function is a possible cancellation point and therefore not
    marked with __THROW.  */
 extern int printf (__const char *__restrict __format, ...);
-/*
- * TriMedia printf protocol
- */
-extern int tmprintf (__const char *__restrict __format, ...);
 /* Write formatted output to S.  */
 extern int sprintf (char *__restrict __s,
 		    __const char *__restrict __format, ...) __THROW;
