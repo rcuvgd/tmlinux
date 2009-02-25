@@ -225,7 +225,6 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _fseek=_tmlinux_fseek 		\
 		-symbolrename _fputc=_tmlinux_fputc 		\
 		-symbolrename _printf=_tmlinux_printf 		\
-		-symbolrename _tmprintf=_printf 		\
 		-symbolrename _puts=_tmlinux_puts  		\
 		-symbolrename _sprintf=_tmlinux_sprintf  	\
 		-symbolrename _sscanf=_tmlinux_sscanf 		\
@@ -263,6 +262,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _fclose=_tmlinux_fclose 		\
 		-symbolrename _fopen=_tmlinux_fopen 		\
 		-symbolrename _fgets=_tmlinux_fgets 		\
+		-symbolrename _gets=_tmlinux_gets 		\
 		-symbolrename _lseek=_tmlinux_lseek 		\
 		-symbolrename _abort=_tmlinux_abort 		\
 		-symbolrename _raise=_tmlinux_raise 		\
