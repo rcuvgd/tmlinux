@@ -500,7 +500,14 @@ wctype_t attribute_hidden __wctype(const char *property)
 	/* TODO - Add locale-specific classifications. */
 	return 0;
 }
+#ifndef __TCS__
 strong_alias(__wctype,wctype)
+#else
+wctype_t wctype(const char *property)
+{
+	return __wctype(property);
+}
+#endif 
 
 #endif
 /**********************************************************************/

@@ -9,7 +9,14 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strchr, strchr)
+#else
+char *strchr(const char *s, int c)
+{
+	return __strchr(s,c);
+}
+#endif 
 
 weak_alias(strchr, index)
 

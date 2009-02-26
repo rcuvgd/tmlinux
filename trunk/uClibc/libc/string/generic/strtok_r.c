@@ -69,4 +69,14 @@ char attribute_hidden *__strtok_r (s, delim, save_ptr)
   return token;
 }
 
+#ifndef __TCS__
 strong_alias(__strtok_r, strtok_r)
+#else
+char *strtok_r (s, delim, save_ptr)
+     char *s;
+     const char *delim;
+     char **save_ptr;
+{
+	return __strtok_r(s,delim,save_ptr);
+}
+#endif 

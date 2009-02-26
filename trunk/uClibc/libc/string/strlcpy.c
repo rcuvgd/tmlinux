@@ -9,7 +9,14 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strlcpy, strlcpy)
+#else
+size_t strlcpy(char *dst,const char *src, size_t n)
+{
+	return __strlcpy(dst,src,n);
+}
+#endif 
 
 #ifdef __LOCALE_C_ONLY
 weak_alias(strlcpy, strxfrm)

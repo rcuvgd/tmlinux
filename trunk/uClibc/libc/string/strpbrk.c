@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strpbrk, strpbrk)
+#else
+char *strpbrk(const char *s, const char *accept)
+{
+	return __strpbrk(s,accept);
+}
+#endif 
 
 #undef L_strpbrk

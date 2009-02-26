@@ -175,7 +175,15 @@ printf(__FUNCTION__": signahdler installed, __sigaction successful\n");
     }
   return 0;
 }
+#ifndef __TCS__
 strong_alias(__sigaction, sigaction)
+#else
+int sigaction(int sig, const struct sigaction * act,
+              struct sigaction * oact)
+{
+	return __sigaction(sig,act,oact);
+}
+#endif 
 
 /* A signal handler that does nothing */
 static void pthread_null_sighandler(int sig) { }

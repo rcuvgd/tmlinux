@@ -160,4 +160,11 @@ FILE attribute_hidden *__open_memstream(char **__restrict bufloc, size_t *__rest
 
 	return NULL;
 }
+#ifndef __TCS__
 strong_alias(__open_memstream,open_memstream)
+#else
+FILE attribute_hidden *open_memstream(char **__restrict bufloc, size_t *__restrict sizeloc)
+{
+	return __open_memstream(bufloc,sizeloc);
+}
+#endif 

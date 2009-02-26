@@ -12,4 +12,11 @@
 #include <sys/mman.h>
 #define __NR___munmap __NR_munmap
 attribute_hidden _syscall2(int, __munmap, void *, start, size_t, length);
+#ifndef __TCS__
 strong_alias(__munmap,munmap)
+#else
+int munmap(void* start,size_t length)
+{
+	return __munmap(start,length);
+}
+#endif 

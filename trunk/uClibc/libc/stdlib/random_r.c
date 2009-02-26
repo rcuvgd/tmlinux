@@ -181,7 +181,14 @@ fail:
     __set_errno (EINVAL);
     return -1;
 }
+#ifndef __TCS__
 strong_alias(__random_r,random_r)
+#else
+int random_r(struct random_data *buf, int32_t *result)
+{
+	return __random_r(buf,result);
+}
+#endif 
 
 /* Initialize the random number generator based on the given seed.  If the
    type is the trivial no-state-information type, just remember the seed.
@@ -245,7 +252,14 @@ done:
 fail:
     return -1;
 }
+#ifndef __TCS__
 strong_alias(__srandom_r,srandom_r)
+#else
+int srandom_r (unsigned int seed, struct random_data *buf)
+{
+	return __srandom_r(seed,buf);
+}
+#endif 
 
 /* Initialize the state information in the given array of N bytes for
    future random number generation.  Based on the number of bytes we
@@ -362,4 +376,11 @@ fail:
     __set_errno (EINVAL);
     return -1;
 }
+#ifndef __TCS__
 strong_alias(__setstate_r,setstate_r)
+#else
+int setstate_r (char *arg_state, struct random_data *buf)
+{
+	return __setstate_r(arg_state,buf);
+}
+#endif 

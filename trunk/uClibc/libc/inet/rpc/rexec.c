@@ -174,7 +174,15 @@ bad:
 	freeaddrinfo(res0);
 	return (-1);
 }
+#ifndef __TCS__
 strong_alias(__rexec_af,rexec_af)
+#else
+int 
+rexec_af(char **ahost, int rport, const char *name, const char *pass, const char *cmd, int *fd2p, sa_family_t af)
+{
+	return __rexec_af(ahost,rport,name,pass,cmd,fd2p,af);
+}
+#endif 
 
 int
 rexec(ahost, rport, name, pass, cmd, fd2p)

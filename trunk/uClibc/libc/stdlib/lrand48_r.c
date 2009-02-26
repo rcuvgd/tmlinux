@@ -29,4 +29,11 @@ int attribute_hidden __lrand48_r (struct drand48_data *buffer, long int *result)
 
     return nrand48_r (buffer->__x, buffer, result);
 }
+#ifndef __TCS__
 strong_alias(__lrand48_r,lrand48_r)
+#else
+int lrand48_r (struct drand48_data *buffer, long int *result)
+{
+	return __lrand48_r(buffer,result);
+}
+#endif 

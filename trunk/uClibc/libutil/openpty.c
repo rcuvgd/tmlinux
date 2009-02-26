@@ -159,4 +159,13 @@ __openpty (int *amaster, int *aslave, char *name, struct termios *termp,
   return -1;
 }
 
+#ifndef __TCS__
 strong_alias(__openpty,openpty)
+#else
+int 
+openpty (int *amaster, int *aslave, char *name, struct termios *termp,
+	 struct winsize *winp)
+{
+	return __openpty(amaster,aslave,name,termp,winp);
+}
+#endif 

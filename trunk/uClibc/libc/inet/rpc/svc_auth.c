@@ -115,7 +115,15 @@ _authenticate_internal (register struct svc_req *rqst, struct rpc_msg *msg)
 
   return AUTH_REJECTEDCRED;
 }
+#ifndef __TCS__
 strong_alias(_authenticate_internal,_authenticate)
+#else
+enum auth_stat 
+_authenticate(register struct svc_req *rqst, struct rpc_msg *msg)
+{
+	return _authenticate_internal(rqst,msg);
+}
+#endif 
 
 static enum auth_stat
 _svcauth_null (struct svc_req *rqst, struct rpc_msg *msg)

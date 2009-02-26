@@ -345,7 +345,15 @@ __clnt_spcreateerror (const char *msg)
   *++cp = '\0';
   return str;
 }
+#ifndef __TCS__
 strong_alias(__clnt_spcreateerror,clnt_spcreateerror)
+#else
+char *
+clnt_spcreateerror (const char *msg)
+{
+	return __clnt_spcreateerror(msg);
+}
+#endif 
 
 void
 clnt_pcreateerror (const char *msg)

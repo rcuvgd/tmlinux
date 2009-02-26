@@ -100,7 +100,15 @@ __authnone_create (void)
     }
   return (&ap->no_client);
 }
+#ifndef __TCS__
 strong_alias(__authnone_create,authnone_create)
+#else
+AUTH *
+authnone_create (void)
+{
+	return __authnone_create();
+}
+#endif 
 
 /*ARGSUSED */
 static bool_t

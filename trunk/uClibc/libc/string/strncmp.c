@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strncmp, strncmp)
+#else
+int strncmp(const char *s1, const char *s2, size_t n)
+{
+	return __strncmp(s1,s2,n);
+}
+#endif 
 
 #undef L_strncmp

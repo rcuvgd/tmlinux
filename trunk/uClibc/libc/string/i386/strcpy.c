@@ -46,4 +46,11 @@ char attribute_hidden *__strcpy(char * dest, const char * src)
     return dest;
 }
 
+#ifndef __TCS__
 strong_alias(__strcpy, strcpy)
+#else
+char *strcpy(char * dest, const char * src)
+{
+	return __strcpy(dest,src);
+}
+#endif 

@@ -204,7 +204,18 @@ __xdrrec_create (XDR *xdrs, u_int sendsize,
   rstrm->fbtbc = 0;
   rstrm->last_frag = TRUE;
 }
+#ifndef __TCS__
 strong_alias(__xdrrec_create,xdrrec_create)
+#else
+void 
+xdrrec_create (XDR *xdrs, u_int sendsize,
+	       u_int recvsize, caddr_t tcp_handle,
+	       int (*readit) (char *, char *, int),
+	       int (*writeit) (char *, char *, int))
+{
+	return __xdrrec_create(xdrs,sendsize,recvsize,tcp_handle,readit,writeit);
+}
+#endif 
 
 
 /*

@@ -23,4 +23,10 @@
 void __cyg_profile_func_enter (void *this_fn, void *call_site)
 {
 }
+#ifndef __TCS__
 strong_alias (__cyg_profile_func_enter, __cyg_profile_func_exit)
+#else
+void __cyg_profile_func_exit(void *this_fn, void *call_site)
+{
+}
+#endif 

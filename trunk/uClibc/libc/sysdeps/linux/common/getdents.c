@@ -99,7 +99,14 @@ ssize_t __getdents (int fd, char *buf, size_t nbytes)
 }
 
 #if defined __UCLIBC_HAS_LFS__ && ! defined __NR_getdents64
+#ifndef __TCS__
 attribute_hidden strong_alias(__getdents,__getdents64)
+#else
+extern ssize_t __getdents64(int fd, char* buf,size_t nbytes)
+{
+	return __getdents(fd,buf,nbytes);
+}
+#endif 
 #endif
 
 #elif __WORDSIZE == 32

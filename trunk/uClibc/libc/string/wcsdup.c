@@ -15,6 +15,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcsdup, wcsdup)
+#else
+wchar_t *wcsdup(const wchar_t *s)
+{
+	return __wcsdup(s);
+}
+#endif 
 
 #undef L_strdup

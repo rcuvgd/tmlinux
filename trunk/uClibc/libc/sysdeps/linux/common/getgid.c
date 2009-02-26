@@ -20,4 +20,11 @@ gid_t attribute_hidden __getgid(void)
 {
 	return (__syscall_getgid());
 }
+#ifndef __TCS__
 strong_alias(__getgid,getgid)
+#else
+gid_t getgid(void)
+{
+	return __getgid();
+}
+#endif 

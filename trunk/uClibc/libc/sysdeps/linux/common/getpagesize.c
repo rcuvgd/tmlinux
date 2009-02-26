@@ -41,6 +41,20 @@ int attribute_hidden __getpagesize_internal(void)
 #endif	/* NBPG.  */
 #endif	/* EXEC_PAGESIZE.  */
 }
+#ifndef __TCS__
 strong_alias(__getpagesize_internal, __getpagesize)
+#else
+int __getpagesize(void)
+{
+	return __getpagesize_internal();
+}
+#endif 
+#ifndef __TCS__
 weak_alias(__getpagesize_internal, getpagesize)
+#else
+int getpagesize(void)
+{
+	return __getpagesize_internal();
+}
+#endif 
 

@@ -159,4 +159,11 @@ void attribute_hidden *__rawmemchr (const void * s, int c_in)
     }
 }
 
+#ifndef __TCS__
 strong_alias(__rawmemchr, rawmemchr)
+#else
+void *rawmemchr (const void * s, int c_in)
+{
+	__rawmemchr(s,c_in);
+}
+#endif 

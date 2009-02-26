@@ -47,7 +47,11 @@ void *__libc_stack_end=NULL;
 /* for gcc-4.1 non-TLS */
 uintptr_t __stack_chk_guard attribute_relro;
 /* for gcc-3.x + Etoh ssp */
+#ifndef __TCS__
 strong_alias(__stack_chk_guard,__guard)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 #endif
 

@@ -12,4 +12,11 @@
 #define __NR___setitimer __NR_setitimer
 attribute_hidden _syscall3(int, __setitimer, __itimer_which_t, which,
 		  const struct itimerval *, new, struct itimerval *, old);
+#ifndef __TCS__
 strong_alias(__setitimer,setitimer)
+#else
+int setitimer(__itimer_which_t which, const struct itimerval* new, struct itimerval* old)
+{
+	return __setitimer(which,new,old);
+}
+#endif 

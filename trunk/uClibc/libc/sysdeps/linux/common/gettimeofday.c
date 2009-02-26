@@ -12,4 +12,11 @@
 #undef gettimeofday
 #define __NR___gettimeofday __NR_gettimeofday
 attribute_hidden _syscall2(int, __gettimeofday, struct timeval *, tv, struct timezone *, tz);
+#ifndef __TCS__
 strong_alias(__gettimeofday,gettimeofday)
+#else
+int gettimeofday(struct timeval* tv,struct timezone* tz)
+{
+	return __gettimeofday(tv,tz);
+}
+#endif 

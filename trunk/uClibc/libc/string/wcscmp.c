@@ -10,11 +10,32 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcscmp, wcscmp)
+#else
+int wcscmp(const wchar_t *s1, const wchar_t *s2)
+{
+	return __wcscmp(s1,s2);
+}
+#endif 
 
 #ifdef __LOCALE_C_ONLY
+#ifndef __TCS__
 weak_alias(__wcscmp, __wcscoll)
+#else
+int __wcscoll(const wchar_t *s1, const wchar_t *s2)
+{
+	return __wcscmp(s1,s2);
+}
+#endif 
+#ifndef __TCS__
 strong_alias(__wcscoll, wcscoll)
+#else
+int wcscoll(const wchar_t *s1, const wchar_t *s2)
+{
+	return __wcscoll(s1,s2);
+}
+#endif 
 #endif
 
 #undef L_strcmp

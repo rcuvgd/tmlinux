@@ -223,7 +223,14 @@ wint_t attribute_hidden __btowc(int c)
 
 #endif /*  __CTYPE_HAS_8_BIT_LOCALES */
 }
+#ifndef __TCS__
 strong_alias(__btowc,btowc)
+#else
+wint_t btowc(int c)
+{
+	return __btowc(c);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -275,7 +282,14 @@ size_t attribute_hidden __mbrlen(const char *__restrict s, size_t n, mbstate_t *
 
 	return __mbrtowc(NULL, s, n, (ps != NULL) ? ps : &mbstate);
 }
+#ifndef __TCS__
 strong_alias(__mbrlen,mbrlen)
+#else
+size_t mbrlen(const char *__restrict s, size_t n, mbstate_t *__restrict ps)
+{
+	return __mbrlen(s,n,ps);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -331,7 +345,15 @@ size_t attribute_hidden __mbrtowc(wchar_t *__restrict pwc, const char *__restric
 	}
 	return (size_t) r;
 }
+#ifndef __TCS__
 strong_alias(__mbrtowc,mbrtowc)
+#else
+size_t mbrtowc(wchar_t *__restrict pwc, const char *__restrict s,
+			   size_t n, mbstate_t *__restrict ps)
+{
+	return __mbrtowc(pwc,s,n,ps);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -362,7 +384,15 @@ size_t attribute_hidden __wcrtomb(register char *__restrict s, wchar_t wc,
 	r = __wcsnrtombs(s, &pwc, 1, MB_LEN_MAX, ps);
 	return (r != 0) ? r : 1;
 }
+#ifndef __TCS__
 strong_alias(__wcrtomb,wcrtomb)
+#else
+size_t wcrtomb(register char *__restrict s, wchar_t wc,
+			   mbstate_t *__restrict ps)
+{
+	return __wcrtomb(s,wc,ps);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -376,7 +406,15 @@ size_t attribute_hidden __mbsrtowcs(wchar_t *__restrict dst, const char **__rest
 	return __mbsnrtowcs(dst, src, SIZE_MAX, len,
 						((ps != NULL) ? ps : &mbstate));
 }
+#ifndef __TCS__
 strong_alias(__mbsrtowcs,mbsrtowcs)
+#else
+size_t mbsrtowcs(wchar_t *__restrict dst, const char **__restrict src,
+				 size_t len, mbstate_t *__restrict ps)
+{
+	return __mbsrtowcs(dst,src,len,ps);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -391,7 +429,15 @@ size_t attribute_hidden __wcsrtombs(char *__restrict dst, const wchar_t **__rest
 {
 	return __wcsnrtombs(dst, src, SIZE_MAX, len, ps);
 }
+#ifndef __TCS__
 strong_alias(__wcsrtombs,wcsrtombs)
+#else
+size_t wcsrtombs(char *__restrict dst, const wchar_t **__restrict src,
+				 size_t len, mbstate_t *__restrict ps)
+{
+	return __wcsrtombs(dst,src,len,ps);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -1152,7 +1198,14 @@ int attribute_hidden __wcswidth(const wchar_t *pwcs, size_t n)
 
 #endif /*  __UCLIBC_HAS_LOCALE__ */
 
+#ifndef __TCS__
 strong_alias(__wcswidth,wcswidth)
+#else
+int wcswidth(const wchar_t *pwcs, size_t n)
+{
+	return __wcswidth(pwcs,n);
+}
+#endif 
 
 #endif
 /**********************************************************************/

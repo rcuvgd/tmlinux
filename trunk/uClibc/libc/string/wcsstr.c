@@ -10,7 +10,14 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcsstr, wcsstr)
+#else
+wchar_t *wcsstr(const wchar_t *haystack, const wchar_t *needle)
+{
+	return __wcsstr(haystack,needle);
+}
+#endif 
 
 weak_alias(wcsstr, wcswcs)
 

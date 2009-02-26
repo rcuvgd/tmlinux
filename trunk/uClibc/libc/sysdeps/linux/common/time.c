@@ -30,4 +30,11 @@ time_t attribute_hidden __time(time_t * t)
 	return result;
 }
 #endif
+#ifndef __TCS__
 strong_alias(__time,time)
+#else
+time_t time(time_t * t)
+{
+	return __time(t);
+}
+#endif 

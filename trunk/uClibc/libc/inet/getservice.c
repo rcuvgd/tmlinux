@@ -215,7 +215,16 @@ again:
     UNLOCK;
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__getservent_r,getservent_r)
+#else
+extern int getservent_r(struct servent * result_buf,
+		 char * buf, size_t buflen,
+		 struct servent ** result)
+{
+	return __getservent_r(result_buf,buf,buflen,result);
+}
+#endif 
 
 struct servent * getservent(void)
 {
@@ -251,7 +260,16 @@ gotname:
     UNLOCK;
     return *result?0:ret;
 }
+#ifndef __TCS__
 strong_alias(__getservbyname_r,getservbyname_r)
+#else
+extern int getservbyname_r(const char *name, const char *proto,
+	struct servent * result_buf, char * buf, size_t buflen,
+	struct servent ** result)
+{
+	return __getservbyname_r(name,proto,result_buf,buf,buflen,result);
+}
+#endif 
 
 struct servent *getservbyname(const char *name, const char *proto)
 {
@@ -282,7 +300,16 @@ extern int attribute_hidden __getservbyport_r(int port, const char *proto,
     UNLOCK;
     return *result?0:ret;
 }
+#ifndef __TCS__
 strong_alias(__getservbyport_r,getservbyport_r)
+#else
+extern int getservbyport_r(int port, const char *proto,
+	struct servent * result_buf, char * buf,
+	size_t buflen, struct servent ** result)
+{
+	return __getservbyport_r(port,proto,result_buf,buf,buflen,result);
+}
+#endif 
 
 struct servent attribute_hidden * __getservbyport(int port, const char *proto)
 {
@@ -292,4 +319,11 @@ struct servent attribute_hidden * __getservbyport(int port, const char *proto)
     __getservbyport_r(port, proto, &serv, servbuf, SBUFSIZE, &result);
     return result;
 }
+#ifndef __TCS__
 strong_alias(__getservbyport,getservbyport)
+#else
+struct servent * getservbyport(int port, const char *proto)
+{
+	return __getservbyport(port,proto);
+}
+#endif 

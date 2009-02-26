@@ -174,4 +174,11 @@ void attribute_hidden *__memchr (const void * s, int c_in, size_t n)
   return 0;
 }
 
+#ifndef __TCS__
 strong_alias(__memchr, memchr)
+#else
+void *memchr (const void * s, int c_in, size_t n)
+{
+	return __memchr(s,c_in,n);
+}
+#endif 

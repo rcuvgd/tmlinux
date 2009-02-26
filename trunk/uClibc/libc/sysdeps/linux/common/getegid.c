@@ -25,4 +25,11 @@ gid_t attribute_hidden __getegid(void)
 	return (getgid());
 }
 #endif
+#ifndef __TCS__
 strong_alias(__getegid,getegid)
+#else
+gid_t getegid(void)
+{
+	return __getegid();
+}
+#endif 

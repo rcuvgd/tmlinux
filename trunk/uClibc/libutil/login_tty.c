@@ -68,4 +68,11 @@ int attribute_hidden __login_tty(int fd)
 	return (0);
 }
 
+#ifndef __TCS__
 strong_alias(__login_tty,login_tty)
+#else
+int login_tty(int fd)
+{
+	return __login_tty(fd);
+}
+#endif 

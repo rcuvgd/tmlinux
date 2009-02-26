@@ -9,7 +9,14 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__memcmp, memcmp)
+#else
+int memcmp(const void *s1, const void *s2, size_t n)
+{
+	return __memcmp(s1,s2,n);
+}
+#endif 
 
 weak_alias(memcmp, bcmp)
 

@@ -274,4 +274,11 @@ long int attribute_hidden __random (void)
   __pthread_mutex_unlock(&lock);
   return retval;
 }
+#ifndef __TCS__
 strong_alias(__random,random)
+#else
+long int random (void)
+{
+	return __random();
+}
+#endif 

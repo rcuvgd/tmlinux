@@ -91,7 +91,11 @@ extern void _start(void);
 /* Only exported for architectures that don't store the stack guard canary
  * in local thread area.  */
 uintptr_t __stack_chk_guard attribute_relro;
+#ifndef __TCS__
 strong_alias(__stack_chk_guard,__guard)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 #endif
 

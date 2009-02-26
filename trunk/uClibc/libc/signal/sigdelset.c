@@ -30,4 +30,12 @@ __sigdelset_internal (sigset_t *set, int signo)
 
   return __sigdelset (set, signo);
 }
+#ifndef __TCS__
 strong_alias(__sigdelset_internal,sigdelset)
+#else
+int
+sigdelset(sigset_t *set, int signo)
+{
+	return __sigdelset_internal(set,signo);
+}
+#endif 

@@ -1227,7 +1227,14 @@ int attribute_hidden __ffs(int i)
 #endif
 }
 
+#ifndef __TCS__
 strong_alias(__ffs, ffs)
+#else
+int ffs(int i)
+{
+	return __ffs(i);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -1413,7 +1420,14 @@ void attribute_hidden *__memccpy(void * __restrict s1, const void * __restrict s
 	return (n == (size_t) -1) ? NULL : r1;
 }
 
+#ifndef __TCS__
 strong_alias(__memccpy, memccpy)
+#else
+void *memccpy(void * __restrict s1, const void * __restrict s2, int c, size_t n)
+{
+	return __memccpy(s1,s2,c,n);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -1784,7 +1798,15 @@ void attribute_hidden *__memmem(const void *haystack, size_t haystacklen,
 	return NULL;
 }
 
+#ifndef __TCS__
 strong_alias(__memmem, memmem)
+#else
+void *memmem(const void *haystack, size_t haystacklen,
+		     const void *needle, size_t needlelen)
+{
+	return __memmem(haystack,haystacklen,needle,needlelen);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -1855,7 +1877,14 @@ void attribute_hidden *__memrchr(const void *s, int c, size_t n)
 }
 #undef np
 
+#ifndef __TCS__
 strong_alias(__memrchr, memrchr)
+#else
+void *memrchr(const void *s, int c, size_t n)
+{
+	return __memrchr(s,c,n);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -1956,7 +1985,14 @@ void attribute_hidden __bzero(void *s, size_t n)
 #if 0
 weak_alias(__bzero, bzero)
 #else
+#ifndef __TCS__
 strong_alias(__bzero, bzero)
+#else
+void bzero(void *s, size_t n)
+{
+	__bzero(s,n);
+}
+#endif 
 #endif
 #undef np
 
@@ -2008,7 +2044,14 @@ void attribute_hidden __bcopy(const void *s2, void *s1, size_t n)
 #endif
 }
 
+#ifndef __TCS__
 strong_alias(__bcopy, bcopy)
+#else
+void bcopy(const void *s2, void *s1, size_t n)
+{
+	__bcopy(s2,s1,n);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2055,7 +2098,14 @@ char attribute_hidden *__strcasestr(const char *s1, const char *s2)
 #endif
 }
 
+#ifndef __TCS__
 strong_alias(__strcasestr, strcasestr)
+#else
+char *strcasestr(const char *s1, const char *s2)
+{
+	return __strcasestr(s1,s2);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2076,7 +2126,14 @@ char attribute_hidden *__strndup(register const char *s1, size_t n)
 	return s;
 }
 
+#ifndef __TCS__
 strong_alias(__strndup, strndup)
+#else
+char *strndup(register const char *s1, size_t n)
+{
+	return __strndup(s1,n);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2104,7 +2161,14 @@ char attribute_hidden *__strsep(char ** __restrict s1, const char * __restrict s
 	return s;
 }
 
+#ifndef __TCS__
 strong_alias(__strsep, strsep)
+#else
+char *strsep(char ** __restrict s1, const char * __restrict s2)
+{
+	return __strsep(s1,s2);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2150,7 +2214,14 @@ void attribute_hidden *__rawmemchr(const void *s, int c)
 	return (void *) r;	/* silence the warning */
 }
 
+#ifndef __TCS__
 strong_alias(__rawmemchr, rawmemchr)
+#else
+void *rawmemchr(const void *s, int c)
+{
+	return __rawmemchr(s,c);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2173,7 +2244,14 @@ char attribute_hidden *__basename(const char *path)
 	return (char *) p;
 }
 
+#ifndef __TCS__
 strong_alias(__basename, basename)
+#else
+char *basename(const char *path)
+{
+	return __basename(path);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -2549,7 +2627,14 @@ char attribute_hidden *__strsignal(int signum)
 
 #endif /* __UCLIBC_HAS_SIGNUM_MESSAGES__ */
 
+#ifndef __TCS__
 strong_alias(__strsignal, strsignal)
+#else
+char *strsignal(int signum)
+{
+	return __strsignal(signum);
+}
+#endif 
 
 #endif
 /**********************************************************************/

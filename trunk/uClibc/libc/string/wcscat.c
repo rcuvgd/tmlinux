@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcscat, wcscat)
+#else
+wchar_t *wcscat(wchar_t *dest, const wchar_t *src)
+{
+	return __wcscat(dest,src);
+}
+#endif 
 
 #undef L_strcat

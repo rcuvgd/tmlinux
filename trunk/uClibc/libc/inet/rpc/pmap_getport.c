@@ -88,4 +88,12 @@ __pmap_getport (struct sockaddr_in *address, u_long program, u_long version, u_i
   address->sin_port = 0;
   return port;
 }
+#ifndef __TCS__
 strong_alias(__pmap_getport,pmap_getport)
+#else
+u_short
+pmap_getport (struct sockaddr_in *address, u_long program, u_long version, u_int protocol)
+{
+	return __pmap_getport(address,program,version,protocol);
+}
+#endif 

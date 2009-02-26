@@ -159,4 +159,11 @@ size_t attribute_hidden __strnlen (const char *str, size_t maxlen)
   return char_ptr - str;
 }
 
+#ifndef __TCS__
 strong_alias(__strnlen, strnlen)
+#else
+size_t strnlen (const char *str, size_t maxlen)
+{
+	return __strnlen(str,maxlen);
+}
+#endif 

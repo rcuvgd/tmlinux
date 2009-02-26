@@ -11,4 +11,11 @@
 #include <unistd.h>
 #define __NR___fchdir __NR_fchdir
 attribute_hidden _syscall1(int, __fchdir, int, fd);
+#ifndef __TCS__
 strong_alias(__fchdir,fchdir)
+#else
+int fchdir(int fd)
+{
+	return __fchdir(fd);
+}
+#endif 

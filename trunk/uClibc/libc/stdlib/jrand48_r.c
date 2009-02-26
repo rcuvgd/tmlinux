@@ -33,4 +33,11 @@ int attribute_hidden __jrand48_r (unsigned short int xsubi[3], struct drand48_da
 
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__jrand48_r,jrand48_r)
+#else
+int jrand48_r (unsigned short int xsubi[3], struct drand48_data *buffer, long int *result)
+{
+	return __jrand48_r(xsubi,buffer,result);
+}
+#endif 

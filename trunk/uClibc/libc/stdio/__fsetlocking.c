@@ -44,4 +44,11 @@ int attribute_hidden __fsetlocking_internal(FILE *stream, int locking_mode)
 #endif
 }
 
+#ifndef __TCS__
 strong_alias(__fsetlocking_internal,__fsetlocking)
+#else
+int attribute_hidden __fsetlocking(FILE *stream, int locking_mode)
+{
+	return __fsetlocking_internal(stream,locking_mode);
+}
+#endif 

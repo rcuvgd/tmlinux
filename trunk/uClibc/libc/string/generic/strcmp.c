@@ -54,6 +54,20 @@ int strcmp(const char *p1, const char *p2)
 #endif 
 
 #ifdef __LOCALE_C_ONLY
+#ifndef __TCS__
 weak_alias(__strcmp, __strcoll)
+#else
+int __strcoll(const char *p1, const char *p2)
+{
+	return __strcmp(p1,p2);
+}
+#endif 
+#ifndef __TCS__
 strong_alias(__strcoll, strcoll)
+#else
+int strcoll(const char *p1, const char *p2)
+{
+	return __strcoll(p1,p2);
+}
+#endif 
 #endif /* __LOCALE_C_ONLY */

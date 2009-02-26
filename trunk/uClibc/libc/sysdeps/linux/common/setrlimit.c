@@ -42,4 +42,11 @@ attribute_hidden _syscall2(int, __setrlimit, unsigned int, resource,
 		const struct rlimit *, rlim);
 #endif
 
+#ifndef __TCS__
 strong_alias(__setrlimit,setrlimit)
+#else
+int setrlimit(unsigned int resource, const struct rlimit* rlim)
+{
+	return __setrlimit(resource,rlim);
+}
+#endif 

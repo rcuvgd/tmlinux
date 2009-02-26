@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wmemmove, wmemmove)
+#else
+wchar_t *wmemmove(wchar_t *dest, const wchar_t *src, size_t n)
+{
+	return __wmemmove(dest,src,n);
+}
+#endif 
 
 #undef L_memmove

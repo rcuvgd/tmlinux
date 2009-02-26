@@ -103,7 +103,14 @@ int attribute_hidden __setttyent(void)
     }
     return (0);
 }
+#ifndef __TCS__
 strong_alias(__setttyent,setttyent)
+#else
+int setttyent(void)
+{
+	return __setttyent();
+}
+#endif 
 
 struct ttyent attribute_hidden * __getttyent(void)
 {
@@ -181,7 +188,14 @@ struct ttyent attribute_hidden * __getttyent(void)
 	*p = '\0';
     return (&tty);
 }
+#ifndef __TCS__
 strong_alias(__getttyent,getttyent)
+#else
+struct ttyent * getttyent(void)
+{
+	return __getttyent();
+}
+#endif 
 
 int attribute_hidden __endttyent(void)
 {
@@ -194,7 +208,14 @@ int attribute_hidden __endttyent(void)
     }
     return (1);
 }
+#ifndef __TCS__
 strong_alias(__endttyent,endttyent)
+#else
+int endttyent(void)
+{
+	return __endttyent();
+}
+#endif 
 
 struct ttyent * getttynam(const char *tty)
 {

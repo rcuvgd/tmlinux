@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__memset, memset)
+#else
+void *memset(void *s, int c, size_t n)
+{
+	return __memset(s,c,n);
+}
+#endif 
 
 #undef L_memset

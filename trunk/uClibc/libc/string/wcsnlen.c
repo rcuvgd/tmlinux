@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcsnlen, wcsnlen)
+#else
+size_t wcsnlen(const wchar_t *s, size_t maxlen)
+{
+	return __wcsnlen(s,maxlen);
+}
+#endif 
 
 #undef L_strnlen

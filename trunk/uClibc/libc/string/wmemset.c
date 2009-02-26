@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wmemset, wmemset)
+#else
+wchar_t *wmemset(wchar_t *wcs, wchar_t wc, size_t n)
+{
+	return __wmemset(wcs,wc,n);
+}
+#endif 
 
 #undef L_memset

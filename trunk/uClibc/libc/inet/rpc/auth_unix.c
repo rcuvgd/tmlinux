@@ -163,7 +163,16 @@ no_memory:
   marshal_new_auth (auth);
   return auth;
 }
+#ifndef __TCS__
 strong_alias(__authunix_create,authunix_create)
+#else
+AUTH *
+authunix_create (char *machname, uid_t uid, gid_t gid, int len,
+		 gid_t *aup_gids)
+{
+	return __authunix_create(machname,uid,gid,len,aup_gids);
+}
+#endif 
 
 /*
  * Returns an auth handle with parameters determined by doing lots of
@@ -192,7 +201,15 @@ __authunix_create_default (void)
      authuxprot.c transforms a fixed array.  Grrr.  */
   return __authunix_create (machname, uid, gid, MIN (NGRPS, len), gids);
 }
+#ifndef __TCS__
 strong_alias(__authunix_create_default,authunix_create_default)
+#else
+AUTH *
+authunix_create_default (void)
+{
+	return __authunix_create_default();
+}
+#endif 
 
 /*
  * authunix operations

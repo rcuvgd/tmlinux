@@ -168,7 +168,14 @@ int attribute_hidden __unsetenv (const char *name)
     UNLOCK;
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__unsetenv,unsetenv)
+#else
+int unsetenv (const char *name)
+{
+	return __unsetenv(name);
+}
+#endif 
 
 /* The `clearenv' was planned to be added to POSIX.1 but probably
    never made it.  Nevertheless the POSIX.9 standard (POSIX bindings

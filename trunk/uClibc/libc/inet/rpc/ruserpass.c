@@ -294,7 +294,14 @@ bad:
 	(void) fclose(cfile);
 	return (-1);
 }
+#ifndef __TCS__
 strong_alias(__ruserpass,ruserpass)
+#else
+int ruserpass(const char *host, const char **aname, const char **apass)
+{
+	return __ruserpass(host,aname,apass);
+}
+#endif 
 
 static int
 token()

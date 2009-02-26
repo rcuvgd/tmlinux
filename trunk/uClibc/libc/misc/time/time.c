@@ -242,7 +242,14 @@ char attribute_hidden *__asctime(const struct tm *ptm)
 {
 	return __asctime_r(ptm, __time_str);
 }
+#ifndef __TCS__
 strong_alias(__asctime,asctime)
+#else
+char *asctime(const struct tm *ptm)
+{
+	return __asctime(ptm);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -384,7 +391,15 @@ char attribute_hidden *__asctime_r(register const struct tm *__restrict ptm,
 
 	return buffer - 8;
 }
+#ifndef __TCS__
 strong_alias(__asctime_r,asctime_r)
+#else
+char *asctime_r(register const struct tm *__restrict ptm,
+				register char *__restrict buffer)
+{
+	return __asctime_r(ptm,buffer);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -463,7 +478,14 @@ char attribute_hidden *__ctime(const time_t *clock)
 	/* ANSI/ISO/SUSv3 say that ctime is equivalent to the following. */
 	return __asctime(__localtime(clock));
 }
+#ifndef __TCS__
 strong_alias(__ctime,ctime)
+#else
+char *ctime(const time_t *clock)
+{
+	return __ctime(clock);
+}
+#endif 
 #endif
 /**********************************************************************/
 #ifdef L_ctime_r
@@ -557,7 +579,14 @@ struct tm attribute_hidden *__localtime(const time_t *timer)
 
 	return ptm;
 }
+#ifndef __TCS__
 strong_alias(__localtime,localtime)
+#else
+struct tm *localtime(const time_t *timer)
+{
+	return __localtime(timer);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -576,7 +605,15 @@ struct tm attribute_hidden *__localtime_r(register const time_t *__restrict time
 
 	return result;
 }
+#ifndef __TCS__
 strong_alias(__localtime_r,localtime_r)
+#else
+struct tm *localtime_r(register const time_t *__restrict timer,
+					   register struct tm *__restrict result)
+{
+	return __localtime_r(timer,result);
+}
+#endif 
 
 #endif
 /**********************************************************************/

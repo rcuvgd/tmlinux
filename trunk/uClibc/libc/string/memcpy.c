@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__memcpy, memcpy)
+#else
+void *memcpy(void *dest, const void *src, size_t n)
+{
+	return __memcpy(dest,src,n);
+}
+#endif 
 
 #undef L_memcpy

@@ -36,4 +36,11 @@ int attribute_hidden __getdtablesize (void)
      returns -1.  */
   return getrlimit (RLIMIT_NOFILE, &ru) < 0 ? __LOCAL_OPEN_MAX : ru.rlim_cur;
 }
+#ifndef __TCS__
 strong_alias(__getdtablesize,getdtablesize)
+#else
+int getdtablesize (void)
+{
+	return __getdtablesize();
+}
+#endif 
