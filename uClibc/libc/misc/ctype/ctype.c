@@ -86,11 +86,11 @@
 #undef ISCTYPE
 #undef CTYPE_ALIAS
 #ifdef __UCLIBC_DO_XLOCALE
-#define CTYPE_NAME(X)  __is ## X ## _l
+#define CTYPE_NAME(X)  __tmlinux_is ## X ## _l
 #define ISCTYPE(C,F)   __isctype_l( C, F, locale_arg)
 #define CTYPE_ALIAS(NAME)    weak_alias( __is ## NAME ## _l , is ## NAME ## _l)
 #else
-#define CTYPE_NAME(X)  is ## X
+#define CTYPE_NAME(X)  tmlinux_is ## X
 #define ISCTYPE(C,F)   __isctype( C, F )
 #define CTYPE_ALIAS(NAME)
 #endif
@@ -143,7 +143,7 @@ CTYPE_ALIAS(NAME)
 #else  /* __UCLIBC_HAS_CTYPE_TABLES__ */
 
 #define C_MACRO(X)		PASTE2(__C_is,X)(c)
-#define CTYPE_NAME(X)  is ## X
+#define CTYPE_NAME(X)  tmlinux_is ## X
 
 #define IS_FUNC_BODY(NAME) \
 int CTYPE_NAME(NAME) (int c) \

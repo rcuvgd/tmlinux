@@ -128,10 +128,7 @@ int fgetc(register FILE *stream)
 #ifndef __TCS__
 weak_alias(fgetc,getc);
 #else
-int getc(register FILE *stream)
-{
-	return fgetc(stream);
-}
+/*NOTE: do not need to implement getc, for getc is a macro which is redirected to fgetc*/
 #endif 
 
 #endif

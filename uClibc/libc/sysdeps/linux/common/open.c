@@ -33,8 +33,41 @@ int attribute_hidden __open(const char *file, int flags, ...)
 	}
 	return __syscall_open(file, flags, mode);
 }
+#ifndef __TCS__
 strong_alias(__open,open)
 weak_alias(__open,__libc_open)
+#else
+int open(const char *file, int flags, ...)
+{
+	/* gcc may warn about mode being uninitialized.
+	 * Just ignore that, since gcc is wrong. */
+	mode_t mode;
+
+	if (flags & O_CREAT) {
+		va_list ap;
+
+		va_start(ap, flags);
+		mode = va_arg(ap, mode_t);
+		va_end(ap);
+	}
+	return __syscall_open(file, flags, mode);
+}
+int __libc_open(const char *file, int flags, ...)
+{
+	/* gcc may warn about mode being uninitialized.
+	 * Just ignore that, since gcc is wrong. */
+	mode_t mode;
+
+	if (flags & O_CREAT) {
+		va_list ap;
+
+		va_start(ap, flags);
+		mode = va_arg(ap, mode_t);
+		va_end(ap);
+	}
+	return __syscall_open(file, flags, mode);
+}
+#endif 
 
 int creat(const char *file, mode_t mode)
 {

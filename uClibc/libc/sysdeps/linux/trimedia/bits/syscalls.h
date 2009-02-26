@@ -15,9 +15,9 @@
 
 #define __syscall_return(type, res) 					\
 do { 									\
-	if ((unsigned long)(res) >= (unsigned long)(-125)) { 		\
-	/* avoid using res which is declared to be in register d0; 	\
-	   errno might expand to a function call and clobber it.  */ 	\
+	if ((unsigned long)(res) >= (unsigned long)(-131)) { 		\
+	/* 131 is the max errno defined in include/asm-trimedia/errno.h \
+	   which defines all the possible errno returned to userspace*/ \
 		int __err = -(res); 					\
 		errno = __err; 						\
 		res = -1; 						\
