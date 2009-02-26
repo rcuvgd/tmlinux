@@ -31,8 +31,7 @@ extern int __getpagesize(void);
  * Therefore, define the function pthread_attr_init() here using
  * a strong symbol. */
 
-//int __pthread_attr_init_2_1(pthread_attr_t *attr)
-int pthread_attr_init(pthread_attr_t *attr)
+int __pthread_attr_init_2_1(pthread_attr_t *attr)
 {
   size_t ps = __getpagesize ();
 
@@ -64,7 +63,14 @@ int __pthread_attr_init_2_0(pthread_attr_t *attr)
 }
 symbol_version (__pthread_attr_init_2_0, pthread_attr_init, GLIBC_2.0);
 #else
+#ifndef __TCS__
 strong_alias (__pthread_attr_init_2_1, pthread_attr_init)
+#else
+int pthread_attr_init(pthread_attr_t *attr)
+{
+	return __pthread_attr_init_2_1(attr);
+}
+#endif 
 #endif
 #endif /* DO_PTHREAD_VERSIONING_WITH_UCLIBC */
 

@@ -49,4 +49,11 @@ void attribute_hidden *__memchr(const void *cs, int c, size_t count)
     return __res;
 }
 
+#ifndef __TCS__
 strong_alias(__memchr, memchr)
+#else
+void *memchr(const void *cs, int c, size_t count)
+{
+	return __memchr(cs,c,count);
+}
+#endif 

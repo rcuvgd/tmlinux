@@ -21,4 +21,11 @@ uid_t attribute_hidden __getuid(void)
 {
 	return (__syscall_getuid());
 }
+#ifndef __TCS__
 strong_alias(__getuid,getuid)
+#else
+uid_t getuid(void)
+{
+	return __getuid();
+}
+#endif 

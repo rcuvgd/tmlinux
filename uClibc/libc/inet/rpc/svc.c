@@ -127,7 +127,15 @@ __xprt_register (SVCXPRT *xprt)
 					       POLLRDNORM | POLLRDBAND);
     }
 }
+#ifndef __TCS__
 strong_alias(__xprt_register,xprt_register)
+#else
+void 
+xprt_register (SVCXPRT *xprt)
+{
+	__xprt_register(xprt);
+}
+#endif 
 
 /* De-activate a transport handle. */
 void
@@ -244,7 +252,16 @@ __svc_sendreply (register SVCXPRT *xprt, xdrproc_t xdr_results,
   rply.acpted_rply.ar_results.proc = xdr_results;
   return SVC_REPLY (xprt, &rply);
 }
+#ifndef __TCS__
 strong_alias(__svc_sendreply,svc_sendreply)
+#else
+bool_t 
+svc_sendreply (register SVCXPRT *xprt, xdrproc_t xdr_results,
+	       caddr_t xdr_location)
+{
+	return __svc_sendreply(xprt,xdr_results,xdr_location);
+}
+#endif 
 
 /* No procedure error reply */
 void
@@ -297,7 +314,15 @@ __svcerr_auth (SVCXPRT *xprt, enum auth_stat why)
   rply.rjcted_rply.rj_why = why;
   SVC_REPLY (xprt, &rply);
 }
+#ifndef __TCS__
 strong_alias(__svcerr_auth,svcerr_auth)
+#else
+void 
+svcerr_auth (SVCXPRT *xprt, enum auth_stat why)
+{
+	return __svcerr_auth(xprt,why);
+}
+#endif 
 
 /* Auth too weak error reply */
 void

@@ -1633,7 +1633,15 @@ int attribute_hidden __gethostent_r(struct hostent *result_buf, char *buf, size_
     UNLOCK;
     return(ret);
 }
+#ifndef __TCS__
 strong_alias(__gethostent_r,gethostent_r)
+#else
+int gethostent_r(struct hostent *result_buf, char *buf, size_t buflen,
+	struct hostent **result, int *h_errnop)
+{
+	return __gethostent_r(result_buf,buf,buflen,result,h_errnop);
+}
+#endif 
 
 struct hostent *gethostent (void)
 {
@@ -2453,7 +2461,15 @@ int attribute_hidden __ns_name_uncompress_internal(const u_char *msg, const u_ch
 		return (-1);
 	return (n);
 }
+#ifndef __TCS__
 strong_alias(__ns_name_uncompress_internal,__ns_name_uncompress)
+#else
+int __ns_name_uncompress(const u_char *msg, const u_char *eom,
+		const u_char *src, char *dst, size_t dstsiz)
+{
+	return __ns_name_uncompress_internal(msg,eom,src,dst,dstsiz);
+}
+#endif 
 
 
 /*
@@ -2534,7 +2550,14 @@ int attribute_hidden __ns_name_ntop_internal(const u_char *src, char *dst, size_
 	*dn++ = '\0';
         return (dn - dst);
 }
+#ifndef __TCS__
 strong_alias(__ns_name_ntop_internal,__ns_name_ntop)
+#else
+int __ns_name_ntop(const u_char *src, char *dst, size_t dstsiz) 
+{
+	return __ns_name_ntop_internal(src,dst,dstsiz);
+}
+#endif 
 
 /*
  * ns_name_unpack(msg, eom, src, dst, dstsiz)
@@ -2609,5 +2632,13 @@ int attribute_hidden __ns_name_unpack_internal(const u_char *msg, const u_char *
 		len = srcp - src;
 	return (len);
 }
+#ifndef __TCS__
 strong_alias(__ns_name_unpack_internal,__ns_name_unpack)
+#else
+int __ns_name_unpack(const u_char *msg, const u_char *eom, const u_char *src,
+               u_char *dst, size_t dstsiz)
+{
+	return __ns_name_unpack_internal(msg,eom,src,dst,dstsiz);
+}
+#endif 
 #endif /* L_ns_name */

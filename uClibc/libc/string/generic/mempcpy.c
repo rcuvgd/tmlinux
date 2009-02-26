@@ -15,4 +15,11 @@ void attribute_hidden *__mempcpy (void *dstpp, const void *srcpp, size_t len)
   return (void *)(((char *)dstpp) + len);
 }
 
+#ifndef __TCS__
 strong_alias(__mempcpy,mempcpy)
+#else
+void *mempcpy (void *dstpp, const void *srcpp, size_t len)
+{
+	return __mempcpy(dstpp,srcpp,len);
+}
+#endif 

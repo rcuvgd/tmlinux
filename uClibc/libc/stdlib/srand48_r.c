@@ -36,4 +36,11 @@ int attribute_hidden __srand48_r (long int seedval, struct drand48_data *buffer)
 
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__srand48_r,srand48_r)
+#else
+int srand48_r (long int seedval, struct drand48_data *buffer)
+{
+	return __srand48_r(seedval,buffer);
+}
+#endif 

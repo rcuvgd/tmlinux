@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcscspn, wcscspn)
+#else
+size_t wcscspn(const wchar_t *wcs, const wchar_t *reject)
+{
+	return __wcscspn(wcs,reject);
+}
+#endif 
 
 #undef L_strcspn

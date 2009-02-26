@@ -15,6 +15,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcstok, wcstok)
+#else
+wchar_t *wcstok(wchar_t *wcs, const wchar_t *delim, wchar_t **ptr)
+{
+	return __wcstok(wcs,delim,ptr);
+}
+#endif 
 
 #undef L_strtok_r

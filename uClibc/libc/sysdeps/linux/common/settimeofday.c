@@ -12,4 +12,11 @@
 #define __NR___settimeofday __NR_settimeofday
 attribute_hidden _syscall2(int, __settimeofday, const struct timeval *, tv,
 		  const struct timezone *, tz);
+#ifndef __TCS__
 strong_alias(__settimeofday,settimeofday)
+#else
+int settimeofday(const struct timeval* tv, const struct timezone* tz)
+{
+	return __settimeofday(tv,tz);
+}
+#endif 

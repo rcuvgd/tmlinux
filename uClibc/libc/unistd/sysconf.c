@@ -891,4 +891,11 @@ long int attribute_hidden __sysconf(int name)
 #endif
     }
 }
+#ifndef __TCS__
 strong_alias(__sysconf,sysconf)
+#else
+long int sysconf(int name)
+{
+	return __sysconf(name);
+}
+#endif 

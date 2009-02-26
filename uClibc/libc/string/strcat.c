@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strcat, strcat)
+#else
+char *strcat(char *dest, const char *src)
+{
+	return __strcat(dest,src);
+}
+#endif 
 
 #undef L_strcat

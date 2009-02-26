@@ -43,4 +43,12 @@ __sigfillset_internal (sigset_t *set)
 
   return 0;
 }
+#ifndef __TCS__
 strong_alias(__sigfillset_internal,sigfillset)
+#else
+int
+sigfillset(sigset_t *set)
+{
+	return __sigfillset_internal(set);
+}
+#endif 

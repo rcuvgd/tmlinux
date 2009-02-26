@@ -47,7 +47,15 @@ char *__dgettext(const char *domainname,
 	return (char *) msgid;
 }
 
+#ifndef __TCS__
 strong_alias(__dgettext, dgettext)
+#else
+char *dgettext(const char *domainname,
+				 const char *msgid)
+{
+	return __dgettext(domainname,msgid);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -59,7 +67,14 @@ char *__dcgettext(const char *domainname,
 	return (char *) msgid;
 }
 
+#ifndef __TCS__
 strong_alias(__dcgettext, dcgettext)
+#else
+char *dcgettext(const char *domainname, const char *msgid, int category)
+{
+	return __dcgettext(domainname,msgid,category);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -107,7 +122,14 @@ char *__textdomain(const char *domainname)
 	return (char *) default_str;
 }
 
+#ifndef __TCS__
 strong_alias(__textdomain, textdomain)
+#else
+char *textdomain(const char *domainname)
+{
+	return __textdomain(domainname);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -133,7 +155,14 @@ char *__bindtextdomain(const char *domainname, const char *dirname)
 	return (char *) dir;
 }
 
+#ifndef __TCS__
 strong_alias(__bindtextdomain, bindtextdomain)
+#else
+char *bindtextdomain(const char *domainname, const char *dirname)
+{
+	return __bindtextdomain(domainname,dirname);
+}
+#endif 
 
 #endif
 /**********************************************************************/

@@ -18,4 +18,11 @@ pid_t attribute_hidden __wait4(pid_t pid, int *status, int opts, struct rusage *
 {
 	return (__syscall_wait4(pid, status, opts, rusage));
 }
+#ifndef __TCS__
 strong_alias(__wait4,wait4)
+#else
+pid_t wait4(pid_t pid, int *status, int opts, struct rusage *rusage)
+{
+	return __wait4(pid,status,opts,rusage);
+}
+#endif 

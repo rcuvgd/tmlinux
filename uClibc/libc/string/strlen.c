@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strlen, strlen)
+#else
+size_t strlen(const char *s)
+{
+	return __strlen(s);
+}
+#endif 
 
 #undef L_strlen

@@ -45,4 +45,11 @@ void attribute_hidden *__memset(void *s, int c, size_t count)
     return s;
 }
 
+#ifndef __TCS__
 strong_alias(__memset, memset)
+#else
+void *memset(void *s, int c, size_t count)
+{
+	return __memset(s,c,count);
+}
+#endif 

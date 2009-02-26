@@ -51,4 +51,11 @@ void attribute_hidden *__memcpy(void * to, const void * from, size_t n)
     return (to);
 }
 
+#ifndef __TCS__
 strong_alias(__memcpy, memcpy)
+#else
+void *memcpy(void * to, const void * from, size_t n)
+{
+	return __memcpy(to,from,n);
+}
+#endif 

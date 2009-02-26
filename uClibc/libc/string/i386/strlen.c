@@ -46,4 +46,11 @@ size_t attribute_hidden __strlen(const char *s)
     return __res;
 }
 
+#ifndef __TCS__
 strong_alias(__strlen, strlen)
+#else
+size_t strlen(const char *s)
+{
+	return __strlen(s);
+}
+#endif 

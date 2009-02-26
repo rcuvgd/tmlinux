@@ -247,7 +247,15 @@ __xdr_hyper (XDR *xdrs, quad_t *llp)
 
   return FALSE;
 }
+#ifndef __TCS__
 strong_alias(__xdr_hyper,xdr_hyper)
+#else
+bool_t 
+xdr_hyper (XDR *xdrs, quad_t *llp)
+{
+	return __xdr_hyper(xdrs,llp);
+}
+#endif 
 
 
 /*
@@ -281,7 +289,15 @@ __xdr_u_hyper (XDR *xdrs, u_quad_t *ullp)
 
   return FALSE;
 }
+#ifndef __TCS__
 strong_alias(__xdr_u_hyper,xdr_u_hyper)
+#else
+bool_t 
+xdr_u_hyper (XDR *xdrs, u_quad_t *ullp)
+{
+	return __xdr_u_hyper(xdrs,ullp);
+}
+#endif 
 
 bool_t
 xdr_longlong_t (XDR *xdrs, quad_t *llp)

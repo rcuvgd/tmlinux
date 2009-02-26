@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcscpy, wcscpy)
+#else
+wchar_t *wcscpy(wchar_t *dest, const wchar_t *src)
+{
+	return __wcscpy(dest,src);
+}
+#endif 
 
 #undef L_strcpy

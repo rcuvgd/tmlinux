@@ -96,7 +96,14 @@ int attribute_hidden __hcreate_r (size_t nel, struct hsearch_data *htab)
   /* everything went alright */
   return 1;
 }
+#ifndef __TCS__
 strong_alias(__hcreate_r,hcreate_r)
+#else
+int hcreate_r (size_t nel, struct hsearch_data *htab)
+{
+	return __hcreate_r(nel,htab);
+}
+#endif 
 #endif
 
 #ifdef L_hdestroy_r
@@ -118,7 +125,14 @@ void attribute_hidden __hdestroy_r (struct hsearch_data *htab)
   /* the sign for an existing table is an value != NULL in htable */
   htab->table = NULL;
 }
+#ifndef __TCS__
 strong_alias(__hdestroy_r,hdestroy_r)
+#else
+void hdestroy_r (struct hsearch_data *htab)
+{
+	__hdestroy_r(htab);
+}
+#endif 
 #endif
 
 #ifdef L_hsearch_r
@@ -224,5 +238,13 @@ int attribute_hidden __hsearch_r (ENTRY item, ACTION action, ENTRY **retval,
   *retval = NULL;
   return 0;
 }
+#ifndef __TCS__
 strong_alias(__hsearch_r,hsearch_r)
+#else
+int hsearch_r (ENTRY item, ACTION action, ENTRY **retval,
+	       struct hsearch_data *htab)
+{
+	return __hsearch_r(item,action,retval,htab);
+}
+#endif 
 #endif

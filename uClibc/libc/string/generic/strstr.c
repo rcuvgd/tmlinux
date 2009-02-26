@@ -112,4 +112,11 @@ ret0:
   return 0;
 }
 
+#ifndef __TCS__
 strong_alias(__strstr, strstr)
+#else
+char *strstr (const char *phaystack, const char *pneedle)
+{
+	return __strstr(phaystack,pneedle);
+}
+#endif 

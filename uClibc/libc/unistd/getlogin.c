@@ -33,7 +33,14 @@ extern char attribute_hidden * __getlogin(void)
 {
 	return (__getenv("LOGNAME"));
 }
+#ifndef __TCS__
 strong_alias(__getlogin,getlogin)
+#else
+extern char * getlogin(void)
+{
+	return __getlogin();
+}
+#endif 
 
 int getlogin_r(char *name, size_t len)
 {

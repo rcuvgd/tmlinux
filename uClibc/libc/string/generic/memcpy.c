@@ -253,4 +253,11 @@ void attribute_hidden *__memcpy (void *dstpp, const void *srcpp, size_t len)
   return dstpp;
 }
 
+#ifndef __TCS__
 strong_alias(__memcpy, memcpy)
+#else
+void *memcpy (void *dstpp, const void *srcpp, size_t len)
+{
+	return __memcpy(dstpp,srcpp,len);
+}
+#endif 

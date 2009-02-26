@@ -49,4 +49,12 @@ void attribute_hidden *__memmem (const void *haystack, size_t haystack_len,
   return NULL;
 }
 
+#ifndef __TCS__
 strong_alias(__memmem, memmem)
+#else
+void *memmem (const void *haystack, size_t haystack_len,
+			  const void *needle,  size_t needle_len)
+{
+	return __memmem(haystack,haystack_len,needle,needle_len);
+}
+#endif 

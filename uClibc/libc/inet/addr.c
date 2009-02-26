@@ -160,7 +160,14 @@ struct in_addr attribute_hidden __inet_makeaddr(in_addr_t net, in_addr_t host)
 	addr = htonl(addr);
 	return (*(struct in_addr *)&addr);
 }
+#ifndef __TCS__
 strong_alias(__inet_makeaddr,inet_makeaddr)
+#else
+struct in_addr inet_makeaddr(in_addr_t net, in_addr_t host)
+{
+	return __inet_makeaddr(net,host);
+}
+#endif 
 
 #endif
 

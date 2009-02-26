@@ -35,4 +35,11 @@ int __sigblock (int mask)
   return sigset_get_old_mask (&oset);
 }
 
+#ifndef __TCS__
 strong_alias (__sigblock, sigblock)
+#else
+int sigblock(int mask)
+{
+	return __sigblock(mask);
+}
+#endif 

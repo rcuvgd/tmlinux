@@ -54,4 +54,12 @@ _rpc_dtablesize_internal (void)
 
   return size;
 }
+#ifndef __TCS__
 strong_alias(_rpc_dtablesize_internal,_rpc_dtablesize)
+#else
+int
+_rpc_dtablesize(void)
+{
+	return _rpc_dtablesize_internal();
+}
+#endif 

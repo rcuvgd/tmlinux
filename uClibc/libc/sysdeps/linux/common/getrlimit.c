@@ -47,4 +47,11 @@ int attribute_hidden __getrlimit(__rlimit_resource_t resource, struct rlimit *rl
 }
 #endif
 
+#ifndef __TCS__
 strong_alias(__getrlimit,getrlimit)
+#else
+int getrlimit(__rlimit_resource_t resource, struct rlimit *rlimits)
+{
+	return __getrlimit(resource,rlimits);
+}
+#endif 

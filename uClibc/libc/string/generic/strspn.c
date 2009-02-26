@@ -42,4 +42,11 @@ size_t attribute_hidden __strspn (const char *s, const char *accept)
   return count;
 }
 
+#ifndef __TCS__
 strong_alias(__strspn, strspn)
+#else
+size_t strspn (const char *s, const char *accept)
+{
+	return __strspn(s,accept);
+}
+#endif 

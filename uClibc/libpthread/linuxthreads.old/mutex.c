@@ -280,18 +280,60 @@ int __pthread_mutexattr_settype(pthread_mutexattr_t *attr, int kind)
   attr->__mutexkind = kind;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_settype, pthread_mutexattr_settype)
+#else
+int pthread_mutexattr_settype(pthread_mutexattr_t *attr, int kind)
+{
+	return __pthread_mutexattr_settype(attr,kind);
+}
+#endif 
+#ifndef __TCS__
 strong_alias ( __pthread_mutexattr_settype, __pthread_mutexattr_setkind_np)
+#else
+int __pthread_mutexattr_setkind_np(pthread_mutexattr_t *attr, int kind)
+{
+	return __pthread_mutexattr_settype(attr,kind);
+}
+#endif 
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_setkind_np, pthread_mutexattr_setkind_np)
+#else
+int pthread_mutexattr_setkind_np(pthread_mutexattr_t *attr, int kind)
+{
+	return __pthread_mutexattr_setkind_np(attr,kind);
+}
+#endif 
 
 int __pthread_mutexattr_gettype(const pthread_mutexattr_t *attr, int *kind)
 {
   *kind = attr->__mutexkind;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_gettype, pthread_mutexattr_gettype)
+#else
+int pthread_mutexattr_gettype(const pthread_mutexattr_t *attr, int *kind)
+{
+	return __pthread_mutexattr_gettype(attr,kind);
+}
+#endif 
+#ifndef __TCS__
 strong_alias (__pthread_mutexattr_gettype, __pthread_mutexattr_getkind_np)
+#else
+int __pthread_mutexattr_getkind_np(const pthread_mutexattr_t *attr, int *kind)
+{
+	return __pthread_mutexattr_gettype(attr,kind);
+}
+#endif 
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_getkind_np, pthread_mutexattr_getkind_np)
+#else
+int pthread_mutexattr_getkind_np(const pthread_mutexattr_t *attr, int *kind)
+{
+	return __pthread_mutexattr_getkind_np(attr,kind);
+}
+#endif 
 
 int __pthread_mutexattr_getpshared (const pthread_mutexattr_t *attr,
 				   int *pshared)
@@ -381,7 +423,14 @@ int __pthread_once(pthread_once_t * once_control, void (*init_routine)(void))
 
   return 0;
 }
+#ifndef __TCS__
 strong_alias (__pthread_once, pthread_once)
+#else
+int pthread_once(pthread_once_t * once_control, void (*init_routine)(void))
+{
+	return __pthread_once(once_control,init_routine);
+}
+#endif 
 
 /*
  * Handle the state of the pthread_once mechanism across forks.  The

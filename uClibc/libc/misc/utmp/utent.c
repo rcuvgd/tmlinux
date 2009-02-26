@@ -133,7 +133,14 @@ struct utmp attribute_hidden *__getutid (const struct utmp *utmp_entry)
 
     return NULL;
 }
+#ifndef __TCS__
 strong_alias(__getutid,getutid)
+#else
+struct utmp *getutid (const struct utmp *utmp_entry)
+{
+	return __getutid(utmp_entry);
+}
+#endif 
 
 /* Locking is done in __getutent */
 struct utmp *getutline(const struct utmp *utmp_entry)

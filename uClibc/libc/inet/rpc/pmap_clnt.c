@@ -142,7 +142,15 @@ __pmap_set (u_long program, u_long version, int protocol, u_short port)
   /* (void)__close(socket); CLNT_DESTROY closes it */
   return rslt;
 }
+#ifndef __TCS__
 strong_alias(__pmap_set,pmap_set)
+#else
+bool_t 
+pmap_set (u_long program, u_long version, int protocol, u_short port)
+{
+	return __pmap_set(program,version,protocol,port);
+}
+#endif 
 
 /*
  * Remove the mapping between program,version and port.

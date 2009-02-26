@@ -9,6 +9,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__strchrnul, strchrnul)
+#else
+char *strchrnul(const char *s, int c)
+{
+	return __strchrnul(s,c);
+}
+#endif 
 
 #undef L_strchrnul

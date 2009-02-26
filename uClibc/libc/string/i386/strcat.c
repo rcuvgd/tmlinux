@@ -49,4 +49,11 @@ char attribute_hidden *__strcat(char * dest, const char * src)
     return dest;
 }
 
+#ifndef __TCS__
 strong_alias(__strcat, strcat)
+#else
+char *strcat(char * dest, const char * src)
+{
+	return __strcat(dest,src);
+}
+#endif 

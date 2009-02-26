@@ -170,4 +170,11 @@ char attribute_hidden *__strchrnul (const char *s, int c_in)
   return NULL;
 }
 
+#ifndef __TCS__
 strong_alias(__strchrnul, strchrnul)
+#else
+char *strchrnul (const char *s, int c_in)
+{
+	return __strchrnul(s,c_in);
+}
+#endif 

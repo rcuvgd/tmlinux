@@ -332,6 +332,14 @@ attribute_hidden __memcmp (const __ptr_t s1, const __ptr_t s2, size_t len)
   return 0;
 }
 
+#ifndef __TCS__
 strong_alias(__memcmp, memcmp)
+#else
+int
+memcmp (const __ptr_t s1, const __ptr_t s2, size_t len)
+{
+	return __memcmp(s1,s2,len);
+}
+#endif 
 
 weak_alias(memcmp, bcmp)

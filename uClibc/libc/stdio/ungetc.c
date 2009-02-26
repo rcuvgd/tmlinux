@@ -75,4 +75,11 @@ int attribute_hidden __ungetc(int c, register FILE *stream)
 
 	return c;
 }
+#ifndef __TCS__
 strong_alias(__ungetc,ungetc)
+#else
+int attribute_hidden ungetc(int c, register FILE *stream)
+{
+	return __ungetc(c,stream);
+}
+#endif 

@@ -38,4 +38,12 @@ __cmsg_nxthdr_internal (struct msghdr *mhdr, struct cmsghdr *cmsg)
     return NULL;
   return cmsg;
 }
+#ifndef __TCS__
 strong_alias(__cmsg_nxthdr_internal,__cmsg_nxthdr)
+#else
+struct cmsghdr *
+__cmsg_nxthdr(struct msghdr *mhdr, struct cmsghdr *cmsg)
+{
+	return __cmsg_nxthdr_internal(mhdr,cmsg);
+}
+#endif 

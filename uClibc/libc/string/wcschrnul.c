@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wcschrnul, wcschrnul)
+#else
+wchar_t *wcschrnul(const wchar_t *s, wchar_t c)
+{
+	return __wcschrnul(s,c);
+}
+#endif 
 
 #undef L_strchrnul

@@ -36,4 +36,11 @@ int attribute_hidden __seed48_r (unsigned short int seed16v[3], struct drand48_d
 
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__seed48_r,seed48_r)
+#else
+int seed48_r (unsigned short int seed16v[3], struct drand48_data *buffer)
+{
+	return __seed48_r(seed16v,buffer);
+}
+#endif 

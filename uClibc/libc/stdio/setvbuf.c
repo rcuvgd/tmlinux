@@ -112,4 +112,12 @@ int attribute_hidden __setvbuf(register FILE * __restrict stream, register char 
 
 #endif
 }
+#ifndef __TCS__
 strong_alias(__setvbuf,setvbuf)
+#else
+int attribute_hidden setvbuf(register FILE * __restrict stream, register char * __restrict buf,
+			int mode, size_t size)
+{
+	return __setvbuf(stream,buf,mode,size);
+}
+#endif 

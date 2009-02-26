@@ -55,7 +55,14 @@ void attribute_hidden __setnetent(int f)
     UNLOCK;
     return;
 }
+#ifndef __TCS__
 strong_alias(__setnetent,setnetent)
+#else
+void setnetent(int f)
+{
+	__setnetent(f);
+}
+#endif 
 
 void attribute_hidden __endnetent(void)
 {
@@ -67,7 +74,14 @@ void attribute_hidden __endnetent(void)
     _net_stayopen = 0;
     UNLOCK;
 }
+#ifndef __TCS__
 strong_alias(__endnetent,endnetent)
+#else
+void endnetent(void)
+{
+	__endnetent();
+}
+#endif 
 
 static char * any(register char *cp, char *match)
 {
@@ -141,4 +155,11 @@ again:
     UNLOCK;
     return (&net);
 }
+#ifndef __TCS__
 strong_alias(__getnetent,getnetent)
+#else
+struct netent * getnetent(void)
+{
+	return __getnetent();
+}
+#endif 

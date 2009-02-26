@@ -31,4 +31,11 @@ int attribute_hidden __utimes(const char *file, const struct timeval tvp[2])
 	return utime(file, times);
 }
 #endif
+#ifndef __TCS__
 strong_alias(__utimes,utimes)
+#else
+int utimes(const char *file, const struct timeval tvp[2])
+{
+	return __utimes(file,tvp);
+}
+#endif 

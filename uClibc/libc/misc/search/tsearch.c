@@ -77,7 +77,14 @@ void attribute_hidden *__tsearch(__const void *key, void **vrootp, __compar_fn_t
     }
     return (q);
 }
+#ifndef __TCS__
 strong_alias(__tsearch,tsearch)
+#else
+void *tsearch(__const void *key, void **vrootp, __compar_fn_t compar)
+{
+	return __tsearch(key,vrootp,compar);
+}
+#endif 
 #endif
 
 #ifdef L_tfind
@@ -212,7 +219,14 @@ void attribute_hidden __tdestroy (void *vroot, __free_fn_t freefct)
 	tdestroy_recurse (root, freefct);
     }
 }
+#ifndef __TCS__
 strong_alias(__tdestroy,tdestroy)
+#else
+void tdestroy (void *vroot, __free_fn_t freefct)
+{
+	__tdestroy(vroot,freefct);
+}
+#endif 
 #endif
 
 /* tsearch.c ends here */

@@ -45,4 +45,11 @@ int attribute_hidden __erand48_r (unsigned short int xsubi[3], struct drand48_da
 
     return 0;
 }
+#ifndef __TCS__
 strong_alias(__erand48_r,erand48_r)
+#else
+int erand48_r (unsigned short int xsubi[3], struct drand48_data *buffer, double *result)
+{
+	return __erand48_r(xsubi,buffer,result);
+}
+#endif 

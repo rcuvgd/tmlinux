@@ -10,6 +10,13 @@
 
 #include "wstring.c"
 
+#ifndef __TCS__
 strong_alias(__wmemchr, wmemchr)
+#else
+wchar_t *wmemchr(const wchar_t *s, wchar_t c, size_t n)
+{
+	return __wmemchr(s,c,n);
+}
+#endif 
 
 #undef L_memchr
