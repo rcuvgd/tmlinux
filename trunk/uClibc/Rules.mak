@@ -237,8 +237,6 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _strrchr=_tmlinux_strrchr  	\
 		-symbolrename _strtol=_tmlinux_strtol  		\
 		-symbolrename _strerror=_tmlinux_strerror	\
-		-symbolrename _tolower=_tmlinux_tolower  	\
-		-symbolrename _toupper=_tmlinux_toupper  	\
 		-symbolrename _vfprintf=_tmlinux_vfprintf  	\
 		-symbolrename _vsprintf=_tmlinux_vsprintf  	\
 		-symbolrename _bsearch=_tmlinux_bsearch  	\
@@ -246,6 +244,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _system=_tmlinux_system  		\
 		-symbolrename _sleep=_tmlinux_sleep 		\
 		-symbolrename _getenv=_tmlinux_getenv 		\
+		-symbolrename _putenv=_tmlinux_putenv 		\
 		-symbolrename _close=_tmlinux_close 		\
 		-symbolrename _closedir=_tmlinux_closedir 	\
 		-symbolrename _fcntl=_tmlinux_fcntl 		\
@@ -260,6 +259,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _unlink=_tmlinux_unlink 		\
 		-symbolrename _fclose=_tmlinux_fclose 		\
 		-symbolrename _fopen=_tmlinux_fopen 		\
+		-symbolrename _open=_tmlinux_open 		\
 		-symbolrename _fgets=_tmlinux_fgets 		\
 		-symbolrename _gets=_tmlinux_gets 		\
 		-symbolrename _lseek=_tmlinux_lseek 		\

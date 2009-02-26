@@ -859,6 +859,8 @@ extern FILE* stdout;
 #define ferror_unlocked(_fp)         __FERROR_UNLOCKED(_fp)
 #endif
 
+extern int _dp(const char* s,...);
+
 __END_DECLS
 
 #endif /* <stdio.h> included.  */
