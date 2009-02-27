@@ -9,7 +9,7 @@ target-$(CONFIG_PNX1700)        := pnx1700
 target-$(CONFIG_PNX1005)        := pnx1005
 TARGET := $(target-y)
 
-CSRC := brk.c ptrace.c sigset.c clone.c vfork.c setjmp.c fork.c
+CSRC := brk.c ptrace.c sigset.c clone.c vfork.c setjmp.c fork.c mmap.c
 SSRC := target/$(TARGET)/syscall.s target/$(TARGET)/__setjmp.s target/$(TARGET)/__longjmp.s target/$(TARGET)/internal_clone.s target/$(TARGET)/syscall_clone.s 
 
 include $(top_srcdir)libc/sysdeps/linux/Makefile.commonarch
