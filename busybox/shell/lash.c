@@ -47,7 +47,11 @@
 #define CONFIG_LASH_PIPE_N_REDIRECTS
 #define CONFIG_LASH_JOB_CONTROL
 
+#ifndef __TCS__
 static const int MAX_READ = 128;	/* size of input buffer for `read' builtin */
+#else
+#define MAX_READ 		128
+#endif 
 #define JOB_STATUS_FORMAT "[%d] %-22s %.40s\n"
 
 

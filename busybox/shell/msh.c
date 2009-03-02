@@ -1615,7 +1615,20 @@ REGISTER int sub;
  * It is assumed that sbrk() and brk() manipulate the high end.
  */
 
+#ifndef __TCS__
 #define sbrk(X) ({ void * __q = (void *)-1; if (brkaddr + (int)(X) < brktop) { __q = brkaddr; brkaddr+=(int)(X); } __q;})
+#else
+static inline void* sbrk(int X)
+{ 
+	void * __q = (void *)-1; 
+	if (brkaddr + (int)(X) < brktop) 
+	{ 
+		__q = brkaddr; 
+		brkaddr+=(int)(X); 
+	} 
+	return __q;
+}
+#endif 
 
 static void initarea()
 {

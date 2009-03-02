@@ -212,11 +212,19 @@ static int get_boot(enum action what);
 #define PLURAL   0
 #define SINGULAR 1
 
+#ifndef __TCS__
 #define hex_val(c)      ({ \
 				char _c = (c); \
 				isdigit(_c) ? _c - '0' : \
 				tolower(_c) + 10 - 'a'; \
 			})
+#else
+static inline char hex_val(char c)
+{ 
+	char _c = (c); 
+	return isdigit(_c) ? _c - '0' : tolower(_c) + 10 - 'a'; 
+}
+#endif 
 
 
 #define LINE_LENGTH     800

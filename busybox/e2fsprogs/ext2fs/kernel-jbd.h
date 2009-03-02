@@ -836,6 +836,7 @@ extern spinlock_t jh_splice_lock;
  * Once `expr1' has been found true, take jh_splice_lock
  * and then reevaluate everything.
  */
+#ifndef __TCS__
 #define SPLICE_LOCK(expr1, expr2)				\
 	({							\
 		int ret = (expr1);				\
@@ -846,6 +847,19 @@ extern spinlock_t jh_splice_lock;
 		}						\
 		ret;						\
 	})
+#else
+static inline int SPLICE_LOCK(int expr1,int expr2)
+{
+	int ret = expr1;
+	if(ret){
+		spin_lock(&jh_splice_lock);		
+		ret = (expr1) && (expr2);		
+		spin_unlock(&jh_splice_lock);		
+
+	}
+	return ret;
+}
+#endif 
 
 /*
  * A number of buffer state predicates.  They test for
