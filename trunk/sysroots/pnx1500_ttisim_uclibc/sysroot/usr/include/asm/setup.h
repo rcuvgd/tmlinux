@@ -1,6 +1,0 @@
-#ifndef _ASM_TRIMEDIA_SETUP_H
-#define _ASM_TRIMEDIA_SETUP_H
-
-#define COMMAND_LINE_SIZE	512
-
-#endif /*_ASM_TRIMEDIA_SETUP_H*/ 
