@@ -196,6 +196,7 @@ static volatile sig_atomic_t pendingsigs;
  * more fun than worrying about efficiency and portability. :-))
  */
 
+#ifndef __TCS__
 #define xbarrier() ({ __asm__ __volatile__ ("": : :"memory"); })
 #define INTOFF \
 	({ \
@@ -218,6 +219,36 @@ static volatile sig_atomic_t pendingsigs;
 			exraise(EXSIG); \
 		0; \
 	})
+#else
+static inline void xbarrier(void)
+{
+	/*FIXME: How to implement it!!*/
+}
+
+#define INTOFF  										\
+do{ 													\
+	suppressint++; 										\
+	xbarrier(); 										\
+}while(0)
+
+#define SAVEINT(v) ((v) = suppressint)
+
+#define RESTOREINT(v) 									\
+do{ 													\
+	xbarrier(); 										\
+	if ((suppressint = (v)) == 0 && intpending) onint();\
+}while(0)
+
+#define EXSIGON()   									\
+do{ 													\
+		exsig++; 										\
+		xbarrier(); 									\
+		if (pendingsigs) 								\
+			exraise(EXSIG); 							\
+		0; 												\
+}while(0)
+
+#endif 
 /* EXSIG is turned off by evalbltin(). */
 
 
@@ -1852,10 +1883,11 @@ static inline char *_STPUTC(int c, char *p) {
 	return p;
 }
 
-#define stackblock() ((void *)stacknxt)
+#define stackblock() ((char*)stacknxt)
 #define stackblocksize() stacknleft
 #define STARTSTACKSTR(p) ((p) = stackblock())
 #define STPUTC(c, p) ((p) = _STPUTC((c), (p)))
+#ifndef __TCS__
 #define CHECKSTRSPACE(n, p) \
 	({ \
 		char *q = (p); \
@@ -1865,6 +1897,17 @@ static inline char *_STPUTC(int c, char *p) {
 			(p) = makestrspace(l, q); \
 		0; \
 	})
+#else
+#define CHECKSTRSPACE(n, p) 				\
+	do{ 									\
+		char *q = (p); 						\
+		size_t l = (n); 					\
+		size_t m = sstrend - q; 			\
+		if (l > m) 							\
+			(p) = makestrspace(l, q); 		\
+		0; 									\
+	}while(0)
+#endif 
 #define USTPUTC(c, p)   (*p++ = (c))
 #define STACKSTRNUL(p)  ((p) == sstrend? (p = growstackstr(), *p = '\0') : (*p = '\0'))
 #define STUNPUTC(p)     (--p)
