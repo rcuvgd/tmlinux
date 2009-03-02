@@ -218,15 +218,24 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _memchr=_tmlinux_memchr 		\
 		-symbolrename _memcmp=_tmlinux_memcmp 		\
 		-symbolrename _memcpy=_tmlinux_memcpy 		\
+		-symbolrename _rename=_tmlinux_rename 		\
 		-symbolrename _exit=_tmlinux_exit 		\
+		-symbolrename _link=_tmlinux_link 		\
 		-symbolrename _strlen=_tmlinux_strlen  		\
 		-symbolrename _strcoll=_tmlinux_strcoll 	\
 		-symbolrename _strpbrk=_tmlinux_strpbrk 	\
+		-symbolrename _strtod=_tmlinux_strtod  		\
 		-symbolrename _strstr=_tmlinux_strstr 		\
 		-symbolrename _strspn=_tmlinux_strspn 		\
 		-symbolrename _atoi=_tmlinux_atoi  		\
 		-symbolrename _atol=_tmlinux_atol  		\
+		-symbolrename _atoll=_tmlinux_atoll  		\
 		-symbolrename _fflush=_tmlinux_fflush  		\
+		-symbolrename _fread=_tmlinux_fread 		\
+		-symbolrename _fwrite=_tmlinux_fwrite 		\
+		-symbolrename _fsync=_tmlinux_fsync 		\
+		-symbolrename _remove=_tmlinux_remove 		\
+		-symbolrename _atof=_tmlinux_atof 		\
 		-symbolrename _fprintf=_tmlinux_fprintf 	\
 		-symbolrename _fputs=_tmlinux_fputs 		\
 		-symbolrename _fseek=_tmlinux_fseek 		\
@@ -243,6 +252,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _strncpy=_tmlinux_strncpy  	\
 		-symbolrename _strrchr=_tmlinux_strrchr  	\
 		-symbolrename _strtol=_tmlinux_strtol  		\
+		-symbolrename _strtoll=_tmlinux_strtoll  	\
 		-symbolrename _strerror=_tmlinux_strerror	\
 		-symbolrename _vfprintf=_tmlinux_vfprintf  	\
 		-symbolrename _vsprintf=_tmlinux_vsprintf  	\
@@ -266,6 +276,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _unlink=_tmlinux_unlink 		\
 		-symbolrename _fclose=_tmlinux_fclose 		\
 		-symbolrename _fopen=_tmlinux_fopen 		\
+		-symbolrename _freopen=_tmlinux_freopen 	\
 		-symbolrename _open=_tmlinux_open 		\
 		-symbolrename _fgets=_tmlinux_fgets 		\
 		-symbolrename _gets=_tmlinux_gets 		\
@@ -283,6 +294,10 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _asctime=_tmlinux_asctime 	\
 		-symbolrename _localtime=_tmlinux_localtime 	\
 		-symbolrename _ctime=_tmlinux_ctime 		\
+		-symbolrename _time=_tmlinux_time 		\
+		-symbolrename _rand=_tmlinux_rand 		\
+		-symbolrename _setvbuf=_tmlinux_setvbuf 	\
+		-symbolrename _difftime=_tmlinux_difftime 	\
 		-symbolrename _sigprocmask=_tmlinux_sigprocmask \
 		-symbolrename _write=_tmlinux_write  
 
