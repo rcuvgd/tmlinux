@@ -26,6 +26,7 @@
    they are replaced with a string that makes the filename unique.
    The directory is created, mode 700, and its name is returned.
    (This function comes from OpenBSD.) */
+#if 0
 char * mkdtemp (char *template)
 {
     if (__gen_tempname (template, __GT_DIR))
@@ -34,3 +35,16 @@ char * mkdtemp (char *template)
 
     return template;
 }
+#else
+/*
+ * FIXME: I think the above implement is incorrect, really??.
+ * */
+char * mkdtemp (char *template)
+{
+    if (__gen_tempname (template, __GT_DIR) < 0)
+		return NULL;
+
+	return template;
+}
+
+#endif 
