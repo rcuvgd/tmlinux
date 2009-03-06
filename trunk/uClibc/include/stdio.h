@@ -248,6 +248,8 @@ extern FILE *__REDIRECT (freopen, (__const char *__restrict __filename,
 				   __const char *__restrict __modes,
 				   FILE *__restrict __stream), freopen64);
 # else
+#  undef fopen
+#  undef freopen
 #  define fopen fopen64
 #  define freopen freopen64
 # endif

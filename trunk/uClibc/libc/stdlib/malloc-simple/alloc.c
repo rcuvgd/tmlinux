@@ -78,6 +78,11 @@ void * calloc(size_t nmemb, size_t lsize)
 #endif
 
 #ifdef L_realloc
+
+#ifndef min
+# define min(x,y) (((x) > (y)) ? (y) : (x))
+#endif /* min */
+
 void *realloc(void *ptr, size_t size)
 {
 	void *newptr = NULL;
@@ -91,11 +96,14 @@ void *realloc(void *ptr, size_t size)
 
 	newptr = malloc(size);
 	if (newptr) {
+		int old_size=0;
+
 #ifndef __TCS__
-		__memcpy(newptr, ptr, *((size_t *) (ptr - sizeof(size_t))));
+		old_size= *((size_t *) (ptr - sizeof(size_t)));
 #else
-		__memcpy(newptr, ptr, *((size_t *) ((unsigned char*)ptr - sizeof(size_t))));
+		old_size= *((size_t *) ((unsigned char*)ptr - sizeof(size_t)));
 #endif 
+		__memcpy(newptr, ptr, min(old_size,size));
 		free(ptr);
 	}
 	return newptr;

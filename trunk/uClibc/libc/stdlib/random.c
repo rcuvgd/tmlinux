@@ -210,7 +210,14 @@ void srandom (unsigned int x)
     srandom_r (x, &unsafe_state);
     __pthread_mutex_unlock(&lock);
 }
+#ifndef __TCS__
 weak_alias (srandom, srand)
+#else
+void srand(unsigned int x)
+{
+	srandom(x);
+}
+#endif 
 
 /* Initialize the state information in the given array of N bytes for
    future random number generation.  Based on the number of bytes we

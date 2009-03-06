@@ -291,6 +291,7 @@ extern __off64_t __REDIRECT (lseek,
 				 (int __fd, __off64_t __offset, int __whence),
 				 lseek64);
 # else
+#  undef lseek
 #  define lseek lseek64
 # endif
 #endif

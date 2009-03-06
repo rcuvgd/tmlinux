@@ -46,9 +46,31 @@ OFFSET_TYPE attribute_hidden FTELL(register FILE *stream)
 #endif
 }
 
+#ifdef __TCS__
+
+#ifdef __DO_LARGEFILE
+long long ftell64(FILE *stream)
+{
+	return __ftello64(stream);
+}
+#else
+long ftell(FILE *stream)
+{
+	return __ftell(stream);
+}
+long ftello(FILE *stream)
+{
+	return ftell(stream);
+}
+#endif
+
+#else
+
 #ifdef __DO_LARGEFILE
 weak_alias(__ftello64,ftello64)
 #else
 weak_alias(__ftell,ftell)
 weak_alias(ftell,ftello)
 #endif
+
+#endif 
