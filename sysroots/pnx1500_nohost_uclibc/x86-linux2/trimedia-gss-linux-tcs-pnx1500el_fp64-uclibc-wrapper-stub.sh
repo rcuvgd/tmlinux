@@ -54,12 +54,12 @@ if [ ! -d "$wrp_sysroot" ]; then
 	echo "Error: Unable to determine sysroot (looking for $wrp_sysroot)!" >&2
 	exit 1
 fi
-TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig"
+TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig-stub"
 STDINC_FLAG="-nostdinc -I$wrp_sysroot/tcs/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
 STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc -lpthread"
 
 DYNAPP_FLAG="-btype app"
-APPMAIN="$wrp_sysroot/sysroot/usr/lib/crt0.o"
+APPMAIN="$wrp_sysroot/sysroot/usr/lib/crt0.o $wrp_sysroot/../config/tcs_sym_pnx1500_nohost_el_fp64.o"
 
 SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dfree=tmlinux_free  		\
