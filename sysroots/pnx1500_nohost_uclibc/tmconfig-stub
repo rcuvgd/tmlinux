@@ -344,7 +344,7 @@ INCLUDE=
 BOOT=$TCS/lib/$CORE/$ENDIAN/$FP/boot.o
 
 APPMAIN=
-LD_APP_DLL_ARG=/home/guohr/workdir/tmlinux/sysroots/pnx1500_nohost_uclibc/ld_app_dll.arg
+LD_APP_DLL_ARG=/home/guohr/workdir/tmlinux/sysroots/config/ld_app_dll.arg
 LD_DYNBOOT_ARG=../ld_dynboot.arg
 LIBAM=$TCS/lib/$CORE/$ENDIAN/$FP/libam.a $TCOMMROOT/$CORE/$ENDIAN/$FP/hostcall.a $TCOMMROOT/$CORE/$ENDIAN/$FP/libIODriver.a
 LIBC=$TCS/lib/$CORE/$ENDIAN/$FP/libc.a
