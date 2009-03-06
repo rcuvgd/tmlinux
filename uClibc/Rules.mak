@@ -276,6 +276,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _unlink=_tmlinux_unlink 		\
 		-symbolrename _fclose=_tmlinux_fclose 		\
 		-symbolrename _fopen=_tmlinux_fopen 		\
+		-symbolrename _ftell=_tmlinux_ftell 		\
 		-symbolrename _freopen=_tmlinux_freopen 	\
 		-symbolrename _open=_tmlinux_open 		\
 		-symbolrename _fgets=_tmlinux_fgets 		\
@@ -296,6 +297,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _ctime=_tmlinux_ctime 		\
 		-symbolrename _time=_tmlinux_time 		\
 		-symbolrename _rand=_tmlinux_rand 		\
+		-symbolrename _srand=_tmlinux_srand 		\
 		-symbolrename _setvbuf=_tmlinux_setvbuf 	\
 		-symbolrename _difftime=_tmlinux_difftime 	\
 		-symbolrename _sigprocmask=_tmlinux_sigprocmask \

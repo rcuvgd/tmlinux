@@ -76,6 +76,7 @@ extern int fcntl (int __fd, int __cmd, ...);
 # ifdef __REDIRECT
 extern int __REDIRECT (fcntl, (int __fd, int __cmd, ...), fcntl64);
 # else
+#  undef fcntl
 #  define fcntl fcntl64
 # endif
 #endif
@@ -93,6 +94,7 @@ extern int open (__const char *__file, int __oflag, ...) __nonnull ((1));
 extern int __REDIRECT (open, (__const char *__file, int __oflag, ...), open64)
      __nonnull ((1));
 # else
+#  undef open
 #  define open open64
 # endif
 #endif

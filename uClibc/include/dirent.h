@@ -158,6 +158,7 @@ extern struct dirent *readdir (DIR *__dirp) __nonnull ((1));
 extern struct dirent *__REDIRECT (readdir, (DIR *__dirp), readdir64)
      __nonnull ((1));
 # else
+#  undef readdir
 #  define readdir readdir64
 # endif
 #endif

@@ -218,6 +218,8 @@ extern int __REDIRECT (stat, (__const char *__restrict __file,
 extern int __REDIRECT (fstat, (int __fd, struct stat *__buf), fstat64)
      __nonnull ((2));
 # else
+#  undef stat
+#  undef fstat
 #  define stat stat64
 #  define fstat fstat64
 # endif
@@ -241,6 +243,7 @@ extern int __REDIRECT (lstat,
 			    struct stat *__restrict __buf), lstat64)
      __nonnull ((1, 2));
 #  else
+#   undef lstat
 #   define lstat lstat64
 #  endif
 # endif
