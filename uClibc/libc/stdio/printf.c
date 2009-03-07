@@ -8,6 +8,7 @@
 #include "_stdio.h"
 #include <stdarg.h>
 
+#ifdef __TCS_nohost__
 int printf(const char * __restrict format, ...)
 {
 	va_list arg;
@@ -19,3 +20,16 @@ int printf(const char * __restrict format, ...)
 
 	return rv;
 }
+#else
+int printf(const char * __restrict format, ...)
+{
+	va_list arg;
+	int rv;
+
+	va_start(arg, format);
+	rv = vprintf(format, arg);
+	va_end(arg);
+
+	return rv;
+}
+#endif 
