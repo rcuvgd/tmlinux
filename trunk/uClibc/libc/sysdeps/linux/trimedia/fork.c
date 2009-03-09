@@ -2,5 +2,6 @@
 
 int fork(void)
 {
-	return -EINVAL;
+	errno = EINVAL;
+	return -1;
 }
