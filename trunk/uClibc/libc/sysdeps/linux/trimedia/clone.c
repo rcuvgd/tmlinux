@@ -10,7 +10,9 @@ clone(int (*fn)(void *arg), void *child_stack, int flags, void *arg)
 {
 	int retval = -EINVAL;
 
-	retval=__internal_clone(fn,child_stack,flags,arg);
+	if(fn && child_stack) {
+		retval=__internal_clone(fn,child_stack,flags,arg);
+	}
 
 	__syscall_return(int,retval);
 }
