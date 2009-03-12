@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#ifdef __TCS__
-#include <tmlib/dprintf.h>
-#define printf _dp
-#endif 
-
 extern int foo(void);
 
 int
