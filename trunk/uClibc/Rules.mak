@@ -296,6 +296,8 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _localtime=_tmlinux_localtime 	\
 		-symbolrename _ctime=_tmlinux_ctime 		\
 		-symbolrename _time=_tmlinux_time 		\
+		-symbolrename _strftime=_tmlinux_strftime 	\
+		-symbolrename _gmtime=_tmlinux_gmtime 		\
 		-symbolrename _rand=_tmlinux_rand 		\
 		-symbolrename _srand=_tmlinux_srand 		\
 		-symbolrename _setvbuf=_tmlinux_setvbuf 	\
