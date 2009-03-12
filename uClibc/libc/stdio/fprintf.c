@@ -27,7 +27,11 @@ int fprintf(FILE * __restrict stream, const char * __restrict format, ...)
 	int rv;
 
 	va_start(arg, format);
-	rv = vprintf(format, arg);
+	if(( stream==stdout ) || ( stream==stderr ) || ( stream==stdin )) {
+		rv = vprintf(format, arg);
+	} else {
+		rv = vfprintf(stream, format, arg);
+	}
 	va_end(arg);
 
 	return rv;
