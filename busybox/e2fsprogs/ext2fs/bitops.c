@@ -9,6 +9,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #if HAVE_SYS_TYPES_H

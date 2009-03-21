@@ -33,6 +33,7 @@
  * DAMAGE.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <unistd.h>

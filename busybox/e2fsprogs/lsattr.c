@@ -16,6 +16,7 @@
  * 94/02/27	- Integrated in Ted's distribution
  * 98/12/29	- Display version info only when -V specified (G M Sipe)
  */
+#include "e2fsbb.h"
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -30,7 +31,6 @@
 #include <sys/stat.h>
 
 #include "ext2fs/ext2_fs.h"
-#include "e2fsbb.h"
 #include "e2p/e2p.h"
 
 #ifdef __GNUC__

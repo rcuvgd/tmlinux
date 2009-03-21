@@ -1,6 +1,7 @@
 /*
  * io_manager.c --- the I/O manager abstraction
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>

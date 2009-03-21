@@ -24,6 +24,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -43,8 +44,6 @@
 
 #include "fsck.h"
 #include "blkid/blkid.h"
-
-#include "e2fsbb.h"
 
 #include "busybox.h"
 

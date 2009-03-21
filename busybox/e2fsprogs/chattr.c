@@ -17,6 +17,7 @@
  * 98/12/29	- Ignore symlinks when working recursively (G M Sipe)
  * 98/12/29	- Display version info only when -V specified (G M Sipe)
  */
+#include "e2fsbb.h"
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -36,7 +37,6 @@
 # define EXT2FS_ATTR(x)
 #endif
 
-#include "e2fsbb.h"
 #include "e2p/e2p.h"
 
 #define OPT_ADD 1

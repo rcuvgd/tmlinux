@@ -202,7 +202,16 @@ static void sendping(int junk)
 {
 	struct icmp *pkt;
 	int i;
+#ifndef __TCS__
 	char packet[datalen + sizeof(struct icmp)];
+#else
+	char* packet=NULL;
+
+	packet=malloc(datalen+sizeof(struct icmp));
+	if(packet==NULL){
+		bb_perror_msg_and_die("malloc");
+	}
+#endif 
 
 	pkt = (struct icmp *) packet;
 
@@ -233,6 +242,10 @@ static void sendping(int junk)
 		signal(SIGALRM, pingstats);
 		alarm(MAXWAIT);
 	}
+
+#ifdef __TCS__
+	free(packet);
+#endif 
 }
 
 static char *icmp_type_name (int id)
@@ -325,8 +338,19 @@ static void unpack(char *buf, int sz, struct sockaddr_in *from)
 
 static void ping(const char *host)
 {
+#ifndef __TCS__
 	char packet[datalen + MAXIPLEN + MAXICMPLEN];
+#else
+	char* packet=NULL;
+#endif 
 	int sockopt;
+
+#ifdef __TCS__
+	packet = malloc(datalen + MAXIPLEN + MAXICMPLEN);
+	if(packet==NULL){
+		bb_error_msg_and_die("No memory.");
+	}
+#endif 
 
 	pingsock = create_icmp_socket();
 
@@ -377,6 +401,10 @@ static void ping(const char *host)
 			break;
 	}
 	pingstats(0);
+
+#ifdef __TCS__
+	free(packet);
+#endif 
 }
 
 int ping_main(int argc, char **argv)

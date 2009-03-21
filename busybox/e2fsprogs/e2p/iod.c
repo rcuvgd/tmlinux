@@ -13,6 +13,7 @@
  * History:
  * 93/10/30	- Creation
  */
+#include "e2fsbb.h"
 
 #include "e2p.h"
 #include <unistd.h>

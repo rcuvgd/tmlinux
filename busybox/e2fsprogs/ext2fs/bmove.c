@@ -5,6 +5,7 @@
  * Copyright (C) 1997 Theodore Ts'o.  This file may be redistributed
  * under the terms of the GNU Public License.
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>

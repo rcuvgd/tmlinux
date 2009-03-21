@@ -8,6 +8,7 @@
  * GNU Lesser General Public License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 /* include this before sys/queues.h! */
 #include "blkidP.h"
@@ -28,8 +29,10 @@
 #endif
 #ifdef HAVE_SYS_DISKLABEL_H
 #include <sys/disklabel.h>
-#include <sys/stat.h>
 #endif
+/*#ifdef HAVE_SYS_STAT_H*/
+#include <sys/stat.h>
+/*#endif */
 #ifdef HAVE_SYS_DISK_H
 #ifdef HAVE_SYS_QUEUE_H
 #include <sys/queue.h> /* for LIST_HEAD */

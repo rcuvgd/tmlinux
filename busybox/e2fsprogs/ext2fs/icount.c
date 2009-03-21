@@ -8,6 +8,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #if HAVE_UNISTD_H
 #include <unistd.h>

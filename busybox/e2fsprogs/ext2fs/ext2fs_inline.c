@@ -8,6 +8,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include "ext2fs.h"
 #include "bitops.h"

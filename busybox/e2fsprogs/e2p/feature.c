@@ -7,6 +7,7 @@
  * Public License
  *
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <stdlib.h>
