@@ -1762,7 +1762,14 @@ char *__glibc_strerror_r(int errnum, char *strerrbuf, size_t buflen)
     return strerrbuf;
 }
 
+#ifndef __TCS__
 weak_alias(__glibc_strerror_r, __strerror_r)
+#else
+char *__strerror_r(int errnum, char *strerrbuf, size_t buflen)
+{
+	return __glibc_strerror_r(errnum, strerrbuf, buflen);
+}
+#endif 
 #endif
 /**********************************************************************/
 #ifdef L_memmem

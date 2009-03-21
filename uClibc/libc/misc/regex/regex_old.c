@@ -1374,7 +1374,11 @@ re_set_syntax (syntax)
   return ret;
 }
 # ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_set_syntax, re_set_syntax)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 # endif
 
 /* This table gives an error message for each of the error codes listed
@@ -4994,7 +4998,11 @@ re_compile_fastmap (bufp)
     return byte_re_compile_fastmap(bufp);
 } /* re_compile_fastmap */
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_compile_fastmap, re_compile_fastmap)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 
@@ -5033,7 +5041,11 @@ re_set_registers (bufp, regs, num_regs, starts, ends)
     }
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_set_registers, re_set_registers)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 /* Searching routines.  */
@@ -5052,7 +5064,11 @@ re_search (bufp, string, size, startpos, range, regs)
 		      regs, size);
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_search, re_search)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 
@@ -5097,7 +5113,11 @@ re_search_2 (bufp, string1, size1, string2, size2, startpos, range, regs, stop)
 			     range, regs, stop);
 } /* re_search_2 */
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_search_2, re_search_2)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 #endif /* not INSIDE_RECURSION */
@@ -5556,7 +5576,11 @@ re_match (bufp, string, size, pos, regs)
   return result;
 }
 # ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_match, re_match)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 # endif
 #endif /* not emacs */
 
@@ -5617,7 +5641,11 @@ re_match_2 (bufp, string1, size1, string2, size2, pos, regs, stop)
   return result;
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_match_2, re_match_2)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 #endif /* not INSIDE_RECURSION */
@@ -7956,7 +7984,11 @@ re_compile_pattern (pattern, length, bufp)
   return gettext (re_error_msgid + re_error_msgid_idx[(int) ret]);
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__re_compile_pattern, re_compile_pattern)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 /* Entry points compatible with 4.2 BSD regex library.  We don't define
@@ -8152,7 +8184,11 @@ regcomp (preg, pattern, cflags)
   return (int) ret;
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__regcomp, regcomp)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 
@@ -8230,7 +8266,11 @@ regexec (preg, string, nmatch, pmatch, eflags)
   return ret >= 0 ? (int) REG_NOERROR : (int) REG_NOMATCH;
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__regexec, regexec)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 
@@ -8278,7 +8318,11 @@ regerror (errcode, preg, errbuf, errbuf_size)
   return msg_size;
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__regerror, regerror)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 
@@ -8305,7 +8349,11 @@ regfree (preg)
   preg->translate = NULL;
 }
 #ifdef _LIBC
+#ifndef __TCS__
 weak_alias (__regfree, regfree)
+#else
+/*FIXME: I don't know how to alias variables.*/
+#endif 
 #endif
 
 #endif /* not emacs  */

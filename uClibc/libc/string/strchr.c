@@ -18,6 +18,13 @@ char *strchr(const char *s, int c)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias(strchr, index)
+#else
+char *index(const char *s, int c)
+{
+	return strchr(s,c);
+}
+#endif 
 
 #undef L_strchr

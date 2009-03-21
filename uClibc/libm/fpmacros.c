@@ -158,7 +158,14 @@ int __finitef ( float x )
    z.fval = x;
    return ((z.lval & FEXP_MASK) != FEXP_MASK);
 }
+#ifndef __TCS__
 weak_alias (__finitef, finitef)
+#else
+int finitef ( float x )
+{
+	return __finitef(x);
+}
+#endif 
 
 #if 0 /* use __finite in s_finite.c */
 int __finite ( double x )
@@ -227,7 +234,14 @@ int __isinff ( float x )
     }
     return 0;
 }
+#ifndef __TCS__
 weak_alias (__isinff, isinff)
+#else
+int isinff ( float x )
+{
+	return __isinff(x);
+}
+#endif 
 
 int __isinf ( double x )
 {
@@ -237,7 +251,14 @@ int __isinf ( double x )
     }
     return 0;
 }
+#ifndef __TCS__
 weak_alias (__isinf, isinf)
+#else
+int isinf ( double x )
+{
+	return __isinf(x);
+}
+#endif 
 
 #if 0
 int __isinfl ( long double x )

@@ -341,7 +341,15 @@ int __pthread_mutexattr_getpshared (const pthread_mutexattr_t *attr,
   *pshared = PTHREAD_PROCESS_PRIVATE;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_getpshared, pthread_mutexattr_getpshared)
+#else
+int pthread_mutexattr_getpshared (const pthread_mutexattr_t *attr,
+				   int *pshared)
+{
+	return __pthread_mutexattr_getpshared(attr, pshared);
+}
+#endif 
 
 int __pthread_mutexattr_setpshared (pthread_mutexattr_t *attr, int pshared)
 {
@@ -354,7 +362,14 @@ int __pthread_mutexattr_setpshared (pthread_mutexattr_t *attr, int pshared)
 
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_mutexattr_setpshared, pthread_mutexattr_setpshared)
+#else
+int pthread_mutexattr_setpshared (pthread_mutexattr_t *attr, int pshared)
+{
+	return __pthread_mutexattr_setpshared(attr, pshared);
+}
+#endif 
 
 /* Once-only execution */
 

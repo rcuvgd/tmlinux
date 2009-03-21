@@ -18,6 +18,13 @@ int memcmp(const void *s1, const void *s2, size_t n)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias(memcmp, bcmp)
+#else
+int bcmp(const void *s1, const void *s2, size_t n)
+{
+	return memcmp(s1,s2,n);
+}
+#endif 
 
 #undef L_memcmp

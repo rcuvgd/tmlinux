@@ -233,7 +233,11 @@ re_compile_pattern (pattern, length, bufp)
   return gettext (__re_error_msgid + __re_error_msgid_idx[(int) ret]);
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__re_compile_pattern, re_compile_pattern)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 /* Set by `re_set_syntax' to the current regexp syntax to recognize.  Can
@@ -261,7 +265,11 @@ re_set_syntax (syntax)
   return ret;
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__re_set_syntax, re_set_syntax)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 int
@@ -283,7 +291,11 @@ re_compile_fastmap (bufp)
   return 0;
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__re_compile_fastmap, re_compile_fastmap)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 static inline void
@@ -499,7 +511,11 @@ regcomp (preg, pattern, cflags)
   return (int) ret;
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__regcomp, regcomp)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 /* Returns a message corresponding to an error code, ERRCODE, returned
@@ -546,7 +562,11 @@ regerror (errcode, preg, errbuf, errbuf_size)
   return msg_size;
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__regerror, regerror)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 
@@ -630,7 +650,11 @@ regfree (preg)
   preg->translate = NULL;
 }
 #if defined _LIBC || defined __UCLIBC__
+#ifndef __TCS__
 weak_alias (__regfree, regfree)
+#else
+/*FIXME: I don't know how to deal with it for TCS*/
+#endif 
 #endif
 
 /* Entry points compatible with 4.2 BSD regex library.  We don't define

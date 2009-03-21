@@ -19,7 +19,14 @@ size_t strlcpy(char *dst,const char *src, size_t n)
 #endif 
 
 #ifdef __LOCALE_C_ONLY
+#ifndef __TCS__
 weak_alias(strlcpy, strxfrm)
+#else
+size_t strxfrm(char *dst,const char *src, size_t n)
+{
+	return strlcpy(dst, src, n);
+}
+#endif 
 #endif
 
 #undef L_strlcpy
