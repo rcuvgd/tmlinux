@@ -19,6 +19,13 @@ wchar_t *wcsstr(const wchar_t *haystack, const wchar_t *needle)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias(wcsstr, wcswcs)
+#else
+wchar_t *wcswcs(const wchar_t *haystack, const wchar_t *needle)
+{
+	return wcsstr(haystack, needle);
+}
+#endif 
 
 #undef L_strstr

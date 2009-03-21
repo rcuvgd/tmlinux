@@ -299,10 +299,37 @@ int sem_timedwait(sem_t *sem, const struct timespec *abstime)
 }
 
 
+#ifndef __TCS__
 weak_alias (__new_sem_init, sem_init)
 weak_alias (__new_sem_wait, sem_wait)
 weak_alias (__new_sem_trywait, sem_trywait)
 weak_alias (__new_sem_post, sem_post)
 weak_alias (__new_sem_getvalue, sem_getvalue)
 weak_alias (__new_sem_destroy, sem_destroy)
+#else
+int sem_init(sem_t *sem, int pshared, unsigned int value)
+{
+	return __new_sem_init(sem, pshared, value);
+}
+int sem_wait(sem_t * sem)
+{
+	return __new_sem_wait(sem);
+}
+int sem_trywait(sem_t * sem)
+{
+	return __new_sem_trywait(sem);
+}
+int sem_post(sem_t * sem)
+{
+	return __new_sem_post(sem);
+}
+int sem_getvalue(sem_t * sem, int * sval)
+{
+	return __new_sem_getvalue(sem,sval);
+}
+int sem_destroy(sem_t * sem)
+{
+	return __new_sem_destroy(sem);
+}
+#endif 
 

@@ -342,4 +342,12 @@ memcmp (const __ptr_t s1, const __ptr_t s2, size_t len)
 }
 #endif 
 
+#ifndef __TCS__
 weak_alias(memcmp, bcmp)
+#else
+int
+bcmp(const __ptr_t s1, const __ptr_t s2, size_t len)
+{
+	return memcmp(s1,s2,len);
+}
+#endif

@@ -22,9 +22,23 @@ int attribute_hidden __fputws_unlocked(const wchar_t *__restrict ws,
 	return (_wstdio_fwrite(ws, n, stream) == n) ? 0 : -1;
 }
 
+#ifndef __TCS__
 weak_alias(__fputws_unlocked,fputws_unlocked)
+#else
+int fputws_unlocked(const wchar_t *__restrict ws, register FILE *__restrict stream)
+{
+	return __fputws_unlocked(ws, stream);
+}
+#endif 
 #ifndef __UCLIBC_HAS_THREADS__
+#ifndef __TCS__
 weak_alias(__fputws_unlocked,fputws)
+#else
+int fputws(const wchar_t *__restrict ws, register FILE *__restrict stream)
+{
+	return __fputws_unlocked(ws, stream);
+}
+#endif 
 #endif
 
 #elif defined __UCLIBC_HAS_THREADS__

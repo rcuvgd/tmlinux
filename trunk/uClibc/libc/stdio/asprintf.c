@@ -24,6 +24,20 @@ int __asprintf(char **__restrict buf, const char * __restrict format, ...)
 	return rv;
 }
 
+#ifndef __TCS__
 weak_alias(__asprintf,asprintf)
+#else
+int asprintf(char **__restrict buf, const char * __restrict format, ...)
+{
+	va_list arg;
+	int rv;
+
+	va_start(arg, format);
+	rv = vasprintf(buf, format, arg);
+	va_end(arg);
+
+	return rv;
+}
+#endif 
 
 #endif

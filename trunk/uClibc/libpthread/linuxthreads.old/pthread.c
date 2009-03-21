@@ -814,7 +814,14 @@ void __pthread_kill_other_threads_np(void)
   if (__pthread_sig_debug > 0)
     __libc_sigaction(__pthread_sig_debug, &sa, NULL);
 }
+#ifndef __TCS__
 weak_alias (__pthread_kill_other_threads_np, pthread_kill_other_threads_np)
+#else
+void pthread_kill_other_threads_np(void)
+{
+	__pthread_kill_other_threads_np();
+}
+#endif 
 
 /* Concurrency symbol level.  */
 static int current_level;
@@ -825,13 +832,27 @@ int __pthread_setconcurrency(int level)
   current_level = level;
   return 0;
 }
+#ifndef __TCS__
 weak_alias (__pthread_setconcurrency, pthread_setconcurrency)
+#else
+int pthread_setconcurrency(int level)
+{
+	return __pthread_setconcurrency(level);
+}
+#endif 
 
 int __pthread_getconcurrency(void)
 {
   return current_level;
 }
+#ifndef __TCS__
 weak_alias (__pthread_getconcurrency, pthread_getconcurrency)
+#else
+int pthread_getconcurrency(void)
+{
+	return __pthread_getconcurrency();
+}
+#endif 
 
 
 /* Primitives for controlling thread execution */

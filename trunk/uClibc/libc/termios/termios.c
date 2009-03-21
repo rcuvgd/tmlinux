@@ -47,7 +47,14 @@ int __libc_tcdrain (int fd)
       /* With an argument of 1, TCSBRK waits for the output to drain.  */
       return ioctl(fd, TCSBRK, 1);
 }
+#ifndef __TCS__
 weak_alias(__libc_tcdrain, tcdrain)
+#else
+int tcdrain (int fd)
+{
+	return __libc_tcdrain(fd);
+}
+#endif 
 #endif
 
 #ifdef L_tcflow

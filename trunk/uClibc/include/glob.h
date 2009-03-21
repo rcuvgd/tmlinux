@@ -145,6 +145,7 @@ typedef struct
 #if __USE_FILE_OFFSET64 && __GNUC__ < 2
 # define glob glob64
 # define globfree globfree64
+# define glob_t glob64_t
 #endif
 
 /* Do glob searching for PATTERN, placing results in PGLOB.

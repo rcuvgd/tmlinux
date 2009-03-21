@@ -124,6 +124,13 @@ int fputc(int c, register FILE *stream)
 	}
 }
 
+#ifndef __TCS__
 weak_alias(fputc,putc)
+#else
+int putc(int c, register FILE *stream)
+{
+	return fputc(c, stream);
+}
+#endif 
 
 #endif

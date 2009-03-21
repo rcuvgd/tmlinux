@@ -486,6 +486,9 @@ __END_NAMESPACE_STD
 
 /* The C standard explicitly says this can be a macro,
    so we always do the optimization for it.  */
+#ifdef putc
+#undef putc
+#endif 
 #define putc(_ch, _fp) __PUTC(_ch, _fp)
 
 #ifdef __USE_MISC

@@ -366,7 +366,14 @@ wint_t TOWLOWER(wint_t wc)
 #endif /* SMALL_UPLOW */
 
 #ifdef L_towlower_l
+#ifndef __TCS__
 weak_alias(__towlower_l, towlower_l)
+#else
+wint_t towlower_l(wint_t __wc, __locale_t __locale) 
+{
+	return __towlower_l(__wc, __locale);
+}
+#endif 
 #endif /* L_towlower_l */
 
 #endif /* __LOCALE_C_ONLY */
@@ -470,7 +477,14 @@ wint_t TOWUPPER(wint_t wc)
 #endif /* SMALL_UPLOW */
 
 #ifdef L_towupper_l
+#ifndef __TCS__
 weak_alias(__towupper_l, towupper_l)
+#else
+wint_t towupper_l(wint_t __wc, __locale_t __locale)
+{
+	return __towupper_l(__wc, __locale);
+}
+#endif 
 #endif /* L_towupper_l */
 
 #endif /* __LOCALE_C_ONLY */
@@ -522,7 +536,14 @@ wctype_t __wctype_l (const char *property, __locale_t locale)
 	return __wctype(property);
 }
 
+#ifndef __TCS__
 weak_alias(__wctype_l, wctype_l)
+#else
+wctype_t wctype_l (const char *property, __locale_t locale)
+{
+	return __wctype_l(property, locale);
+}
+#endif 
 
 #endif
 /**********************************************************************/
@@ -701,13 +722,27 @@ int ISWCTYPE(wint_t wc, wctype_t desc)
 #endif /* defined(L_iswctype) && defined(__UCLIBC_HAS_XLOCALE__) */
 
 #ifdef L_iswctype_l
+#ifndef __TCS__
 weak_alias(__iswctype_l, iswctype_l)
+#else
+extern int iswctype_l(wint_t __wc, wctype_t __desc, __locale_t __locale)
+{
+	return __iswctype_l(__wc, __desc, __locale);
+}
+#endif 
 #endif /* L_iswctype_l */
 
 #endif /* __LOCALE_C_ONLY */
 
 #ifdef L_iswctype
+#ifndef __TCS__
 weak_alias(__iswctype, iswctype)
+#else
+int iswctype(wint_t wc, wctype_t desc)
+{
+	return __iswctype(wc, desc);
+}
+#endif 
 #endif /* L_iswctype */
 
 #endif
@@ -874,7 +909,14 @@ wint_t TOWCTRANS(wint_t wc, wctrans_t desc)
 #endif /* defined(L_towctrans) && defined(__UCLIBC_HAS_XLOCALE__) */
 
 #ifdef L_towctrans_l
+#ifndef __TCS__
 weak_alias(__towctrans_l, towctrans_l)
+#else
+wint_t towctrans_l(wint_t __wc, wctrans_t __desc, __locale_t __locale) 
+{
+	return __towctrans_l(__wc, __desc, __locale);
+}
+#endif 
 #endif /* L_towctrans_l */
 
 #endif /* __LOCALE_C_ONLY */
@@ -917,7 +959,14 @@ wctrans_t __wctrans_l(const char *property, __locale_t locale)
 	return wctrans(property);
 }
 
+#ifndef __TCS__
 weak_alias(__wctrans_l, wctrans_l)
+#else
+wctrans_t wctrans_l(const char *property, __locale_t locale)
+{
+	return __wctrans_l(property, locale);
+}
+#endif 
 
 #endif
 /**********************************************************************/
