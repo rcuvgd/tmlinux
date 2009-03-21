@@ -31,6 +31,7 @@
  * Journal recovery routines for the generic filesystem journaling code;
  * part of the ext2fs journaling system.
  */
+#include "e2fsbb.h"
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1 /* get strnlen() */

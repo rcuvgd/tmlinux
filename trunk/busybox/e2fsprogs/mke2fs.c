@@ -13,6 +13,7 @@
  * The device may be a block device or a image of one, but this isn't
  * enforced (but it's not much fun on a character device :-).
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -27,7 +28,6 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
-#include "e2fsbb.h"
 #include "ext2fs/ext2_fs.h"
 #include "uuid/uuid.h"
 #include "e2p/e2p.h"

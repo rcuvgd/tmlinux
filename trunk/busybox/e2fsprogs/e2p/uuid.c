@@ -1,6 +1,7 @@
 /*
  * uuid.c -- utility routines for manipulating UUID's.
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>

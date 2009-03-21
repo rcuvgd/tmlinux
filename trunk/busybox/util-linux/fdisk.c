@@ -5006,6 +5006,7 @@ check(int n, uint h, uint s, uint c, off_t start)
 			"total %llu\n"), n, (unsigned long long)start, (unsigned long long)total);
 }
 
+#ifndef __TCS__
 static void
 verify(void)
 {
@@ -5082,7 +5083,97 @@ verify(void)
 	else if ((total = heads * sectors * cylinders - total) != 0)
 		printf(_("%d unallocated sectors\n"), total);
 }
+#else
+static void
+verify(void)
+{
+	int i, j;
+	uint total = 1;
+	off_t* first = NULL;
+	off_t* last = NULL;
+	struct partition *p;
 
+	first = malloc(sizeof(off_t)*partitions);
+	last = malloc(sizeof(off_t)*partitions);
+	if(( first==NULL ) || ( last==NULL )){
+		goto out;
+	}
+
+	if (warn_geometry())
+		goto out;
+
+#ifdef CONFIG_FEATURE_SUN_LABEL
+	if (label_sun == current_label_type) {
+		verify_sun();
+		goto out;
+	}
+#endif
+#ifdef CONFIG_FEATURE_SGI_LABEL
+	if (label_sgi == current_label_type) {
+		verify_sgi(1);
+		goto out;
+	}
+#endif
+
+	fill_bounds(first, last);
+	for (i = 0; i < partitions; i++) {
+		struct pte *pe = &ptes[i];
+
+		p = pe->part_table;
+		if (p->sys_ind && !IS_EXTENDED(p->sys_ind)) {
+			check_consistency(p, i);
+			if (get_partition_start(pe) < first[i])
+				printf(_("Warning: bad start-of-data in "
+					"partition %d\n"), i + 1);
+			check(i + 1, p->end_head, p->end_sector, p->end_cyl,
+				last[i]);
+			total += last[i] + 1 - first[i];
+			for (j = 0; j < i; j++)
+			if ((first[i] >= first[j] && first[i] <= last[j])
+			 || ((last[i] <= last[j] && last[i] >= first[j]))) {
+				printf(_("Warning: partition %d overlaps "
+					"partition %d.\n"), j + 1, i + 1);
+				total += first[i] >= first[j] ?
+					first[i] : first[j];
+				total -= last[i] <= last[j] ?
+					last[i] : last[j];
+			}
+		}
+	}
+
+	if (extended_offset) {
+		struct pte *pex = &ptes[ext_index];
+		off_t e_last = get_start_sect(pex->part_table) +
+			get_nr_sects(pex->part_table) - 1;
+
+		for (i = 4; i < partitions; i++) {
+			total++;
+			p = ptes[i].part_table;
+			if (!p->sys_ind) {
+				if (i != 4 || i + 1 < partitions)
+					printf(_("Warning: partition %d "
+						"is empty\n"), i + 1);
+			}
+			else if (first[i] < extended_offset ||
+					last[i] > e_last)
+				printf(_("Logical partition %d not entirely in "
+					"partition %d\n"), i + 1, ext_index + 1);
+		}
+	}
+
+	if (total > heads * sectors * cylinders)
+		printf(_("Total allocated sectors %d greater than the maximum "
+			"%d\n"), total, heads * sectors * cylinders);
+	else if ((total = heads * sectors * cylinders - total) != 0)
+		printf(_("%d unallocated sectors\n"), total);
+
+out:
+	if(first==NULL) free(first);
+	if(last==NULL) free(last);
+}
+#endif 
+
+#ifndef __TCS__
 static void
 add_partition(int n, int sys)
 {
@@ -5212,6 +5303,147 @@ add_partition(int n, int sys)
 		partitions = 5;
 	}
 }
+#else
+static void
+add_partition(int n, int sys)
+{
+	char mesg[256];         /* 48 does not suffice in Japanese */
+	int i, readed = 0;
+	struct partition *p = ptes[n].part_table;
+	struct partition *q = ptes[ext_index].part_table;
+	long long llimit;
+	off_t start, stop = 0, limit, temp;
+	off_t* first = NULL;
+	off_t* last = NULL;
+
+	first = malloc(sizeof(off_t)*partitions);
+	last = malloc(sizeof(off_t)*partitions);
+	if(( first==NULL ) || ( last==NULL )){
+		goto out;	
+	}
+
+	if (p && p->sys_ind) {
+		printf(_("Partition %d is already defined.  Delete "
+			 "it before re-adding it.\n"), n + 1);
+		goto out;
+	}
+	fill_bounds(first, last);
+	if (n < 4) {
+		start = sector_offset;
+		if (display_in_cyl_units || !total_number_of_sectors)
+			llimit = heads * sectors * cylinders - 1;
+		else
+			llimit = total_number_of_sectors - 1;
+		limit = llimit;
+		if (limit != llimit)
+			limit = 0x7fffffff;
+		if (extended_offset) {
+			first[ext_index] = extended_offset;
+			last[ext_index] = get_start_sect(q) +
+				get_nr_sects(q) - 1;
+		}
+	} else {
+		start = extended_offset + sector_offset;
+		limit = get_start_sect(q) + get_nr_sects(q) - 1;
+	}
+	if (display_in_cyl_units)
+		for (i = 0; i < partitions; i++)
+			first[i] = (cround(first[i]) - 1) * units_per_sector;
+
+	snprintf(mesg, sizeof(mesg), _("First %s"), str_units(SINGULAR));
+	do {
+		temp = start;
+		for (i = 0; i < partitions; i++) {
+			int lastplusoff;
+
+			if (start == ptes[i].offset)
+				start += sector_offset;
+			lastplusoff = last[i] + ((n < 4) ? 0 : sector_offset);
+			if (start >= first[i] && start <= lastplusoff)
+				start = lastplusoff + 1;
+		}
+		if (start > limit)
+			break;
+		if (start >= temp+units_per_sector && readed) {
+			printf(_("Sector %llu is already allocated\n"), (unsigned long long)temp);
+			temp = start;
+			readed = 0;
+		}
+		if (!readed && start == temp) {
+			off_t saved_start;
+
+			saved_start = start;
+			start = read_int(cround(saved_start), cround(saved_start), cround(limit),
+					 0, mesg);
+			if (display_in_cyl_units) {
+				start = (start - 1) * units_per_sector;
+				if (start < saved_start) start = saved_start;
+			}
+			readed = 1;
+		}
+	} while (start != temp || !readed);
+	if (n > 4) {                    /* NOT for fifth partition */
+		struct pte *pe = &ptes[n];
+
+		pe->offset = start - sector_offset;
+		if (pe->offset == extended_offset) { /* must be corrected */
+			pe->offset++;
+			if (sector_offset == 1)
+				start++;
+		}
+	}
+
+	for (i = 0; i < partitions; i++) {
+		struct pte *pe = &ptes[i];
+
+		if (start < pe->offset && limit >= pe->offset)
+			limit = pe->offset - 1;
+		if (start < first[i] && limit >= first[i])
+			limit = first[i] - 1;
+	}
+	if (start > limit) {
+		printf(_("No free sectors available\n"));
+		if (n > 4)
+			partitions--;
+		return;
+	}
+	if (cround(start) == cround(limit)) {
+		stop = limit;
+	} else {
+		snprintf(mesg, sizeof(mesg),
+			 _("Last %s or +size or +sizeM or +sizeK"),
+			 str_units(SINGULAR));
+		stop = read_int(cround(start), cround(limit), cround(limit),
+				cround(start), mesg);
+		if (display_in_cyl_units) {
+			stop = stop * units_per_sector - 1;
+			if (stop >limit)
+				stop = limit;
+		}
+	}
+
+	set_partition(n, 0, start, stop, sys);
+	if (n > 4)
+		set_partition(n - 1, 1, ptes[n].offset, stop, EXTENDED);
+
+	if (IS_EXTENDED(sys)) {
+		struct pte *pe4 = &ptes[4];
+		struct pte *pen = &ptes[n];
+
+		ext_index = n;
+		pen->ext_pointer = p;
+		pe4->offset = extended_offset = start;
+		pe4->sectorbuffer = xcalloc(1, sector_size);
+		pe4->part_table = pt_offset(pe4->sectorbuffer, 0);
+		pe4->ext_pointer = pe4->part_table + 1;
+		pe4->changed = 1;
+		partitions = 5;
+	}
+out:
+	if(first==NULL) free(first);
+	if(last==NULL) free(last);
+}
+#endif 
 
 static void
 add_logical(void)

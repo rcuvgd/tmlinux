@@ -14,6 +14,7 @@
  * History:
  * 93/10/30	- Creation
  */
+#include "e2fsbb.h"
 
 #if HAVE_ERRNO_H
 #include <errno.h>

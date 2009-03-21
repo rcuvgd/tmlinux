@@ -10,6 +10,7 @@
  * GNU Lesser General Public License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>

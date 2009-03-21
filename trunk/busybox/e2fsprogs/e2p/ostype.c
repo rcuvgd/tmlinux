@@ -6,6 +6,7 @@
  * This file can be redistributed under the terms of the GNU Library General
  * Public License
  */
+#include "e2fsbb.h"
 
 #include "e2p.h"
 #include <string.h>

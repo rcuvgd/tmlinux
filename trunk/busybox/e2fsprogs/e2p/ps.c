@@ -13,6 +13,7 @@
  * History:
  * 93/12/22	- Creation
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 

@@ -24,9 +24,13 @@ struct list_head {
 	(ptr)->next = (ptr); (ptr)->prev = (ptr); \
 } while (0)
 
+#ifndef __TCS__
 #if (!defined(__GNUC__) && !defined(__WATCOMC__))
 #define __inline__
 #endif
+#else
+#define __inline__  inline
+#endif 
 
 /*
  * Insert a new entry between two known consecutive entries.

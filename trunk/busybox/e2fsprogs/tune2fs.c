@@ -24,6 +24,7 @@
  * 94/02/27	- Ported to use the ext2fs library
  * 94/03/06	- Added the checks interval from Uwe Ohse (uwe@tirka.gun.de)
  */
+#include "e2fsbb.h"
 
 #include <sys/types.h>
 #include <fcntl.h>
@@ -34,7 +35,6 @@
 #include <unistd.h>
 #include <getopt.h>
 
-#include "e2fsbb.h"
 #include "ext2fs/ext2_fs.h"
 #include "ext2fs/ext2fs.h"
 #include "uuid/uuid.h"

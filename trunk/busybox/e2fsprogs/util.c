@@ -8,6 +8,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -15,7 +16,6 @@
 #include <linux/major.h>
 #include <sys/stat.h>
 
-#include "e2fsbb.h"
 #include "e2p/e2p.h"
 #include "ext2fs/ext2_fs.h"
 #include "ext2fs/ext2fs.h"

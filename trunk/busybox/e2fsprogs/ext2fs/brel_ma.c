@@ -11,6 +11,7 @@
  * License.
  * %End-Header%
  */
+#include "e2fsbb.h"
 
 #include <fcntl.h>
 #include <stdio.h>

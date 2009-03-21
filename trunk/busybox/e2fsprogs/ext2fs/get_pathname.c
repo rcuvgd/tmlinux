@@ -17,6 +17,7 @@
  *	of the the directory <dir>.
  *
  */
+#include "e2fsbb.h"
 
 #include <stdio.h>
 #include <string.h>
