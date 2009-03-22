@@ -80,6 +80,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dfflush=tmlinux_fflush  	\
 	-Dfprintf=tmlinux_fprintf 	\
 	-Dfputs=tmlinux_fputs 		\
+	-Dputc=tmlinux_putc 		\
 	-Dfseek=tmlinux_fseek 		\
 	-Dputs=tmlinux_puts  		\
 	-Dsprintf=tmlinux_sprintf  	\
@@ -143,9 +144,11 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Denviron=__environ 		\
 	-Draise=tmlinux_raise 		\
 	-Dstrtoul=tmlinux_strtoul 	\
+	-Dstrtoull=tmlinux_strtoull 	\
 	-Drand=tmlinux_rand 		\
 	-Dsrand=tmlinux_srand 		\
 	-Dsetvbuf=tmlinux_setvbuf 	\
+	-Dsetbuf=tmlinux_setbuf 	\
 	-Drewind=tmlinux_rewind 	\
 	-Daccess=tmlinux_access 	\
 	-Dstrtok=tmlinux_strtok 	\
