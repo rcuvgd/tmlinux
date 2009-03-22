@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int
 main(void)
@@ -8,7 +9,6 @@ main(void)
 
 	printf("goto initapp test case!\n");
 
-#if 1
 	pid=vfork();
 	if(pid<0){
 		printf("Error failed to create child process.\n");
@@ -22,13 +22,12 @@ main(void)
 			"127.0.0.1",
 			NULL,
 		};
-		execve("/sbin/ifconfig",argv,NULL);
+		execve("ifconfig",argv,NULL);
+		exit(errno);
 	}
 	/*father process*/
 	printf("create process for ifconfig %d\n",pid);
-#endif 
 
-#if 1
 	pid=vfork();
 	if(pid<0){
 		printf("Error failed to create child process.\n");
@@ -45,12 +44,12 @@ main(void)
 		};
 		ret=execve("/server",argv,env);
 		printf("failed to execve, return value is %d\n",ret);
+		exit(errno);
 
 	}
 
 	/*father process*/
 	printf("create process for server %d\n",pid);
-#endif 
 
 	while(1);	
 
