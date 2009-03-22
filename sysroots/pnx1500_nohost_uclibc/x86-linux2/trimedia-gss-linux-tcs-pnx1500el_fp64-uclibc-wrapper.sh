@@ -55,7 +55,7 @@ if [ ! -d "$wrp_sysroot" ]; then
 	exit 1
 fi
 TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig"
-STDINC_FLAG="-nostdinc -I$wrp_sysroot/tcs/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
+STDINC_FLAG="-nostdinc -I$wrp_sysroot/compiler/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
 STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc -lpthread"
 
 DYNAPP_FLAG="-btype app"
