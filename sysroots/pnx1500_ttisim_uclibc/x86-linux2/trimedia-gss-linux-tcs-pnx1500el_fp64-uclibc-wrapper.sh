@@ -153,6 +153,8 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dasctime=tmlinux_asctime 	\
 	-Ddifftime=tmlinux_difftime 	\
 	-Dtime=tmlinux_time 		\
+	-Dstrftime=tmlinux_strftime 	\
+	-Dgmtime=tmlinux_gmtime 	\
 	-Dlocaltime=tmlinux_localtime 	\
 	-Dctime=tmlinux_ctime 		\
 	-Dsigprocmask=tmlinux_sigprocmask \
