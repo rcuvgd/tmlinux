@@ -48,6 +48,11 @@
 
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 #define BUFSIZE 4000
 
 #ifdef CONFIG_FEATURE_IPV6

@@ -19,6 +19,11 @@
 
 #include "libbb.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 /* transformer(), more than meets the eye */
 int open_transformer(int src_fd, int (*transformer)(int src_fd, int dst_fd))
 {

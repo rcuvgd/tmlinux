@@ -18,6 +18,11 @@
 #include <stdlib.h>
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 int
 setsid_main(int argc, char *argv[]) {
 

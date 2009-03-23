@@ -154,6 +154,11 @@
 
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 //#define CONFIG_FEATURE_INETD_RPC
 //#define CONFIG_FEATURE_INETD_SUPPORT_BILTIN_ECHO
 //#define CONFIG_FEATURE_INETD_SUPPORT_BILTIN_DISCARD

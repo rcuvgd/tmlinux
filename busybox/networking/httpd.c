@@ -116,6 +116,10 @@
 #include <fcntl.h>         /* for open modes        */
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
 
 static const char httpdVersion[] = "busybox httpd/1.35 6-Oct-2004";
 static const char default_path_httpd_conf[] = "/etc";
