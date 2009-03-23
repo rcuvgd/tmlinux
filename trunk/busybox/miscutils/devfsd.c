@@ -71,6 +71,10 @@
 #include <errno.h>
 #include <sys/sysmacros.h>
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
 
 /* Various defines taken from linux/major.h */
 #define IDE0_MAJOR	3

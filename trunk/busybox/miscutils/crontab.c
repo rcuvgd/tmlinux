@@ -27,6 +27,11 @@
 #include <sys/stat.h>
 #include <sys/resource.h>
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 #ifndef CRONTABS
 #define CRONTABS        "/var/spool/cron/crontabs"
 #endif

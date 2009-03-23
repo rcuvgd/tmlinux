@@ -23,6 +23,11 @@
 #include <fcntl.h>
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 struct mod_opt_t {	/* one-way list of options to pass to a module */
 	char *  m_opt_val;
 	struct mod_opt_t * m_next;

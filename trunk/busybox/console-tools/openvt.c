@@ -32,6 +32,11 @@
 
 #include "busybox.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 int openvt_main(int argc, char **argv)
 {
 	int fd;

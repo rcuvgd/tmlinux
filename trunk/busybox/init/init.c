@@ -38,6 +38,10 @@
 # include <sys/syslog.h>
 #endif
 
+#if defined(__UCLIBC__) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
 
 #define INIT_BUFFS_SIZE 256
 
@@ -466,7 +470,7 @@ static pid_t run(const struct init_action *a)
 						break;
 					}
 					/* FIXME handle other errors */
-		}
+				}
 
 				/* See if stealing the controlling tty back is necessary */
 				pgrp = tcgetpgrp(0);

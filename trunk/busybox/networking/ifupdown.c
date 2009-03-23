@@ -34,6 +34,11 @@
 
 #include "libbb.h"
 
+#if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
+#undef fork
+#define fork vfork
+#endif 
+
 #define MAX_OPT_DEPTH 10
 #define EUNBALBRACK 10001
 #define EUNDEFVAR   10002
