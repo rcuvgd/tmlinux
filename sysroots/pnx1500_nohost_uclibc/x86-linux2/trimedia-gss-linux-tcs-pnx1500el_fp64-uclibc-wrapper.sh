@@ -105,6 +105,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dstrpbrk=tmlinux_strpbrk 	\
 	-Dstrstr=tmlinux_strstr 	\
 	-Dstrspn=tmlinux_strspn 	\
+	-Dstrcspn=tmlinux_strcspn 	\
 	-Dtolower=tmlinux_tolower  	\
 	-Dtoupper=tmlinux_toupper  	\
 	-Dqsort=tmlinux_qsort 		\
