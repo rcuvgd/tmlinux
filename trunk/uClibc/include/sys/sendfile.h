@@ -39,6 +39,7 @@ extern ssize_t __REDIRECT (sendfile,
 			       (int __out_fd, int __in_fd, __off64_t *__offset,
 				size_t __count), sendfile64) __nonnull ((3));
 # else
+#  define __off_t __off64_t
 #  define sendfile sendfile64
 # endif
 #endif

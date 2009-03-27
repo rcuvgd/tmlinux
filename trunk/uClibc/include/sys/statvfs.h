@@ -78,6 +78,7 @@ extern int fstatvfs (int __fildes, struct statvfs *__buf)
 extern int __REDIRECT (fstatvfs, (int __fildes, struct statvfs *__buf),
 			   fstatvfs64) __nonnull ((2));
 # else
+#  define statvfs statvfs64
 #  define fstatvfs fstatvfs64
 # endif
 #endif

@@ -292,6 +292,7 @@ extern __off64_t __REDIRECT (lseek,
 				 lseek64);
 # else
 #  undef lseek
+#  define __off_t __off64_t
 #  define lseek lseek64
 # endif
 #endif
@@ -345,6 +346,7 @@ extern ssize_t __REDIRECT (pwrite, (int __fd, __const void *__buf,
 				    size_t __nbytes, __off64_t __offset),
 			   pwrite64);
 #  else
+#   define __off_t __off64_t
 #   define pread pread64
 #   define pwrite pwrite64
 #  endif
@@ -906,6 +908,7 @@ extern int __REDIRECT (truncate,
 			   (__const char *__file, __off64_t __length),
 			   truncate64) __nonnull ((1));
 #  else
+#   define __off_t __off64_t
 #   define truncate truncate64
 #  endif
 # endif
@@ -926,6 +929,7 @@ extern int ftruncate (int __fd, __off_t __length) __THROW;
 extern int __REDIRECT (ftruncate, (int __fd, __off64_t __length),
 			   ftruncate64);
 #  else
+#   define __off_t __off64_t
 #   define ftruncate ftruncate64
 #  endif
 # endif
@@ -990,6 +994,7 @@ extern int lockf (int __fd, int __cmd, __off_t __len);
 extern int __REDIRECT (lockf, (int __fd, int __cmd, __off64_t __len),
 		       lockf64);
 #  else
+#   define __off_t __off64_t
 #   define lockf lockf64
 #  endif
 # endif
