@@ -55,6 +55,7 @@ extern int fstatfs (int __fildes, struct statfs *__buf)
 extern int __REDIRECT (fstatfs, (int __fildes, struct statfs *__buf),
 			   fstatfs64) __nonnull ((2));
 # else
+#  define statfs statfs64
 #  define fstatfs fstatfs64
 # endif
 #endif

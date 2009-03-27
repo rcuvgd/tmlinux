@@ -7,7 +7,7 @@
  * conflicts with uClibc's namespace.   See bits/kernel_types.h
  * for i386, arm, etc for examples... */
 
-typedef unsigned short	__kernel_dev_t;
+typedef unsigned long   __kernel_dev_t;
 typedef unsigned long	__kernel_ino_t;
 typedef unsigned short	__kernel_mode_t;
 typedef unsigned short	__kernel_nlink_t;
@@ -31,7 +31,7 @@ typedef unsigned int	__kernel_gid32_t;
 typedef unsigned short	__kernel_old_uid_t;
 typedef unsigned short	__kernel_old_gid_t;
 typedef long long	__kernel_loff_t;
-typedef __kernel_dev_t	__kernel_old_dev_t;
+typedef unsigned short  __kernel_old_dev_t;
 
 typedef struct {
 #ifdef __USE_ALL

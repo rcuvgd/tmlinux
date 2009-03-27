@@ -683,6 +683,7 @@ extern int __REDIRECT (fseeko,
 		       fseeko64);
 extern __off64_t __REDIRECT (ftello, (FILE *__stream), ftello64);
 #  else
+#   define __off_t __off64_t
 #   define fseeko fseeko64
 #   define ftello ftello64
 #  endif
@@ -708,6 +709,7 @@ extern int __REDIRECT (fgetpos, (FILE *__restrict __stream,
 extern int __REDIRECT (fsetpos,
 		       (FILE *__stream, __const fpos_t *__pos), fsetpos64);
 # else
+#   define fpos_t fpos64_t 
 #  define fgetpos fgetpos64
 #  define fsetpos fsetpos64
 # endif

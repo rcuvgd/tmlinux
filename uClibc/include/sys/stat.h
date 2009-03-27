@@ -244,6 +244,7 @@ extern int __REDIRECT (lstat,
      __nonnull ((1, 2));
 #  else
 #   undef lstat
+#   define stat  stat64
 #   define lstat lstat64
 #  endif
 # endif

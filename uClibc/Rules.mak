@@ -227,6 +227,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _strtod=_tmlinux_strtod  		\
 		-symbolrename _strstr=_tmlinux_strstr 		\
 		-symbolrename _strspn=_tmlinux_strspn 		\
+		-symbolrename _strcspn=_tmlinux_strcspn 	\
 		-symbolrename _atoi=_tmlinux_atoi  		\
 		-symbolrename _atol=_tmlinux_atol  		\
 		-symbolrename _atoll=_tmlinux_atoll  		\

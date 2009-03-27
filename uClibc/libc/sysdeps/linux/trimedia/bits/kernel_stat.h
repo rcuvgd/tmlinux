@@ -29,27 +29,34 @@ struct kernel_stat {
 };
 
 struct kernel_stat64 {
-	unsigned char	__pad0[6];
-	unsigned short	st_dev;
-	unsigned char	__pad1[2];
+	unsigned long long	st_dev;
+
 #define _HAVE_STAT64___ST_INO
 	unsigned long	__st_ino;
+
 	unsigned int	st_mode;
 	unsigned int	st_nlink;
+
 	unsigned long	st_uid;
 	unsigned long	st_gid;
-	unsigned short	st_rdev;
-	unsigned char	__pad3[10];
+
+	unsigned long long	st_rdev;
+
 	long long	st_size;
 	unsigned long	st_blksize;
-	unsigned long	st_blocks;	/* Number 512-byte blocks allocated. */
+
 	unsigned long	__pad4;		/* future possible st_blocks high bits */
+	unsigned long	st_blocks;	/* Number 512-byte blocks allocated. */
+
 	unsigned long	st_atime;
-	unsigned long	__pad5;
+	unsigned long	st_atime_nsec;
+
 	unsigned long	st_mtime;
-	unsigned long	__pad6;
+	unsigned long	st_mtime_nsec;
+
 	unsigned long	st_ctime;
-	unsigned long	__pad7;		/* will be high 32 bits of ctime someday */
+	unsigned long	st_ctime_nsec;
+
 	unsigned long long	st_ino;
 };
 

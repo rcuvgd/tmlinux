@@ -24,7 +24,7 @@ typedef int __sig_atomic_t;
 
 /* A `sigset_t' has a bit for each signal.  */
 
-# define _SIGSET_NWORDS	(1024 / (8 * sizeof (unsigned long int)))
+# define _SIGSET_NWORDS	 		(2)
 typedef struct
   {
     unsigned long int __val[_SIGSET_NWORDS];

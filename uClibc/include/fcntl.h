@@ -168,6 +168,7 @@ extern int lockf (int __fd, int __cmd, __off_t __len);
 # ifdef __REDIRECT
 extern int __REDIRECT (lockf, (int __fd, int __cmd, __off64_t __len), lockf64);
 # else
+#   define __off_t __off64_t
 #  define lockf lockf64
 # endif
 # endif
