@@ -628,6 +628,7 @@ extern int mkstemp (char *__template) __nonnull ((1)) __wur;
 extern int __REDIRECT (mkstemp, (char *__template), mkstemp64)
      __nonnull ((1)) __wur;
 #  else
+extern int mkstemp64 (char *__template) __nonnull ((1)) __wur;
 #   define mkstemp mkstemp64
 #  endif
 # endif

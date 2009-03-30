@@ -98,6 +98,8 @@ extern __sighandler_t __REDIRECT (signal,
 				      (int __sig, __sighandler_t __handler),
 				      __sysv_signal);
 # else
+extern __sighandler_t __sysv_signal(int __sig, __sighandler_t __handler)
+     __THROW;
 #  undef signal
 #  define signal __sysv_signal
 # endif

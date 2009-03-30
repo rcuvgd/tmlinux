@@ -292,6 +292,7 @@ extern __off64_t __REDIRECT (lseek,
 				 lseek64);
 # else
 #  undef lseek
+extern __off64_t lseek64 (int __fd, __off64_t __offset, int __whence) __THROW;
 #  define __off_t __off64_t
 #  define lseek lseek64
 # endif
@@ -346,6 +347,10 @@ extern ssize_t __REDIRECT (pwrite, (int __fd, __const void *__buf,
 				    size_t __nbytes, __off64_t __offset),
 			   pwrite64);
 #  else
+extern ssize_t pread64 (int __fd, void *__buf, size_t __nbytes,
+			__off64_t __offset);
+extern ssize_t pwrite64 (int __fd, __const void *__buf, size_t __n,
+			 __off64_t __offset);
 #   define __off_t __off64_t
 #   define pread pread64
 #   define pwrite pwrite64
@@ -562,6 +567,7 @@ extern __pid_t getpgrp (void) __THROW;
 # ifdef __REDIRECT
 extern __pid_t __REDIRECT (getpgrp, (__pid_t __pid), __getpgid);
 # else
+extern __pid_t __getpgid (__pid_t __pid) __THROW;
 #  define getpgrp __getpgid
 # endif
 #endif
@@ -601,6 +607,7 @@ extern int setpgrp (void) __THROW;
 #  ifdef __REDIRECT
 extern int __REDIRECT (setpgrp, (__pid_t __pid, __pid_t __pgrp), setpgid);
 #  else
+extern int setpgid (__pid_t __pid, __pid_t __pgid) __THROW;
 #   define setpgrp setpgid
 #  endif
 
@@ -908,6 +915,8 @@ extern int __REDIRECT (truncate,
 			   (__const char *__file, __off64_t __length),
 			   truncate64) __nonnull ((1));
 #  else
+extern int truncate64 (__const char *__file, __off64_t __length)
+     __THROW __nonnull ((1));
 #   define __off_t __off64_t
 #   define truncate truncate64
 #  endif
@@ -929,6 +938,7 @@ extern int ftruncate (int __fd, __off_t __length) __THROW;
 extern int __REDIRECT (ftruncate, (int __fd, __off64_t __length),
 			   ftruncate64);
 #  else
+extern int ftruncate64 (int __fd, __off64_t __length) __THROW;
 #   define __off_t __off64_t
 #   define ftruncate ftruncate64
 #  endif
@@ -994,6 +1004,7 @@ extern int lockf (int __fd, int __cmd, __off_t __len);
 extern int __REDIRECT (lockf, (int __fd, int __cmd, __off64_t __len),
 		       lockf64);
 #  else
+extern int lockf64 (int __fd, int __cmd, __off64_t __len);
 #   define __off_t __off64_t
 #   define lockf lockf64
 #  endif
