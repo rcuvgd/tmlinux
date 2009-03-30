@@ -159,6 +159,7 @@ extern FILE *tmpfile (void);
 # ifdef __REDIRECT
 extern FILE *__REDIRECT (tmpfile, (void), tmpfile64);
 # else
+extern FILE *tmpfile64 (void);
 #  define tmpfile tmpfile64
 # endif
 #endif
@@ -250,6 +251,11 @@ extern FILE *__REDIRECT (freopen, (__const char *__restrict __filename,
 # else
 #  undef fopen
 #  undef freopen
+extern FILE *fopen64 (__const char *__restrict __filename,
+		      __const char *__restrict __modes);
+extern FILE *freopen64 (__const char *__restrict __filename,
+			__const char *__restrict __modes,
+			FILE *__restrict __stream);
 #  define fopen fopen64
 #  define freopen freopen64
 # endif
@@ -684,6 +690,8 @@ extern int __REDIRECT (fseeko,
 extern __off64_t __REDIRECT (ftello, (FILE *__stream), ftello64);
 #  else
 #   define __off_t __off64_t
+extern int fseeko64 (FILE *__stream, __off64_t __off, int __whence);
+extern __off64_t ftello64 (FILE *__stream);
 #   define fseeko fseeko64
 #   define ftello ftello64
 #  endif
@@ -709,6 +717,8 @@ extern int __REDIRECT (fgetpos, (FILE *__restrict __stream,
 extern int __REDIRECT (fsetpos,
 		       (FILE *__stream, __const fpos_t *__pos), fsetpos64);
 # else
+extern int fgetpos64 (FILE *__restrict __stream, fpos64_t *__restrict __pos);
+extern int fsetpos64 (FILE *__stream, __const fpos64_t *__pos);
 #   define fpos_t fpos64_t 
 #  define fgetpos fgetpos64
 #  define fsetpos fsetpos64

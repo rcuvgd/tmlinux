@@ -141,6 +141,8 @@ extern int ftw (__const char *__dir, __ftw_func_t __func, int __descriptors)
 extern int __REDIRECT (ftw, (__const char *__dir, __ftw_func_t __func,
 			     int __descriptors), ftw64) __nonnull ((1, 2));
 # else
+extern int ftw64 (__const char *__dir, __ftw64_func_t __func, int __descriptors)
+     __nonnull ((1, 2));
 #   define __ftw_func_t __ftw64_func_t
 #  define ftw ftw64
 # endif
@@ -165,6 +167,8 @@ extern int __REDIRECT (nftw, (__const char *__dir, __nftw_func_t __func,
 			      int __descriptors, int __flag), nftw64)
      __nonnull ((1, 2));
 #  else
+extern int nftw64 (__const char *__dir, __nftw64_func_t __func,
+		   int __descriptors, int __flag) __nonnull ((1, 2));
 #   define __nftw_func_t __nftw64_func_t
 #   define nftw nftw64
 #  endif

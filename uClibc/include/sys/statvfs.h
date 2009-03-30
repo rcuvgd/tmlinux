@@ -59,6 +59,9 @@ extern int __REDIRECT (statvfs,
 			    struct statvfs *__restrict __buf), statvfs64)
      __nonnull ((1, 2));
 # else
+extern int statvfs64 (__const char *__restrict __file,
+		      struct statvfs64 *__restrict __buf)
+     __THROW __nonnull ((1, 2));
 #  define statvfs statvfs64
 # endif
 #endif
@@ -78,6 +81,8 @@ extern int fstatvfs (int __fildes, struct statvfs *__buf)
 extern int __REDIRECT (fstatvfs, (int __fildes, struct statvfs *__buf),
 			   fstatvfs64) __nonnull ((2));
 # else
+extern int fstatvfs64 (int __fildes, struct statvfs64 *__buf)
+     __THROW __nonnull ((2));
 #  define statvfs statvfs64
 #  define fstatvfs fstatvfs64
 # endif

@@ -64,6 +64,8 @@ extern void * __REDIRECT (mmap,
 			       int __flags, int __fd, __off64_t __offset),
 			      mmap64);
 # else
+extern void *mmap64 (void *__addr, size_t __len, int __prot,
+		     int __flags, int __fd, __off64_t __offset) __THROW;
 #   define __off_t __off64_t
 #  define mmap mmap64
 # endif

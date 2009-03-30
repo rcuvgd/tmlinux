@@ -159,6 +159,7 @@ extern struct dirent *__REDIRECT (readdir, (DIR *__dirp), readdir64)
      __nonnull ((1));
 # else
 #  undef readdir
+extern struct dirent64 *readdir64 (DIR *__dirp) __nonnull ((1));
 #  define dirent dirent64
 #  define readdir readdir64
 # endif
@@ -188,6 +189,10 @@ extern int __REDIRECT (readdir_r,
 		       readdir64_r) __nonnull ((1, 2, 3));
 #  else
 #   undef readdir_r
+extern int readdir64_r (DIR *__restrict __dirp,
+		      struct dirent64 *__restrict __entry,
+		      struct dirent64 **__restrict __result)
+     __nonnull ((1, 2, 3));
 #   define dirent dirent64 
 #   define readdir_r readdir64_r
 #  endif
@@ -259,6 +264,11 @@ extern int __REDIRECT (scandir,
 #  else
 #   undef scandir
 #   undef dirent
+extern int scandir64 (__const char *__restrict __dir,
+		    struct dirent64 ***__restrict __namelist,
+		    int (*__selector) (__const struct dirent64 *),
+		    int (*__cmp) (__const void *, __const void *))
+     __nonnull ((1, 2));
 #   define dirent dirent64
 #   define scandir scandir64
 #  endif
@@ -284,6 +294,8 @@ extern int __REDIRECT (alphasort,
 			   (__const void *__e1, __const void *__e2),
 			   alphasort64) __attribute_pure__ __nonnull ((1, 2));
 #  else
+extern int alphasort64 (__const void *__e1, __const void *__e2)
+     __THROW __attribute_pure__ __nonnull ((1, 2));
 #   define alphasort alphasort64
 #  endif
 # endif

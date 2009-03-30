@@ -287,6 +287,8 @@ extern int __REDIRECT (strerror_r,
 			   (int __errnum, char *__buf, size_t __buflen),
 			   __xpg_strerror_r) __nonnull ((2));
 #  else
+extern int __xpg_strerror_r (int __errnum, char *__buf, size_t __buflen)
+     __THROW __nonnull ((2));
 #   define strerror_r __xpg_strerror_r
 #  endif
 # else
@@ -297,6 +299,8 @@ extern char * __REDIRECT (strerror_r,
 			   (int __errnum, char *__buf, size_t __buflen),
 			   __glibc_strerror_r) __nonnull ((2));
 #  else
+extern char *__glibc_strerror_r (int __errnum, char *__buf, size_t __buflen)
+     __THROW __nonnull ((2));
 #   define strerror_r __glibc_strerror_r
 #  endif
 # endif

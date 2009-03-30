@@ -77,6 +77,7 @@ extern int fcntl (int __fd, int __cmd, ...);
 extern int __REDIRECT (fcntl, (int __fd, int __cmd, ...), fcntl64);
 # else
 #  undef fcntl
+extern int fcntl64 (int __fd, int __cmd, ...);
 #  define fcntl fcntl64
 # endif
 #endif
@@ -95,6 +96,7 @@ extern int __REDIRECT (open, (__const char *__file, int __oflag, ...), open64)
      __nonnull ((1));
 # else
 #  undef open
+extern int open64 (__const char *__file, int __oflag, ...) __nonnull ((1));
 #  define open open64
 # endif
 #endif
@@ -140,6 +142,7 @@ extern int creat (__const char *__file, __mode_t __mode) __nonnull ((1));
 extern int __REDIRECT (creat, (__const char *__file, __mode_t __mode),
 		       creat64) __nonnull ((1));
 # else
+extern int creat64 (__const char *__file, __mode_t __mode) __nonnull ((1));
 #  define creat creat64
 # endif
 #endif
@@ -168,6 +171,7 @@ extern int lockf (int __fd, int __cmd, __off_t __len);
 # ifdef __REDIRECT
 extern int __REDIRECT (lockf, (int __fd, int __cmd, __off64_t __len), lockf64);
 # else
+extern int lockf64 (int __fd, int __cmd, __off64_t __len);
 #   define __off_t __off64_t
 #  define lockf lockf64
 # endif

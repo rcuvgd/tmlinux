@@ -37,6 +37,8 @@ extern int __REDIRECT (statfs,
 			   (__const char *__file, struct statfs *__buf),
 			   statfs64) __nonnull ((1, 2));
 # else
+extern int statfs64 (__const char *__file, struct statfs64 *__buf)
+     __THROW __nonnull ((1, 2));
 #  define statfs statfs64
 # endif
 #endif
@@ -55,6 +57,8 @@ extern int fstatfs (int __fildes, struct statfs *__buf)
 extern int __REDIRECT (fstatfs, (int __fildes, struct statfs *__buf),
 			   fstatfs64) __nonnull ((2));
 # else
+extern int fstatfs64 (int __fildes, struct statfs64 *__buf)
+     __THROW __nonnull ((2));
 #  define statfs statfs64
 #  define fstatfs fstatfs64
 # endif
