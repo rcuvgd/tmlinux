@@ -27,7 +27,17 @@ int setgroups(size_t n, const gid_t * groups)
 #ifndef __TCS__
 		__kernel_gid_t kernel_groups[n];
 #else
-		__kernel_gid_t kernel_groups[_SC_NGROUPS_MAX];
+		__kernel_gid_t* kernel_groups = NULL;
+		int ret = 0;
+
+		if(n > 0) {
+			kernel_groups = malloc(sizeof(__kernel_gid_t)*n);
+			if(kernel_groups==NULL){
+				__set_errno(ENOMEM);
+				return -1;
+			}
+			memset(kernel_groups,0,sizeof(__kernel_gid_t)*n);
+		}
 #endif
 
 		for (i = 0; i < n; i++) {
@@ -37,6 +47,12 @@ int setgroups(size_t n, const gid_t * groups)
 				return -1;
 			}
 		}
+#ifndef __TCS__
 		return (__syscall_setgroups(n, kernel_groups));
+#else
+		ret = __syscall_setgroups(n, kernel_groups);
+		free(kernel_groups);
+		return ret;
+#endif 
 	}
 }
