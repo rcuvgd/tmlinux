@@ -1288,7 +1288,8 @@ static int pseudo_exec(struct child_prog *child)
 
 	/* Do not use bb_perror_msg_and_die() here, since we must not
 	 * call exit() but should call _exit() instead */
-	fprintf(stderr, "%s: %m\n", child->argv[0]);
+	fprintf(stderr, "lash: %s: %s\n", child->argv[0], 
+			(errno==ENOENT) ? "command not found" : strerror(errno));
 	_exit(EXIT_FAILURE);
 }
 
@@ -1330,8 +1331,15 @@ static void insert_job(struct job *newjob, int inbg)
 
 		/* move the new process group into the foreground */
 		/* suppress messages when run from /linuxrc mag@sysgo.de */
+		/*
+		 * FIXME: to avoid tcsetpgrp error warning, see issue 38
+		 * */
+#if 0
 		if (tcsetpgrp(shell_terminal, newjob->pgrp) && errno != ENOTTY)
 			bb_perror_msg("tcsetpgrp");
+#else
+		tcsetpgrp(shell_terminal, newjob->pgrp);
+#endif 
 	}
 #endif
 }
@@ -1531,8 +1539,15 @@ static int busy_loop(FILE * input)
 			if (!job_list.fg) {
 				/* move the shell to the foreground */
 				/* suppress messages when run from /linuxrc mag@sysgo.de */
+				/*
+				 * FIXME: to avoid tcsetpgrp error warning, see issue 38
+				 * */
+#if 0
 				if (tcsetpgrp(shell_terminal, getpgrp()) && errno != ENOTTY)
 					bb_perror_msg("tcsetpgrp");
+#else
+				tcsetpgrp(shell_terminal, getpgrp());
+#endif 
 			}
 #endif
 		}
@@ -1540,9 +1555,16 @@ static int busy_loop(FILE * input)
 	free(command);
 
 #ifdef CONFIG_LASH_JOB_CONTROL
+	/*
+	 * FIXME: to avoid tcsetpgrp error warning, see issue 38
+	 * */
+#if 0
 	/* return controlling TTY back to parent process group before exiting */
 	if (tcsetpgrp(shell_terminal, parent_pgrp) && errno != ENOTTY)
 		bb_perror_msg("tcsetpgrp");
+#else
+	tcsetpgrp(shell_terminal, parent_pgrp);
+#endif 
 #endif
 
 	/* return exit status if called with "-c" */
