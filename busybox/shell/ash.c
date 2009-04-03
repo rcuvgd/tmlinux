@@ -97,6 +97,8 @@
 
 #include "cmdedit.h"
 
+#define bgcmd  fgcmd
+
 #if ( defined(__UCLIBC__) || defined(__uClinux__) ) && !defined(__ARCH_HAS_MMU__)
 #undef fork
 #define fork vfork
@@ -109,9 +111,11 @@ static int *dash_errno;
 #define errno (*dash_errno)
 #endif
 
+#if 0
 #if defined(__uClinux__)
 #error "Do not even bother, ash will not run on uClinux"
 #endif
+#endif 
 
 #ifdef DEBUG
 #define _DIAGASSERT(assert_expr) assert(assert_expr)
@@ -2909,10 +2913,14 @@ exexit:
 }
 
 
+#ifndef __TCS__
 #if !defined(__alpha__) || (defined(__GNUC__) && __GNUC__ >= 3)
 static
 #endif
 void evaltreenr(union node *, int) __attribute__ ((alias("evaltree"),__noreturn__));
+#else
+#define evaltreenr  evaltree
+#endif 
 
 
 static void
@@ -6694,7 +6702,9 @@ fgcmd(int argc, char **argv)
 	return retval;
 }
 
+#ifndef __TCS__
 static int bgcmd(int, char **) __attribute__((__alias__("fgcmd")));
+#endif 
 
 
 static int

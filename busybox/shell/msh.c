@@ -1621,10 +1621,10 @@ REGISTER int sub;
 static inline void* sbrk(int X)
 { 
 	void * __q = (void *)-1; 
-	if (brkaddr + (int)(X) < brktop) 
+	if (((unsigned char* )brkaddr) + (int)(X) < brktop) 
 	{ 
 		__q = brkaddr; 
-		brkaddr+=(int)(X); 
+		brkaddr = ((unsigned char*)brkaddr) + (int)(X);
 	} 
 	return __q;
 }
@@ -1633,7 +1633,7 @@ static inline void* sbrk(int X)
 static void initarea()
 {
 	brkaddr = malloc(AREASIZE);
-	brktop = brkaddr + AREASIZE;
+	brktop = ((unsigned char*)brkaddr) + AREASIZE;
 
 	while ((long) sbrk(0) & ALIGN)
 		sbrk(1);

@@ -15,7 +15,7 @@
 /*
  * ext2_loff_t is defined here since unix_io.c needs it.
  */
-#if defined(__GNUC__) || defined(HAS_LONG_LONG)
+#if defined(__GNUC__) || defined(__TCS__) || defined(HAS_LONG_LONG)
 typedef long long	ext2_loff_t;
 #else
 typedef long		ext2_loff_t;
