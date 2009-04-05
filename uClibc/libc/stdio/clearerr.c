@@ -38,7 +38,7 @@ weak_alias(__clearerr_unlocked,clearerr);
 #else
 void clearerr(register FILE *stream)
 {
-	return __clearerr_unlocked(stream);
+	__clearerr_unlocked(stream);
 }
 #endif 
 #endif

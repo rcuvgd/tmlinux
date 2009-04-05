@@ -16,6 +16,7 @@
 /*
  * FIXME: to avoid symbol duplication with TCS
  * */
+#define getc    tmlinux_getc
 #define fgetc   tmlinux_fgetc
 #endif 
 
