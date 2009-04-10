@@ -45,6 +45,8 @@ ENTRY(__syscall)
 	IF r1   nop,
 	IF r1   nop;
 
+	nop,nop,nop,nop,nop;
+
 	(* cycle 6 *)
 	IF r1   nop,
 	IF r1   ijmpt r1 r2,                         
