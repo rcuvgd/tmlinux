@@ -204,13 +204,16 @@ static void sendping(int junk)
 	int i;
 #ifndef __TCS__
 	char packet[datalen + sizeof(struct icmp)];
+#define PACKET_LEN  sizeof(packet) 
 #else
 	char* packet=NULL;
+#define PACKET_LEN  (datalen + sizeof(struct icmp))
 
-	packet=malloc(datalen+sizeof(struct icmp));
+	packet=malloc(PACKET_LEN);
 	if(packet==NULL){
 		bb_perror_msg_and_die("malloc");
 	}
+	memset(packet, 0, PACKET_LEN);
 #endif 
 
 	pkt = (struct icmp *) packet;
@@ -223,16 +226,16 @@ static void sendping(int junk)
 	CLR(ntohs(pkt->icmp_seq) % MAX_DUP_CHK);
 
 	gettimeofday((struct timeval *) &pkt->icmp_dun, NULL);
-	pkt->icmp_cksum = in_cksum((unsigned short *) pkt, sizeof(packet));
+	pkt->icmp_cksum = in_cksum((unsigned short *) pkt, PACKET_LEN);
 
-	i = sendto(pingsock, packet, sizeof(packet), 0,
+	i = sendto(pingsock, packet, PACKET_LEN, 0,
 			   (struct sockaddr *) &pingaddr, sizeof(struct sockaddr_in));
 
 	if (i < 0)
 		bb_perror_msg_and_die("sendto");
-	else if ((size_t)i != sizeof(packet))
+	else if ((size_t)i != PACKET_LEN)
 		bb_error_msg_and_die("ping wrote %d chars; %d expected", i,
-			   (int)sizeof(packet));
+			   (int)PACKET_LEN);
 
 	signal(SIGALRM, sendping);
 	if (pingcount == 0 || ntransmitted < pingcount) {	/* schedule next in 1s */
@@ -246,6 +249,8 @@ static void sendping(int junk)
 #ifdef __TCS__
 	free(packet);
 #endif 
+
+#undef PACKET_LEN
 }
 
 static char *icmp_type_name (int id)
@@ -340,16 +345,19 @@ static void ping(const char *host)
 {
 #ifndef __TCS__
 	char packet[datalen + MAXIPLEN + MAXICMPLEN];
+#define PACKET_LEN sizeof(packet)
 #else
 	char* packet=NULL;
+#define PACKET_LEN (datalen + MAXIPLEN + MAXICMPLEN)
 #endif 
 	int sockopt;
 
 #ifdef __TCS__
-	packet = malloc(datalen + MAXIPLEN + MAXICMPLEN);
+	packet = malloc(PACKET_LEN);
 	if(packet==NULL){
 		bb_error_msg_and_die("No memory.");
 	}
+	memset(packet, 0, PACKET_LEN);
 #endif 
 
 	pingsock = create_icmp_socket();
@@ -389,7 +397,7 @@ static void ping(const char *host)
 		socklen_t fromlen = (socklen_t) sizeof(from);
 		int c;
 
-		if ((c = recvfrom(pingsock, packet, sizeof(packet), 0,
+		if ((c = recvfrom(pingsock, packet, PACKET_LEN, 0,
 						  (struct sockaddr *) &from, &fromlen)) < 0) {
 			if (errno == EINTR)
 				continue;
@@ -405,6 +413,8 @@ static void ping(const char *host)
 #ifdef __TCS__
 	free(packet);
 #endif 
+
+#undef PACKET_LEN
 }
 
 int ping_main(int argc, char **argv)
