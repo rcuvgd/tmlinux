@@ -73,6 +73,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dmemcpy=tmlinux_memcpy 	\
 	-Drename=tmlinux_rename 	\
 	-Dexit=tmlinux_exit 		\
+	-Datexit=tmlinux_atexit 	\
 	-Dstrlen=tmlinux_strlen		\
 	-Datoi=tmlinux_atoi  		\
 	-Datol=tmlinux_atol  		\
@@ -108,6 +109,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dstrcspn=tmlinux_strcspn 	\
 	-Dtolower=tmlinux_tolower  	\
 	-Dtoupper=tmlinux_toupper  	\
+	-Dtmpnam=tmlinux_tmpnam  	\
 	-Dqsort=tmlinux_qsort 		\
 	-Dvfprintf=tmlinux_vfprintf  	\
 	-Dvsprintf=tmlinux_vsprintf  	\
@@ -154,6 +156,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Daccess=tmlinux_access 	\
 	-Dstrtok=tmlinux_strtok 	\
 	-Dfscanf=tmlinux_fscanf 	\
+	-Dscanf=tmlinux_scanf 		\
 	-Dasctime=tmlinux_asctime 	\
 	-Ddifftime=tmlinux_difftime 	\
 	-Dtime=tmlinux_time 		\
