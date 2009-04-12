@@ -91,7 +91,7 @@ strong_alias(__xdrmem_create,xdrmem_create)
 void 
 xdrmem_create (XDR *xdrs, const caddr_t addr, u_int size, enum xdr_op op)
 {
-	return __xdrmem_create(xdrs,addr,size,op);
+	__xdrmem_create(xdrs,addr,size,op);
 }
 #endif 
 

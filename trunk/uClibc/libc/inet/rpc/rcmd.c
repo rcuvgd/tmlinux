@@ -70,11 +70,8 @@ static int iruserok2 (u_int32_t raddr, int superuser, const char *ruser,
 		      const char *luser, const char *rhost);
 
 
-int rcmd(ahost, rport, locuser, remuser, cmd, fd2p)
-     char **ahost;
-     u_short rport;
-     const char *locuser, *remuser, *cmd;
-     int *fd2p;
+int rcmd(char** ahost, unsigned short rport, const char* locuser, 
+		const char* remuser, const char* cmd, int* fd2p)
 {
 #ifdef __UCLIBC_HAS_REENTRANT_RPC__
 	int herr;
