@@ -186,7 +186,16 @@ __authunix_create_default (void)
   uid_t uid;
   gid_t gid;
   int max_nr_groups = sysconf (_SC_NGROUPS_MAX);
+#ifndef __TCS__
   gid_t gids[max_nr_groups];
+#else
+  gid_t* gids=NULL;
+  gids = malloc(sizeof(gid_t)*max_nr_groups);
+  if(gids==NULL){
+  	return NULL;
+  }
+  memset(gids,0,sizeof(gid_t)*max_nr_groups);
+#endif 
 
   if (gethostname (machname, MAX_MACHINE_NAME) == -1)
     abort ();
@@ -199,7 +208,15 @@ __authunix_create_default (void)
   /* This braindamaged Sun code forces us here to truncate the
      list of groups to NGRPS members since the code in
      authuxprot.c transforms a fixed array.  Grrr.  */
+#ifndef __TCS__
   return __authunix_create (machname, uid, gid, MIN (NGRPS, len), gids);
+#else
+  {
+  	AUTH* ret = __authunix_create (machname, uid, gid, MIN (NGRPS, len), gids); 	
+	free(gids);
+	return ret;
+  }
+#endif 
 }
 #ifndef __TCS__
 strong_alias(__authunix_create_default,authunix_create_default)

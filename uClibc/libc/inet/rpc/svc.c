@@ -320,7 +320,7 @@ strong_alias(__svcerr_auth,svcerr_auth)
 void 
 svcerr_auth (SVCXPRT *xprt, enum auth_stat why)
 {
-	return __svcerr_auth(xprt,why);
+	__svcerr_auth(xprt,why);
 }
 #endif 
 

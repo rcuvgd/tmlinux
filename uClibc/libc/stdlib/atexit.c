@@ -103,7 +103,12 @@ extern int __cxa_atexit (cxaefuncp, void *arg, void *dso_handle);
 
 /* remove old_atexit after 0.9.29 */
 #if defined(L_atexit) || defined(L_old_atexit)
+#ifndef __TCS__
 extern void *__dso_handle __attribute__ ((__weak__));
+#else
+/*FIXME: Why it is here, how to deal with, what it is used for???*/
+void *__dso_handle=NULL;
+#endif 
 
 /*
  * register a function to be called at normal program termination

@@ -170,6 +170,29 @@ extern char *strndup (__const char *__string, size_t __n)
     }))
 #endif
 
+#if defined __USE_GNU && defined __TCS__
+/* Duplicate S, returning an identical alloca'd string.  */
+static inline char* strdupa(const char* s)
+{									      
+	const char *__old = (s);					      
+	extern size_t strlen (const char *__s);
+	size_t __len = strlen (__old) + 1;				      
+	char *__new = (char *) _rt_alloca(__len);			      
+	return (char *) memcpy (__new, __old, __len);				      
+}
+
+/* Return an alloca'd copy of at most N bytes of string.  */
+static inline char* strndupa(const char* s, size_t n)
+{									      
+	const char *__old = (s);					      
+	extern size_t strnlen(const char *s, size_t maxlen);
+	size_t __len = strnlen(__old, (n));				      
+	char *__new = (char *) _rt_alloca(__len + 1);		      
+	__new[__len] = '\0';						      
+	return (char *) memcpy (__new, __old, __len);				      
+}
+#endif
+
 __BEGIN_NAMESPACE_STD
 /* Find the first occurrence of C in S.  */
 extern char *strchr (__const char *__s, int __c)
