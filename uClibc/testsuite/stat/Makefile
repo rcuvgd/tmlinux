@@ -1,0 +1,8 @@
+TESTS = stat stat64
+
+include ../Test.mak
+
+CFLAGS64=-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+CFLAGS_stat64_uclibc = $(CFLAGS64)
+GLIBC_CFLAGS_stat64_glibc = $(CFLAGS64)
+

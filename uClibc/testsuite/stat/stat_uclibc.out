@@ -1,0 +1,45 @@
+
+Testing stat:
+device    : 0x9
+inode     : 49836
+mode      : 0x81a4
+nlink     : 1
+uid       : 500
+gid       : 100
+rdev      : 0x0
+size      : 1779
+blksize   : 4096
+blocks    : 8
+atime     : 1239428445
+mtime     : 1239428445
+ctime     : 1239428445
+
+Testing lstat:
+device    : 0x9
+inode     : 49836
+mode      : 0x81a4
+nlink     : 1
+uid       : 500
+gid       : 100
+rdev      : 0x0
+size      : 1779
+blksize   : 4096
+blocks    : 8
+atime     : 1239428445
+mtime     : 1239428445
+ctime     : 1239428445
+
+Testing fstat:
+device    : 0x9
+inode     : 49836
+mode      : 0x81a4
+nlink     : 1
+uid       : 500
+gid       : 100
+rdev      : 0x0
+size      : 1779
+blksize   : 4096
+blocks    : 8
+atime     : 1239428445
+mtime     : 1239428445
+ctime     : 1239428445
