@@ -38,6 +38,11 @@ void *malloc(size_t size)
 #else
 # define MMAP_FLAGS MAP_SHARED | MAP_ANONYMOUS
 #endif
+	
+	if(unlikely((int)size < 0)) {
+		__set_errno(ENOMEM);
+		return 0;
+	}
 
 	result = mmap((void *) 0, size + sizeof(size_t), PROT_READ | PROT_WRITE,
 	              MMAP_FLAGS, 0, 0);

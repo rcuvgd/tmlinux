@@ -334,7 +334,7 @@ weak_alias(__libc_sendmsg, sendmsg);
 #else
 ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags)
 {
-	return sendmsg(sockfd,msg,flags);
+	return __libc_sendmsg(sockfd,msg,flags);
 }
 #endif 
 #endif
