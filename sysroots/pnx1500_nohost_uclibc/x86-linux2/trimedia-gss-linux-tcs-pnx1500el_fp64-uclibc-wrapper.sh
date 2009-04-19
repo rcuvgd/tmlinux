@@ -56,7 +56,7 @@ if [ ! -d "$wrp_sysroot" ]; then
 fi
 TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig"
 STDINC_FLAG="-nostdinc -I$wrp_sysroot/compiler/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
-STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc"
+STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc -lcstub"
 
 DYNAPP_FLAG="-btype app"
 APPMAIN="$wrp_sysroot/sysroot/usr/lib/crt0.o"
