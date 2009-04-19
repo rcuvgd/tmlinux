@@ -515,8 +515,18 @@ int __pthread_initialize_manager(void)
   /* Synchronize debugging of the thread manager */
   PDEBUG("send REQ_DEBUG to manager thread\n");
   request.req_kind = REQ_DEBUG;
+#ifndef __TCS__
   TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 	      (char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
   return 0;
 }
 
@@ -538,8 +548,18 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
   sigprocmask(SIG_SETMASK, (const sigset_t *) NULL,
               &request.req_args.create.mask);
   PDEBUG("write REQ_CREATE to manager thread\n");
+#ifndef __TCS__
   TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 	      (char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
   PDEBUG("before suspend(self)\n");
   suspend(self);
   PDEBUG("after suspend(self)\n");
@@ -663,8 +683,18 @@ static void pthread_onexit_process(int retcode, void *arg)
 	request.req_thread = self;
 	request.req_kind = REQ_PROCESS_EXIT;
 	request.req_args.exit.code = retcode;
+#ifndef __TCS__
 	TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		    (char *) &request, sizeof(request)));
+#else
+	{ 
+		long int __result;						      
+		do __result = (long int) (__libc_write(__pthread_manager_request,
+					(char *) &request, sizeof(request)));
+		while (__result == -1L && errno == EINTR);			      
+		__result; 
+	}
+#endif 
 	suspend(self);
 	/* Main thread should accumulate times for thread manager and its
 	   children, so that timings for main thread account for all threads. */
@@ -1050,7 +1080,16 @@ void __pthread_message(char * fmt, ...)
   va_start(args, fmt);
   vsnprintf(buffer + 8, sizeof(buffer) - 8, fmt, args);
   va_end(args);
+#ifndef __TCS__
   TEMP_FAILURE_RETRY(__libc_write(2, buffer, strlen(buffer)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(2, buffer, strlen(buffer)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
 }
 
 #endif

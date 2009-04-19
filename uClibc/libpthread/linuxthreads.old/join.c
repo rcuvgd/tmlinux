@@ -77,8 +77,18 @@ void pthread_exit(void * retval)
   if (self == __pthread_main_thread && __pthread_manager_request >= 0) {
     request.req_thread = self;
     request.req_kind = REQ_MAIN_THREAD_EXIT;
+#ifndef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		(char *)&request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
     suspend(self);
     /* Main thread flushes stdio streams and runs atexit functions.
      * It also calls a handler within LinuxThreads which sends a process exit
@@ -176,8 +186,18 @@ int pthread_join(pthread_t thread_id, void ** thread_return)
     request.req_thread = self;
     request.req_kind = REQ_FREE;
     request.req_args.free.thread_id = thread_id;
+#ifndef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		(char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
   }
   return 0;
 }
@@ -214,8 +234,18 @@ int pthread_detach(pthread_t thread_id)
     request.req_thread = thread_self();
     request.req_kind = REQ_FREE;
     request.req_args.free.thread_id = thread_id;
+#ifdef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		(char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif
   }
   return 0;
 }

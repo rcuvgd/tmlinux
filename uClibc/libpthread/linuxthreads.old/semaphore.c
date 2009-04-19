@@ -169,8 +169,18 @@ int __new_sem_post(sem_t * sem)
     }
     request.req_kind = REQ_POST;
     request.req_args.post = sem;
+#ifndef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 				    (char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
   }
   return 0;
 }
