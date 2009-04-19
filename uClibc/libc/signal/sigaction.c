@@ -112,6 +112,8 @@ __libc_sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
 {
 	return __sigaction_internal(sig,act,oact);
 }
+#if 0
+/*for trimedia, the following functions are moved to libcstub.a*/
 int attribute_hidden
 __sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
 {
@@ -122,4 +124,5 @@ sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
 {
 	return __sigaction_internal(sig,act,oact);
 }
+#endif 
 #endif

@@ -149,8 +149,7 @@ int __pthread_manager(void *arg)
   /* Raise our priority to match that of main thread */
   __pthread_manager_adjust_prio(__pthread_main_thread->p_priority);
   /* Synchronize debugging of the thread manager */
-  n = TEMP_FAILURE_RETRY(__libc_read(reqfd, (char *)&request,
-				     sizeof(request)));
+  n = TEMP_FAILURE_RETRY(__libc_read(reqfd, (char *)&request, sizeof(request)));
   ASSERT(n == sizeof(request) && request.req_kind == REQ_DEBUG);
 #ifndef USE_SELECT
   ufd.fd = reqfd;

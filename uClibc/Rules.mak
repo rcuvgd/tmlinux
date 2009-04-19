@@ -308,9 +308,12 @@ ifeq ($(TARGET_ARCH),trimedia)
 		-symbolrename _rand=_tmlinux_rand 		\
 		-symbolrename _srand=_tmlinux_srand 		\
 		-symbolrename _setvbuf=_tmlinux_setvbuf 	\
-		-symbolrename _setbuf=_tmlinux_setbuf 	\
+		-symbolrename _setbuf=_tmlinux_setbuf 		\
 		-symbolrename _difftime=_tmlinux_difftime 	\
 		-symbolrename _sigprocmask=_tmlinux_sigprocmask \
+		-symbolrename _abs=_tmlinux_abs 		\
+		-symbolrename _labs=_tmlinux_labs 		\
+		-symbolrename _llabs=_tmlinux_llabs 		\
 		-symbolrename _write=_tmlinux_write  
 
 	CPU_CFLAGS-$(CONFIG_PNX1500) += -target pnx1500

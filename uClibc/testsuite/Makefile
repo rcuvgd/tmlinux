@@ -11,7 +11,7 @@ top_builddir=../
 .EXPORT_ALL_VARIABLES:
 
 
-ALL_SUBDIRS = args assert crypt ctype malloc misc mmap rpc pwd_grp setjmp stat signal silly stdlib string termios unistd
+ALL_SUBDIRS = args assert crypt ctype malloc misc mmap pwd_grp setjmp stat signal silly stdlib string termios unistd
 
 DIRS := $(ALL_SUBDIRS)
 

@@ -37,8 +37,5 @@ int attribute_hidden __sigwait (const sigset_t *set, int *sig)
 #ifndef __TCS__
 weak_alias(__sigwait, sigwait)
 #else
-int attribute_hidden sigwait (const sigset_t *set, int *sig)
-{
-	return __sigwait(set,sig);
-}
+/*for trimedia, sigwait is moved to libcstub.a*/
 #endif

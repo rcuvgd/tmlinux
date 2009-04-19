@@ -34,6 +34,7 @@ include $(top_srcdir)extra/locale/Makefile.in
 
 # last included to catch all the objects added by others (locales/threads)
 include $(top_srcdir)libc/Makefile.in
+include $(top_srcdir)libcstub/Makefile.in
 
 include/bits/uClibc_config.h: extra/config/conf .config
 	$(INSTALL) -d $(dir $@)

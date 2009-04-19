@@ -18,6 +18,30 @@ extern void __uClibc_main(int (*main)(int, char **, char **),
 
 extern void __rtld_fini(void);
 
+/*
+ * The following symbols are used by libcstub.a, 
+ * Due to the tmcc bug, they must be resolved at first.
+   _errno
+   _h_errno
+   ___libc_longjmp
+   ___raise
+   ___sigaction_internal
+   ___sigwait
+*/
+extern int errno;
+extern int h_errno;
+extern int __libc_longjmp;
+extern int __raise;
+extern int __sigaction_internal;
+extern int __sigwait;
+
+void* errno_addr = &errno;
+void* h_errno_addr = &h_errno;
+void* __libc_longjmp_addr = &__libc_longjmp;
+void* __raise_addr = &__raise;
+void* __sigaction_internal_addr = &__sigaction_internal;
+void* __sigwait_addr = &__sigwait;
+
 #ifdef CONFIG_DYNLOAD
 extern void _application_main(void)
 {
