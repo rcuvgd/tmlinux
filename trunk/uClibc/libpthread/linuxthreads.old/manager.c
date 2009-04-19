@@ -149,7 +149,16 @@ int __pthread_manager(void *arg)
   /* Raise our priority to match that of main thread */
   __pthread_manager_adjust_prio(__pthread_main_thread->p_priority);
   /* Synchronize debugging of the thread manager */
+#ifndef __TCS__
   n = TEMP_FAILURE_RETRY(__libc_read(reqfd, (char *)&request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_read(reqfd, (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  n = __result; 
+  }
+#endif 
   ASSERT(n == sizeof(request) && request.req_kind == REQ_DEBUG);
 #ifndef USE_SELECT
   ufd.fd = reqfd;
@@ -305,8 +314,18 @@ pthread_start_thread(void *arg)
   if (__pthread_threads_debug && __pthread_sig_debug > 0) {
     request.req_thread = self;
     request.req_kind = REQ_DEBUG;
+#ifndef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		(char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
     suspend(self);
   }
   /* Run the thread code */
@@ -891,8 +910,18 @@ void __pthread_manager_sighandler(int sig)
 	struct pthread_request request;
 	request.req_thread = 0;
 	request.req_kind = REQ_KICK;
+#ifndef __TCS__
 	TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		    (char *) &request, sizeof(request)));
+#else
+  { 
+	  long int __result;						      
+	  do __result = (long int) (__libc_write(__pthread_manager_request,
+				  (char *) &request, sizeof(request)));
+	  while (__result == -1L && errno == EINTR);			      
+	  __result; 
+  }
+#endif 
     }
 }
 

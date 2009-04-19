@@ -1017,7 +1017,7 @@ extern int lockf64 (int __fd, int __cmd, __off64_t __len);
 
 #ifdef __USE_GNU
 
-#if 0
+#ifndef __TCS__ 
 /* Evaluate EXPRESSION, and repeat as long as it returns -1 with `errno'
    set to EINTR.  */
 
@@ -1027,13 +1027,6 @@ extern int lockf64 (int __fd, int __cmd, __off64_t __len);
        do __result = (long int) (expression);				      \
        while (__result == -1L && errno == EINTR);			      \
        __result; }))
-#else
-
-/*
- * FIXME: I don't know how to implement it
- */
-#define TEMP_FAILURE_RETRY(expression)  (1)
-
 #endif 
 
 #endif 
