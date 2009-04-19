@@ -905,9 +905,11 @@ static void parse_inittab(void)
 		new_init_action(RESTART, "/sbin/init", "");
 		/* Askfirst shell on tty1-4 */
 		new_init_action(ASKFIRST, bb_default_login_shell, "");
+#if 0
 		new_init_action(ASKFIRST, bb_default_login_shell, VC_2);
 		new_init_action(ASKFIRST, bb_default_login_shell, VC_3);
 		new_init_action(ASKFIRST, bb_default_login_shell, VC_4);
+#endif 
 		/* sysinit */
 		new_init_action(SYSINIT, INIT_SCRIPT, "");
 
