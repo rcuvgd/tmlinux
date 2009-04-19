@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define printf _dp
+/*#define printf _dp*/
 
 int
 main(void)
@@ -17,5 +17,6 @@ main(void)
 		free(str);
 		str=NULL;
 	}
+
 	return 0;
 }
