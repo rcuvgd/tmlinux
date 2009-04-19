@@ -56,7 +56,7 @@ if [ ! -d "$wrp_sysroot" ]; then
 fi
 TMCONFIG_FLAG="-tmconfig=$wrp_sysroot/tmconfig"
 STDINC_FLAG="-nostdinc -I$wrp_sysroot/compiler/$TCS_VERSION/include -I$wrp_sysroot/sysroot/usr/include/ -D__signed__=signed"
-STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc"
+STDLIB_FLAG="-L$wrp_sysroot/sysroot/usr/lib/ -lc -lcstub"
 
 DYNAPP_FLAG="-btype app"
 APPMAIN="$wrp_sysroot/sysroot/usr/lib/crt0.o"
@@ -73,6 +73,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dmemcpy=tmlinux_memcpy 	\
 	-Drename=tmlinux_rename 	\
 	-Dexit=tmlinux_exit 		\
+	-Datexit=tmlinux_atexit 	\
 	-Dstrlen=tmlinux_strlen		\
 	-Datoi=tmlinux_atoi  		\
 	-Datol=tmlinux_atol  		\
@@ -105,8 +106,10 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Dstrpbrk=tmlinux_strpbrk 	\
 	-Dstrstr=tmlinux_strstr 	\
 	-Dstrspn=tmlinux_strspn 	\
+	-Dstrcspn=tmlinux_strcspn 	\
 	-Dtolower=tmlinux_tolower  	\
 	-Dtoupper=tmlinux_toupper  	\
+	-Dtmpnam=tmlinux_tmpnam  	\
 	-Dqsort=tmlinux_qsort 		\
 	-Dvfprintf=tmlinux_vfprintf  	\
 	-Dvsprintf=tmlinux_vsprintf  	\
@@ -153,6 +156,7 @@ SYMRENAME="-Dcalloc=tmlinux_calloc  	\
 	-Daccess=tmlinux_access 	\
 	-Dstrtok=tmlinux_strtok 	\
 	-Dfscanf=tmlinux_fscanf 	\
+	-Dscanf=tmlinux_scanf 		\
 	-Dasctime=tmlinux_asctime 	\
 	-Ddifftime=tmlinux_difftime 	\
 	-Dtime=tmlinux_time 		\
