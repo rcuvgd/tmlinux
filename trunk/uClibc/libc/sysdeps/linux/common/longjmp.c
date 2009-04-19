@@ -53,18 +53,24 @@ weak_alias (__libc_longjmp, _longjmp)
 weak_alias (__libc_longjmp, siglongjmp)
 weak_alias (__libc_longjmp, __libc_siglongjmp)
 #else
+/*for trimedia, longjmp is moved to libcstub.a*/
+#if 0
 void longjmp (sigjmp_buf env, int val)
 {
 	__libc_longjmp(env,val);
 }
+#endif 
 void _longjmp (sigjmp_buf env, int val)
 {
 	__libc_longjmp(env,val);
 }
+#if 0
+/*for trimedia, siglongjmp is moved to libcstub.a*/
 void siglongjmp (sigjmp_buf env, int val)
 {
 	__libc_longjmp(env,val);
 }
+#endif 
 void __libc_siglongjmp (sigjmp_buf env, int val)
 {
 	__libc_longjmp(env,val);

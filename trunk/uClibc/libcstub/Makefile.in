@@ -1,0 +1,55 @@
+# Makefile for uClibc
+#
+# Copyright (C) 2000 by Lineo, inc.
+# Copyright (C) 2000-2005 Erik Andersen <andersen@uclibc.org>
+#
+# Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+#
+
+CFLAGS-libcstub := -DNOT_IN_libc -DIS_IN_libcstub $(SSP_ALL_CFLAGS)
+
+LDFLAGS-libcstub.so := $(LDFLAGS)
+
+LIBS-libcstub.so := $(LIBS)
+
+libcstub_FULL_NAME := libcstub-$(MAJOR_VERSION).$(MINOR_VERSION).$(SUBLEVEL).so
+
+libcstub_DIR := $(top_srcdir)libcstub
+libcstub_OUT := $(top_builddir)libcstub
+
+libcstub_SRC := $(wildcard $(libcstub_DIR)/*.c)
+libcstub_OBJ := $(patsubst $(libcstub_DIR)/%.c,$(libcstub_OUT)/%.o,$(libcstub_SRC))
+
+ifeq ($(DOPIC),y)
+libcstub-a-y := $(libcstub_OBJ:.o=.os)
+else
+libcstub-a-y := $(libcstub_OBJ)
+endif
+libcstub-so-y := $(libcstub_OBJ:.o=.os)
+
+libcstub-multi-y := $(libcstub_SRC)
+
+lib-a-y += $(top_builddir)lib/libcstub.a
+lib-so-y += $(top_builddir)lib/libcstub.so
+objclean-y += libcstub_clean
+
+ifeq ($(DOPIC),y)
+$(top_builddir)lib/libcstub.so: $(top_builddir)lib/libcstub.a $(libc)
+else
+$(top_builddir)lib/libcstub.so: $(libcstub_OUT)/libcstub_so.a $(libc)
+endif
+	$(call link.so,$(libcstub_FULL_NAME),$(MAJOR_VERSION))
+
+$(libcstub_OUT)/libcstub_so.a: $(libcstub-so-y)
+	$(Q)$(RM) $@
+	$(do_strip)
+	$(do_ar)
+
+$(top_builddir)lib/libcstub.a: $(libcstub-a-y)
+	$(Q)$(INSTALL) -d $(dir $@)
+	$(Q)$(RM) $@
+	$(do_strip)
+	$(do_ar)
+
+libcstub_clean:
+	$(RM) $(libcstub_OUT)/*.{o,os,a}

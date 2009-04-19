@@ -11,14 +11,9 @@
 #include <sys/types.h>
 
 #undef raise
-int attribute_hidden __raise(int signo)
-{
-    return kill(__getpid(), signo);
-}
+extern int __raise(int signo);
 
-/* psm: keep this weak, because the one in libpthread.so could overwrite it */
-#ifndef __TCS__
-weak_alias(__raise, raise)
-#else
-/*for trimedia, raise is moved to libcstub.a*/
-#endif
+int raise(int signo)
+{
+	return __raise(signo);
+}

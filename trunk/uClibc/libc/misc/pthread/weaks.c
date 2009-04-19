@@ -17,6 +17,9 @@
    write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
    Boston, MA 02111-1307, USA.  */
 
+/*For trimedia, the below functions are moved to libcstub.a*/
+#ifndef __TCS__
+
 #define _GNU_SOURCE
 #include <errno.h>
 #include <limits.h>
@@ -113,28 +116,14 @@ void weak_function pthread_exit (void *retval)
 
 /**********************************************************************/
 /* Weaks used internally by the C library. */
-#ifndef __TCS__
 weak_alias (__pthread_return_0, __pthread_mutex_init)
 weak_alias (__pthread_return_0, __pthread_mutex_lock)
 weak_alias (__pthread_return_0, __pthread_mutex_trylock)
 weak_alias (__pthread_return_0, __pthread_mutex_unlock)
-#else
-int __pthread_mutex_init(void)
-{
-	return __pthread_return_0();
-}
-int __pthread_mutex_lock(void)
-{
-	return __pthread_return_0();
-}
-int __pthread_mutex_trylock(void)
-{
-	return __pthread_return_0();
-}
-int __pthread_mutex_unlock(void)
-{
-	return __pthread_return_0();
-}
 #endif 
 
+int testandset(void* addr)
+{
+	return 0;
+}
 /**********************************************************************/
