@@ -48,9 +48,17 @@ __compare_and_swap (long int *p, long int oldval, long int newval)
 
 /* Get some notion of the current stack.  Need not be exactly the top
    of the stack, just something somewhere in the current frame.  */
-#define CURRENT_STACK_FRAME  (char*)RDREG(4)
+#define CURRENT_STACK_FRAME     ((char*)get_sp())
+
+static inline char* get_sp(void)
+{
+#pragma TCS_atomic
+	return (char*)RDREG(4);
+}
 
 #define THREAD_MANAGER_STACK_SIZE  (2 * PAGE_SIZE - 32)
+
+#define INITIAL_STACK_SIZE  (2 * PAGE_SIZE)
 
 /*
  * FIXME: I don't know how to implement it for trimedia
