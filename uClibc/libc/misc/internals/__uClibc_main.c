@@ -266,6 +266,8 @@ __uClibc_main(int (*main)(int, char **, char **), int argc,
 	__check_one_fd (STDOUT_FILENO, O_RDWR | O_NOFOLLOW);
 	__check_one_fd (STDERR_FILENO, O_RDWR | O_NOFOLLOW);
     }
+#else
+    __pagesize = PAGE_SIZE;
 #endif
 
     __progname = *argv;
