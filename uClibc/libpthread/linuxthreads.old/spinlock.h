@@ -37,10 +37,10 @@
 
 extern int __pthread_has_cas;
 extern int __pthread_compare_and_swap(long * ptr, long oldval, long newval,
-                                      int * spinlock);
+                                      volatile int * spinlock);
 
 static inline int compare_and_swap(long * ptr, long oldval, long newval,
-                                   int * spinlock)
+                                   volatile int * spinlock)
 {
   if (__builtin_expect (__pthread_has_cas, 1))
     return __compare_and_swap(ptr, oldval, newval);
@@ -67,7 +67,7 @@ compare_and_swap_with_release_semantics (long * ptr, long oldval,
 #endif
 
 static inline int compare_and_swap(long * ptr, long oldval, long newval,
-                                   int * spinlock)
+                                   volatile int * spinlock)
 {
   return __compare_and_swap(ptr, oldval, newval);
 }
@@ -75,10 +75,10 @@ static inline int compare_and_swap(long * ptr, long oldval, long newval,
 #else
 
 extern int __pthread_compare_and_swap(long * ptr, long oldval, long newval,
-                                      int * spinlock);
+                                      volatile int * spinlock);
 
 static inline int compare_and_swap(long * ptr, long oldval, long newval,
-                                   int * spinlock)
+                                   volatile int * spinlock)
 {
   return __pthread_compare_and_swap(ptr, oldval, newval, spinlock);
 }

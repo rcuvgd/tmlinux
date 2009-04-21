@@ -323,7 +323,7 @@ pthread_start_thread(void *arg)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
     suspend(self);
@@ -919,7 +919,7 @@ void __pthread_manager_sighandler(int sig)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
     }

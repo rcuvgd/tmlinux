@@ -26,9 +26,9 @@
 #include "spinlock.h"
 #include "restart.h"
 
-static void __pthread_acquire(int * spinlock);
+static void __pthread_acquire(volatile int * spinlock);
 
-static inline void __pthread_release(int * spinlock)
+static inline void __pthread_release(volatile int * spinlock)
 {
   WRITE_MEMORY_BARRIER();
   *spinlock = __LT_SPINLOCK_INIT;
@@ -666,7 +666,7 @@ int __pthread_has_cas = 0;
 #if !defined HAS_COMPARE_AND_SWAP || defined TEST_FOR_COMPARE_AND_SWAP
 
 int __pthread_compare_and_swap(long * ptr, long oldval, long newval,
-                               int * spinlock)
+                               volatile int * spinlock)
 {
   int res;
 
@@ -703,7 +703,7 @@ int __pthread_compare_and_swap(long * ptr, long oldval, long newval,
    - When nanosleep() returns, we try again, doing MAX_SPIN_COUNT
      sched_yield(), then sleeping again if needed. */
 
-static void __pthread_acquire(int * spinlock)
+static void __pthread_acquire(volatile int * spinlock)
 {
   int cnt = 0;
   struct timespec tm;

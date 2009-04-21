@@ -40,13 +40,13 @@ $(G_TARGETS): $(patsubst %_glibc,%.c,$(G_TARGETS))
 $(U_TARGETS):
 	-@ echo "Compiling $@ vs uClibc: "
 	@$(CC) $(CFLAGS) $(CFLAGS_$@) -c $(patsubst %_uclibc,%,$@).c -o $@.o
-	@$(CC) $(LDFLAGS) $@.o -o $@ $(EXTRA_LIBS)
+	$(CC) $(LDFLAGS) $@.o -o $@ $(EXTRA_LIBS)
 	@chmod a+x $@
 
 $(G_TARGETS):
 	-@ echo "Compiling $@ vs glibc: "
 	@$(HOSTCC) $(GLIBC_CFLAGS) $(GLIBC_CFLAGS_$@) -c $(patsubst %_glibc,%,$@).c -o $@.o
-	@$(HOSTCC) $(GLIBC_LDFLAGS) $@.o -o $@ $(EXTRA_LIBS)
+	$(HOSTCC) $(GLIBC_LDFLAGS) $@.o -o $@ $(EXTRA_LIBS)
 
 clean:
 	@$(RM) *.[oa] *~ core $(TARGETS)
