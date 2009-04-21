@@ -122,8 +122,4 @@ weak_alias (__pthread_return_0, __pthread_mutex_trylock)
 weak_alias (__pthread_return_0, __pthread_mutex_unlock)
 #endif 
 
-int testandset(void* addr)
-{
-	return 0;
-}
 /**********************************************************************/

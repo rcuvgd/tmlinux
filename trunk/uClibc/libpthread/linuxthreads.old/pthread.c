@@ -524,7 +524,7 @@ int __pthread_initialize_manager(void)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
   return 0;
@@ -557,7 +557,7 @@ int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
   PDEBUG("before suspend(self)\n");
@@ -692,7 +692,7 @@ static void pthread_onexit_process(int retcode, void *arg)
 		do __result = (long int) (__libc_write(__pthread_manager_request,
 					(char *) &request, sizeof(request)));
 		while (__result == -1L && errno == EINTR);			      
-		__result; 
+		(void)__result; 
 	}
 #endif 
 	suspend(self);
@@ -1087,7 +1087,7 @@ void __pthread_message(char * fmt, ...)
 	  long int __result;						      
 	  do __result = (long int) (__libc_write(2, buffer, strlen(buffer)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
 }

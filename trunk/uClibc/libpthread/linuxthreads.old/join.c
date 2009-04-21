@@ -86,7 +86,7 @@ void pthread_exit(void * retval)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
     suspend(self);
@@ -195,7 +195,7 @@ int pthread_join(pthread_t thread_id, void ** thread_return)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif 
   }
@@ -234,7 +234,7 @@ int pthread_detach(pthread_t thread_id)
     request.req_thread = thread_self();
     request.req_kind = REQ_FREE;
     request.req_args.free.thread_id = thread_id;
-#ifdef __TCS__
+#ifndef __TCS__
     TEMP_FAILURE_RETRY(__libc_write(__pthread_manager_request,
 		(char *) &request, sizeof(request)));
 #else
@@ -243,7 +243,7 @@ int pthread_detach(pthread_t thread_id)
 	  do __result = (long int) (__libc_write(__pthread_manager_request,
 				  (char *) &request, sizeof(request)));
 	  while (__result == -1L && errno == EINTR);			      
-	  __result; 
+	  (void)__result; 
   }
 #endif
   }
