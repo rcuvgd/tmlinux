@@ -33,7 +33,7 @@
 void *
 memalign (size_t alignment, size_t size)
 {
-  void *mem, *base;
+  unsigned char *mem, *base;
   unsigned long tot_addr, tot_end_addr, addr, end_addr;
   struct heap *heap = &__malloc_heap;
 
