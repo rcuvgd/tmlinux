@@ -318,7 +318,7 @@ ifeq ($(TARGET_ARCH),trimedia)
 
 	CPU_CFLAGS-$(CONFIG_PNX1500) += -target pnx1500
 	CPU_CFLAGS-$(CONFIG_PNX1700) += -target pnx1700
-	CPU_CFLAGS-$(CONFIG_PNX1005) += -core tm3282 
+	CPU_CFLAGS-$(CONFIG_PNX1005) += -target pnx1005 
 	CPU_CFLAGS-$(CONFIG_TTISIM)  += -host ttisim
 	CPU_CFLAGS-$(CONFIG_NOHOST)  += -host nohost
 	CPU_CFLAGS-$(CONFIG_WINNT)   += -host winnt
