@@ -150,4 +150,4 @@ make install
 
 After installing uClibc, it is the time to deliver sysroots to application developers:
 For how to build applications, please refer ApplicationDeveloperGettingStart;
-For how to build busybox, please refer BusyboxBuildingGuide.
+For how to build busybox, please refer BusyboxGuide.
