@@ -1,4 +1,6 @@
 #labels Featured
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
 This page describes how to compile the whole platform of tmlinux (includding linux kernel, uclibc and so on) and how to populate sysroot for application developer.
@@ -55,12 +57,9 @@ Fatal error: exception Errormsg.Error
 
 ==Build Linux Kernel==
 ===1. checkout Linux kernel of tmlinux===
-*Note that:*
-Due to the limit of max upload size of google code, I put the Linux kernel of tmlinux to [http://www.gulessoft.com/en/compay/contribution/125.html gulessoft official site] and will move to this project site as soon as google increase the limit.
-
 Download Linux kernel of tmlinux using the following command: (DO NOT forget to verify it using md5sum)
 {{{
-wget -c http://www.gulessoft.com/download/tmlinux/linux-2.6.14-tmlinux-1.0.tar.bz2 
+wget -c http://tmlinux.googlecode.com/files/linux-2.6.14-tmlinux-1.0.tar.bz2 
 }}}
 
 Unpack the Linux kernel
@@ -70,11 +69,19 @@ mv linux-2.6.14-tmlinux-1.0 linux
 }}}
 
 ===2. Configure Linux kernel===
-*Note that:* Because of lacking storage device, I have to put the root filesystem into RAM using *initramfs* mechanism. So you have to arrange the root filesystem correctly, or else the kernel image can not load the `init` program as you want. About more details of initramfs, please refer the files in *_Documentation/early-userspace/_* of linux kernel source distribution.
-
 First configure the linux kernel using default configuration files by the following command (at *_/home/guohr/worktest/linux/_* directory).
+
+*To compile kernel for PNX1500 simulator*
 {{{
-make ttisim_defconfig
+make sim1500_defconfig
+}}}
+*To compile kernel for PNX1005 simulator*
+{{{
+make sim1005_defconfig
+}}}
+*To compile kernel for MBE1500*
+{{{
+make mbe1500_defconfig
 }}}
 
 Then adjust the configuration if necessary by the following command
@@ -82,25 +89,13 @@ Then adjust the configuration if necessary by the following command
 make menuconfig
 }}}
 
-====Some important configuration options you may need to adjust====
-*Options about initramfs:* In most time, you have to adjust the `General setup -> Initramfs source file` to populate your root filesystem. Please refer ApplicationDeveloperGettingStart `Arrange target root file system and create initramfs cpio file` for detail information.
-
-*Options about dynamically loading application:* To enable dynamically loading application, you must enable `Boot options -> Enable Load applications dynamically`.
-
 ===3. Build Linux kernel===
 To build linux kernel image, use the following command at *_/home/guohr/worktest/linux_*:
 {{{
 make
 }}}
 
-After building kernel, the `TMLinux-pnx1500-ttisim-fp64-el.out` at _/home/guohr/worktest/linux/arch/trimedia/boot/_ is the executable Linux kernel image and the initramfs is built into it.
-
-To run Linux kernel, use the following command:
-{{{
-ttisim -ms 67108864 arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out
-}}}
-
-*Note about memory size:* By default, the memory size of ttisim is 64M and the memory size  for Linux kernel is 56M. You can change the ttisim memory size when running kernel by changing the argument of `-ms` option. You can change the memory size for linux kernel by setting `Boot options -> System memory size(Mbytes)`.
+After building kernel, the `TMLinux-pnx1500-*-el.out` at _/home/guohr/worktest/linux/arch/trimedia/boot/_ is the executable Linux kernel image.
 
 ==Build uClibc and generate sysroot==
 ===1. Checkout sysroots and uClibc===
@@ -111,9 +106,9 @@ svn checkout http://tmlinux.googlecode.com/svn/trunk/uClibc
 }}}
 
 ===2. Setup TCS for tmlinux build environment===
-To create the whole TCS environment for building tmlinux uClibc and applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* and then use the following command:
+To create the whole TCS environment for building tmlinux uClibc and applications, you need to goto *_sysroots/sysroots/tcs/5.1.0_* and then use the following command:
 {{{
-cd /home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
+cd /home/guohr/worktest/sysroots/tcs/5.1.0
 TCS=/opt/NXP/TCS510 ./creat-tcs.sh
 }}}
 Please set TCS using your TCS installation path (In the above example, it is *_/opt/NXP/TCS510_*).
@@ -128,7 +123,7 @@ make menuconfig
 {{{
 Target Architecture Features and Options -> tmcc compiler include search path
 }}}
-In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_*
+In this example, it is *_/home/guohr/worktest/sysroots/tcs/5.1.0_*
 
 ====Linux location====
 {{{
@@ -140,11 +135,11 @@ In this example, it is *_/home/guohr/worktest/linux_*
 {{{
 Libary Installation Options -> uClibc runtime library directory
 }}}
-In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot_*.
+for pnx1500 simulator, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot_*; for pnx1005 simulator, it is *_/home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/sysroot_*; for pnx1500 standalone board, it is *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/sysroot_*;
 {{{
 Libary Installation Options -> uClibc development environment directory
 }}}
-In this example, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot/usr/_*
+for pnx1500 simulator, it is *_/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/sysroot/usr_*; for pnx1005 simulator, it is *_/home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/sysroot/usr_*; for pnx1500 standalone board, it is *_/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/sysroot/usr_*;
 
 Build and install uClibc using the following commands:
 {{{
