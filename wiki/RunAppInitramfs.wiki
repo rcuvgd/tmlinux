@@ -1,3 +1,9 @@
+=Introduction=
+
+This page describes how to run tmlinux application on initramfs filesystem. 
+
+=Details==
+
 You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
  * put your binary applications into the target root file system.
  * convert the target root file system to initramfs cpio file.
