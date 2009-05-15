@@ -1,4 +1,7 @@
 #summary One-sentence summary of this page.
 
-||         || NIC              ||  IDE controller                       ||  UART controller ||  test ||
-|| mbe1500 || lan100/rtl8139   ||  PCIXIO IDE (harddisk and DVD reader) ||  MOSCHIP 8270 || LTP syscalls ||
+MBE1500
+
+|| NIC     ||  PCI controller || IDE controller     ||  UART controller ||  test        ||
+|| rtl8139 ||  On chip ||  On chip PCIXIO IDE ||  MOSCHIP 8270    || LTP syscalls ||
+|| lan100  ||                 ||    ||                  ||              ||
