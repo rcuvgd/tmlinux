@@ -173,5 +173,26 @@ sudo /home/guohr/workdir/tmlinux/filesystem/fs-install
 Now the basic files should be installed into the target root filesystem (*_/home/guohr/workdir/tmlinux/export_*)
 
 ===2. Install busybox for the filesystem===
+BusyBox combines tiny versions of many common UNIX utilities into a single small executable. It is optional for the target root filesystem, but you are well advised to install it into target root fs.
+To Build it, please refer BusyboxGuide. To install it, you need to set
+{{{
+Busybox Settings -> Installation Options -> Busybox installation prefix
+}}}
+to the target root filesystem directory, in the above example, it is *_/home/guohr/workdir/tmlinux/export_*. And then type *make install*.
 
 ===3. pack the target root filesystem and deliver it to application developer===
+After install your software package for the target root filesystem, it is the time to deliver it to application developers, so that they can boot the whole linux system using it. 
+
+To pack the target root filesystem, please use the following commands:
+{{{
+tar -C /home/guohr/workdir/tmlinux/export -cpf - . | bzip2 -9f > trimedia-uclibc_small-small-dist.tar.bz2
+}}}
+Above, the *_/home/guohr/workdir/tmlinux/export_* is the target root filesystem directory, the *_trimedia-uclibc_small-small-dist.tar.bz2_* contains the whole target root fs.
+
+The application developers should unpack it using the following commands:
+{{{
+tar xvfjp trimedia-uclibc_small-small-dist.tar.bz2 -C /home/guohr/export 
+}}}
+Above, the *_/home/guohr/export_* is the directory which contains the target root filesystem content.
+
+For more information about booting linux on trimedia, please refer BootingLinuxOnTriMedia.
