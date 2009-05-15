@@ -1,0 +1,110 @@
+You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
+ * put your binary applications into the target root file system.
+ * convert the target root file system to initramfs cpio file.
+ * Build your Linux kernel with this initramfs cpio file embedded.
+
+  === 1. Install cil (C intermedia language) ===
+
+  Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
+  {{{
+./configure
+make world
+make opt
+make install
+  }}}
+
+  Before building Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
+  
+  Use the following command to check it out and compile, setup it.
+  {{{
+svn checkout http://tmlinux.googlecode.com/svn/trunk/cil
+cd cil/
+./configure
+make  
+export PATH=$PATH:/home/guohr/worktest/cil/obj/x86_LINUX/
+  }}}
+
+  To validate the environment, type the following command and you will get the following message:
+{{{
+guohr@ghr-notebook-01:~/worktest/cil> cilly.asm.exe
+
+Error: No arguments for CIL
+
+Fatal error: exception Errormsg.Error
+}}}
+
+  === 2. Arrange target root file system and create initramfs cpio file ===
+
+  To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 (for building pnx1500 applications) or http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-pnx1005-20081104-01.tar.bz2 (for building pnx1005 applications), and then unpack it.
+  
+  If you want to build pnx1500 applications, in most cases, you do not need to download [http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 tmlinux-kernel-obj-lastest.tar.bz2], you can get it from the platform developers or build it yourself. For how to build it, please refer PlatformDeveloperGettingStart
+
+  Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
+  E.g:
+{{{
+mkdir export
+cp app-test/hello.out ./export/init -fr
+}}}
+  Do not forget to assign runnable permission to the binary applications
+{{{
+chmod a+x ./export/init
+}}}
+
+  Because regular users can not make device node files and the basic target root filesystem needs them, I suggest that you write a initramfs list file (in this example, it is named *_initramfs_list_* and located at *_/home/guohr/worktest directory_*) which contains the device node files information:
+{{{
+# This is a very simple, default initramfs
+
+dir /dev 0755 0 0
+nod /dev/console 0600 0 0 c 5 1
+nod /dev/zero 0600 0 0 c 1 5
+dir /root 0700 0 0
+}}}
+ 
+  Now change to *_linux-obj_* directory at the work directory. And use `make menuconfig` to change the *CONFIG_INITRAMFS_SOURCE* option.
+{{{
+cd linux-obj
+make menuconfig
+select "General setup -> Initramfs source file(s)"
+set "/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
+save and quite
+}}}
+  while `/home/guohr/worktest/initramfs_list` is the full path of that initramfs list file and `/home/guohr/worktest/export` is the target root directory in which contains your applications.
+
+  Tips: you can edit *.config* file located at linux-obj directly. Just set
+{{{
+CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
+}}}
+  and then save and quite.
+
+  === 3. Build Linux kernel image ===
+
+  At *_linux-obj_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
+{{{
+guohr@ghr-notebook-01:~/worktest/linux-obj$ make
+  CHK     include/linux/version.h
+  GEN     include/asm-trimedia/asm-offsets.h
+  CHK     include/linux/compile.h
+  CHK     usr/initramfs_list
+  GEN     usr/initramfs_data.h
+  GEN     usr/initramfs_len.h
+  CC      usr/initramfs_data.o
+  LD      usr/built-in.o
+  GEN     .version
+  CHK     include/linux/compile.h
+  UPD     include/linux/compile.h
+  CC      init/version.o
+  LD      init/built-in.o
+  LD      vmlinux
+  SYSMAP  System.map
+}}}
+
+  If success, the Linux image is `arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out`
+
+  === 4. Run this Linux system and see your application running ===
+
+  Congratulations, you now get the runnable Linux image, at shell, type `./run.sh` to run it.
+
+  The information below traces the tasks switching track. the `(1)` is the previous task process ID and the `(13)` is the next task process ID. It tells you that Linux kernel switch from `task(1)` to `task(13)`. 
+{{{
+switch_to: from (1) to (13)
+}}}
