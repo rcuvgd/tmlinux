@@ -2,8 +2,6 @@
 
 This page describes how to build busybox for tmlinux. To completely understand this how to, please read ApplicationDeveloperGettingStart first.
 
-*Note that:* This howto just decribes how to build busybox, I have not fully tested it on ttisim.
-
 = Details =
 
 == 1. Checkout busybox==
