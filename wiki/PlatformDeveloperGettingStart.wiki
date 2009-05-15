@@ -151,3 +151,18 @@ make install
 After installing uClibc, it is the time to deliver sysroots to application developers:
 For how to build applications, please refer ApplicationDeveloperGettingStart;
 For how to build busybox, please refer BusyboxGuide.
+
+==Generate target root filesystem==
+The target root filesystem is formed by a set of basic files (device node files and system configuration files) and lots of optional software package. This section describes how to form the target root filesystem for tmlinux.
+
+===1. Install the basic files for the filesystem===
+In SVN repository, there is a package call *filesystem*, which contains the basic files for target root filesystem of tmlinux. 
+
+First, check it out from svn:
+{{{
+svn co https://tmlinux.googlecode.com/svn/trunk/filesystem
+}}}
+
+===2. Install busybox for the filesystem===
+
+===3. pack the target root filesystem and deliver it to application developer===
