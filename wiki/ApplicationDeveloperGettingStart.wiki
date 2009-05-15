@@ -1,7 +1,7 @@
 #labels Featured
 = Introduction =
 
-  This page describes how to compile your applications and run them on tmlinux.
+  This page describes how to compile your applications and run them on tmlinux. For more details on application development, please refer AppliacationDevelopmentNote.
 
 
 = Details =
@@ -22,16 +22,28 @@ svn checkout http://tmlinux.googlecode.com/svn/trunk/sysroots/
   === 3. Setup application building environment.===
   Make sure the TCS tools(such as tmcc, tmld) in the PATH environment and the compiler for your application building in the PATH environment.
 
-*For PNX1500:*
+*For PNX1500 Simulator:*
     {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/x86-linux2/
   }}}
 
-*For PNX1005*:
+*For PNX1500 standalone board (e.g: MBE1500 board):*
+    {{{
+export PATH=$PATH:/opt/NXP/TCS510/bin/
+export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1500_nohost_uclibc/x86-linux2/
+  }}}
+
+*For PNX1005 Simulator*:
     {{{
 export PATH=$PATH:/opt/NXP/TCS510/bin/
 export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/x86-linux2/
+  }}}
+
+*For PNX1005 standalone board*:
+    {{{
+export PATH=$PATH:/opt/NXP/TCS510/bin/
+export PATH=$PATH:/home/guohr/worktest/sysroots/pnx1005_nohost_uclibc/x86-linux2/
   }}}
   
   To validate the environment, at shell, use the following command, the result will like this:
