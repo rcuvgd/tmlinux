@@ -1,4 +1,6 @@
 #labels Featured
+<wiki:toc max_depth="3" />
+
 = Introduction =
 
   This page describes how to compile your applications and run them on tmlinux. For more details on application development, please refer ApplicationDevelopmentNote.
@@ -78,11 +80,11 @@ TCS=/opt/NXP/TCS510 ./creat-tcs.sh
 
 ==Build your application:==  
   === 1. Note about tmlinux applications ===
-  Now, you can compile your exist application, but before compiling them, please note that:
-  * INPUT/OUTPUT FUNCTIONS CANNOT WORK
-  Until now, tmlinux can only run on trimedia simulator. In another words, it can not run on any real boards. Because of lacking real output devices, this linux kernel directs stdout/stderr to /dev/null, which means that these output functions (such as `printf()`, `puts()`) will output nothing. Because of lacking real input devices, this linux kernel will wait forever when application calls input functions (such as `gets()`, `getchar()`)
+  Now, you can compile your exist application. BUT if you run tmlinux system on *simulator*, then before compiling them, please note that:
+  * ON SIMULATOR INPUT/OUTPUT FUNCTIONS CANNOT WORK
+  Because of lacking real output devices on simulator, this linux kernel directs stdout/stderr to /dev/null, which means that these output functions (such as `printf()`, `puts()`) will output nothing. Because of lacking real input devices, this linux kernel will wait forever when application calls input functions (such as `gets()`, `getchar()`)
 
-  * WITHOUT `PRINTF()`, HOW CAN I SEE APPLICATION RUNNING
+  * ON SIMULATOR WITHOUT `PRINTF()`, HOW CAN I SEE APPLICATION RUNNING
   As I said before, tmlinux's `printf()` just output information to /dev/null. To see application running, I use *TCS*'s `printf()` instead of tmlinux's `printf()`. So, in the following code,
 {{{
 #include <stdio.h>
