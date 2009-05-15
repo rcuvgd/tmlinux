@@ -1,0 +1,136 @@
+#!/bin/sh
+#
+#	$Id: fs-install,v 1.5.10.1 2007/02/08 04:26:34 yshi Exp $
+#
+# Start common/fs/fs-install script
+#
+# We get $top_srcdir and $top_builddir from the environment
+#
+# We are cd'ed to the filesystem/INSTALL_STAGE directory when called so
+# we need to use relative PATHs
+#
+# Install Empty directories
+#
+install -d -m 0755 dev dev/pts dev/shm var/log var/run mnt/relay sys
+
+#
+# Install Empty files
+#
+
+#
+# Initial kernel entropy pool.  In a newly booted system, the kernel's entropy
+# pool is in a predictable state, and generating OpenSSH keys will rapidly
+# deplete this pool (and thus key generation will take a long time).
+#
+echo "Generating initial entropy pool ..."
+if install -d -m 0755 var/lib; then
+   if test -c /dev/urandom; then
+      dd if=/dev/urandom of=var/lib/random-seed count=1 bs=512
+   else
+      touch var/lib/random-seed
+   fi
+   if test -f var/random-seed; then
+      chmod 0600 var/lib/random-seed
+   fi
+fi
+#
+# Make any device nodes needed here
+#
+# This is the list that the Linux MAKEDEV man page says is the minimum
+#
+mknod -m 0666 dev/mem c 1 1
+
+mknod -m 0644 dev/kmem c 1 2
+
+mknod -m 0666 dev/null c 1 3
+
+mknod -m 0666 dev/port c 1 4
+
+mknod -m 0666 dev/zero c 1 5
+
+mknod -m 0600 dev/core c 1 6
+
+mknod -m 0666 dev/full c 1 7
+chown 0.0 dev/full
+
+mknod -m 0666 dev/random c 1 8
+chown 0.0 dev/random
+
+mknod -m 0444 dev/urandom c 1 9
+chown 0.0 dev/urandom
+
+mknod -m 0666 dev/ram b 1 1
+chown 0.6 dev/ram
+mknod -m 0666 dev/ram0 b 1 0
+chown 0.6 dev/ram0
+mknod -m 0666 dev/ram1 b 1 1
+chown 0.6 dev/ram1
+
+mknod -m 0666 dev/tty c 5 0
+chown 0:5 dev/tty
+
+mknod -m 0666 dev/console c 5 1
+
+mknod -m 0666 dev/ptmx c 5 2
+chown 0:5 dev/ptmx
+
+mknod -m 0666 dev/mixer c 14 0
+chown 0:5 dev/mixer
+
+mknod -m 0666 dev/dsp c 14 3
+chown 0:5 dev/dsp
+
+mknod -m 0640 dev/hda b 3 0
+chown 0.6 dev/hda
+mknod -m 0640 dev/hda1 b 3 1
+chown 0.6 dev/hda1
+mknod -m 0640 dev/hda2 b 3 2
+chown 0.6 dev/hda2
+mknod -m 0640 dev/hda3 b 3 3
+chown 0.6 dev/hda3
+mknod -m 0640 dev/hda4 b 3 4
+chown 0.6 dev/hda4
+mknod -m 0640 dev/hda5 b 3 5
+chown 0.6 dev/hda5
+mknod -m 0640 dev/hda6 b 3 6
+chown 0.6 dev/hda6
+mknod -m 0640 dev/hda7 b 3 7
+chown 0.6 dev/hda7
+mknod -m 0640 dev/hda8 b 3 8
+chown 0.6 dev/hda8
+mknod -m 0640 dev/hdb b 3 64
+chown 0.6 dev/hdb
+mknod -m 0640 dev/hdb1 b 3 65
+chown 0.6 dev/hdb1
+mknod -m 0640 dev/hdb2 b 3 66
+chown 0.6 dev/hdb2
+mknod -m 0640 dev/hdb3 b 3 67
+chown 0.6 dev/hdb3 
+mknod -m 0640 dev/hdb4 b 3 68
+chown 0.6 dev/hdb4
+mknod -m 0640 dev/hdb5 b 3 69
+chown 0.6 dev/hdb5
+mknod -m 0640 dev/hdb6 b 3 70
+chown 0.6 dev/hdb6
+mknod -m 0640 dev/hdb7 b 3 71
+chown 0.6 dev/hdb7
+mknod -m 0640 dev/hdb8 b 3 72
+chown 0.6 dev/hdb8
+
+# Set permissions of any files that need it here
+#
+# You should always verify the existence of a file from the fs tree before
+# manipulating it because subsequent templates could have removed it before
+# this script gets run.
+#
+if test -f etc/gshadow; then
+   chown 0.0 etc/gshadow
+   chmod 0400 etc/gshadow
+fi
+if test -f etc/shadow; then
+   chown 0.0 etc/shadow
+   chmod 0400 etc/shadow
+fi
+#
+# End common/fs/fs-install script
+#
