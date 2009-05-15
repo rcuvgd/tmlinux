@@ -195,4 +195,6 @@ tar xvfjp trimedia-uclibc_small-small-dist.tar.bz2 -C /home/guohr/export
 }}}
 Above, the *_/home/guohr/export_* is the directory which contains the target root filesystem content.
 
+=references=
+
 For more information about booting linux on trimedia, please refer BootingLinuxOnTriMedia.
