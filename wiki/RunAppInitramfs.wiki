@@ -3,49 +3,15 @@
 This page describes how to run tmlinux application on initramfs filesystem. 
 
 =Details==
+To run tmlinux application on initramfs filesystem, you are advised to read PlatformDeveloperGettingStart first, for you need the linux kernel build evironment. To run it, you need to:
+ # put your binary applications into the target root file system.
+ # convert the target root file system to initramfs cpio file.
+ # Build your Linux kernel with this initramfs cpio file embedded.
 
-You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
- * put your binary applications into the target root file system.
- * convert the target root file system to initramfs cpio file.
- * Build your Linux kernel with this initramfs cpio file embedded.
+=== 1. Arrange target root file system and create initramfs cpio file ===
+Before running tmlinux applications on initramfs, you need to build linux kernel yourself. For how to build it, please refer PlatformDeveloperGettingStart
 
-  === 1. Install cil (C intermedia language) ===
-
-  Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
-  {{{
-./configure
-make world
-make opt
-make install
-  }}}
-
-  Before building Linux kernel image, you need to setup and install cil in your Linux machine, which is used to process GNU C extension options when compiling Linux kernel.
-  
-  Use the following command to check it out and compile, setup it.
-  {{{
-svn checkout http://tmlinux.googlecode.com/svn/trunk/cil
-cd cil/
-./configure
-make  
-export PATH=$PATH:/home/guohr/worktest/cil/obj/x86_LINUX/
-  }}}
-
-  To validate the environment, type the following command and you will get the following message:
-{{{
-guohr@ghr-notebook-01:~/worktest/cil> cilly.asm.exe
-
-Error: No arguments for CIL
-
-Fatal error: exception Errormsg.Error
-}}}
-
-  === 2. Arrange target root file system and create initramfs cpio file ===
-
-  To build your Linux system(kernel and target root file system), you need to download the tmlinux kernel object files from http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 (for building pnx1500 applications) or http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-pnx1005-20081104-01.tar.bz2 (for building pnx1005 applications), and then unpack it.
-  
-  If you want to build pnx1500 applications, in most cases, you do not need to download [http://tmlinux.googlecode.com/files/tmlinux-kernel-obj-latest.tar.bz2 tmlinux-kernel-obj-lastest.tar.bz2], you can get it from the platform developers or build it yourself. For how to build it, please refer PlatformDeveloperGettingStart
-
-  Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
+Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
   E.g:
 {{{
 mkdir export
@@ -82,7 +48,7 @@ CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktes
 }}}
   and then save and quite.
 
-  === 3. Build Linux kernel image ===
+=== 2. Build Linux kernel image ===
 
   At *_linux-obj_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
 {{{
@@ -104,11 +70,11 @@ guohr@ghr-notebook-01:~/worktest/linux-obj$ make
   SYSMAP  System.map
 }}}
 
-  If success, the Linux image is `arch/trimedia/boot/TMLinux-pnx1500-ttisim-fp64-el.out`
+  If success, the Linux image is `arch/trimedia/boot/TMLinux-*-fp64-el.out`
 
-  === 4. Run this Linux system and see your application running ===
+=== 3. Run this Linux system and see your application running ===
 
-  Congratulations, you now get the runnable Linux image, at shell, type `./run.sh` to run it.
+  Congratulations, you now get the runnable Linux image. ON real hardware board, you just need to download it into the board and run it. On simulator, at shell, type `./run.sh` to run it.
 
   The information below traces the tasks switching track. the `(1)` is the previous task process ID and the `(13)` is the next task process ID. It tells you that Linux kernel switch from `task(1)` to `task(13)`. 
 {{{
