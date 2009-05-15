@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+#	$Id: rcS,v 1.4 2006/04/26 18:53:32 rmagee Exp $
+#
+# This is a minmal rcS files that just prints out a Welcome message.
+
+# Make sure that /proc is mounted.
+mount -a
+
+# Assign an address to the loopback device.
+ifconfig lo 127.0.0.1 up
+
+sleep 1
+
+echo "Welcome to tmlinux"
+
+exit 0
