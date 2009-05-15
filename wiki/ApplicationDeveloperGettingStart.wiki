@@ -1,7 +1,7 @@
 #labels Featured
 = Introduction =
 
-  This page describes how to compile your applications and run them on tmlinux. For more details on application development, please refer AppliacationDevelopmentNote.
+  This page describes how to compile your applications and run them on tmlinux. For more details on application development, please refer ApplicationDevelopmentNote.
 
 
 = Details =
@@ -69,14 +69,8 @@ tmcc warning : no work
 
   === 4. Create TCS environment for building your applications.===
   To create the whole TCS environment for building tmlinux applications, you need to goto *_sysroots/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0_* (for building pnx1500 application) or *_sysroots/sysroots/pnx1005_ttisim_uclibc/tcs/5.1.0_* (for building pnx1005 application) and then use the following command:
-*For PNX1500:*
   {{{
-cd /home/guohr/worktest/sysroots/pnx1500_ttisim_uclibc/tcs/5.1.0
-TCS=/opt/NXP/TCS510 ./creat-tcs.sh
-  }}}
-*For PNX1005:*
-  {{{
-cd /home/guohr/worktest/sysroots/pnx1005_ttisim_uclibc/tcs/5.1.0
+cd /home/guohr/worktest/sysroots/tcs/5.1.0
 TCS=/opt/NXP/TCS510 ./creat-tcs.sh
   }}}
 
