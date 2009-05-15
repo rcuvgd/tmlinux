@@ -123,7 +123,9 @@ make
   Please see TmlinuxAppExample for examples.
   
 == Run your applications==
-  You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
+   Now you can put your binary applications into the target root file system and run it. For trimedia simulator, tmlinux only supports initramfs file system, please refer RunAppInitramfs to get to know how to run it. For trimedia standalone hardware board (e.g: MBE1500), tmlinux supports lots of file systems, e.g: ext2 (based on harddisk), NFS. But you need to configure linux kernel properly before running application.
+
+You have got your binary applications and you are eager to run your applications and see their output result. But please wait, you have just got binary applications but not linux kernel. Now, your need to 
  * put your binary applications into the target root file system.
  * convert the target root file system to initramfs cpio file.
  * Build your Linux kernel with this initramfs cpio file embedded.
