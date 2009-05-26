@@ -9,15 +9,21 @@ This page describes how to compile the whole platform of tmlinux (includding lin
 
 ==Preparation==
 ===0. Environment setup==
-In the following section, let's suppose the workdir is _*/home/guohr/worktest*_ and the TCS installation directory is _*/opt/NXP/TCS510*_
+In the following section, let's suppose:
+# the workdir is _*/home/guohr/worktest*_;
+# the TCS installation directory is _*/opt/NXP/TCS520*_;
+# the NDK installation directory is _*/opt/NXP/NDK6.0/*_;
  
 ===1. Get and Install TCS Linux edition===
 First of all, you should install TCS Linux edition on your Linux machines. Please goto [http://www.tcshelp.com] to get it. Of course, you should have the license for it. 
-In the following section, let's suppose the installation directory of your TCS is _*/opt/NXP/TCS510/*_
+In the following section, let's suppose the installation directory of your TCS is _*/opt/NXP/TCS520/*_
+
+*Note that*<br>
+To run tmlinux on mbe1500 board or pnx1500 simulator, you need TCS 5.10 or above; to run tmlinux on pnx1005 simulator, you need TCS 5.20 or above.
 
 To make sure the TCS tools(such as tmcc, tmld) are in the PATH environment
   {{{
-export PATH=$PATH:/opt/NXP/TCS510/bin/
+export PATH=$PATH:/opt/NXP/TCS520/bin/
   }}}
   {{{
 guohr@ghr-notebook-02:~/worktest> tmcc -V
@@ -25,8 +31,14 @@ tmcc: V7.1.0 of TCS V5.1(0042rc6_Linux)
 tmcc warning : no work
   }}}
 
+===2. Get and install NDK edition===
+Then, you should install NDK on your windows machine. And then pack the whole NDK directory and copy it to your linux machine (work machine of tmlinux). On your linux machine, unpack it to _*/opt/NXP/NDK6.0*_. <br>
+If you don't have NDK, please goto [http://www.tcshelp.com] to get it. 
 
-===2. Install CIL (C intermedia language)===
+*Note that*<br>
+To run tmlinux on mbe1500 board or pnx1500 simulator, you need NDK 5.8 or above; to run tmlinux on pnx1005 simulator, you need NDK 6.0 or above.
+
+===3. Install CIL (C intermedia language)===
 Note that: before continuing, you need to make sure you have installed OCaml language compiler. OCaml can be downloaded from http://caml.inria.fr/ocaml/. After downloading and unpacking the source distribution, in the ocaml directory, do:
   {{{
 ./configure
@@ -56,17 +68,20 @@ Fatal error: exception Errormsg.Error
 }}}
 
 ==Build Linux Kernel==
-===1. checkout Linux kernel of tmlinux===
-Download Linux kernel of tmlinux using the following command: (DO NOT forget to verify it using md5sum)
+===1. checkout Linux kernel of tmlinux and setup environment===
+checkout Linux kernel of tmlinux using the following command (at *_/home/guohr/worktest/_*): 
 {{{
-wget -c http://tmlinux.googlecode.com/files/linux-2.6.14-tmlinux-1.0.tar.bz2 
+git clone git://github.com/camelguo/linux-2.6-trimedia.git linux
 }}}
 
-Unpack the Linux kernel
+and run setup.sh to setup the compilation enviroment using the following commands:
 {{{
-tar xvfjp linux-2.6.14-tmlinux-1.0.tar.bz2
-mv linux-2.6.14-tmlinux-1.0 linux
+cd /home/guohr/worktest/linux/
+export NDK=/opt/NDK/NDK6.0/
+./setup.sh
 }}}
+
+the evironment NDK should be set to your NDK directory.
 
 ===2. Configure Linux kernel===
 First configure the linux kernel using default configuration files by the following command (at *_/home/guohr/worktest/linux/_* directory).
