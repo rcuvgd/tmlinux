@@ -77,7 +77,7 @@ git clone git://github.com/camelguo/linux-2.6-trimedia.git linux
 and run setup.sh to setup the compilation enviroment using the following commands:
 {{{
 cd /home/guohr/worktest/linux/
-export NDK=/opt/NDK/NDK6.0/
+export NDK=/opt/NXP/NDK6.0/
 ./setup.sh
 }}}
 
