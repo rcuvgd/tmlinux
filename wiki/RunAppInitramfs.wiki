@@ -52,7 +52,7 @@ CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktes
 
   At *_/home/guohr/worktest/linux_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
 {{{
-guohr@ghr-notebook-01:~/worktest/linux-obj$ make
+guohr@ghr-notebook-01:~/worktest/linux$ make
   CHK     include/linux/version.h
   GEN     include/asm-trimedia/asm-offsets.h
   CHK     include/linux/compile.h
