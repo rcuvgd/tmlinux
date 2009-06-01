@@ -9,7 +9,7 @@ To run tmlinux application on initramfs filesystem, you are advised to read Plat
  # Build your Linux kernel with this initramfs cpio file embedded.
 
 === 1. Arrange target root file system and create initramfs cpio file ===
-Before running tmlinux applications on initramfs, you need to build linux kernel yourself. For how to build it, please refer PlatformDeveloperGettingStart
+Before running tmlinux applications on initramfs, you need to build linux kernel yourself. For how to build it, please refer PlatformDeveloperGettingStart. In this page, let's suppose the linux build directory is *_/home/guohr/worktest/linux_* which is usually the directory of your linux kernel source tree.
 
 Now make a directory as the target root filesystem directory (suppose it is *_/home/guohr/worktest/export_*). The kernel of tmlinux will load its first application, which name is *_init_* and located at the target root directory. So you need to copy the application you want to run to the target root directory and rename it to *_init_*.
   E.g:
@@ -32,9 +32,9 @@ nod /dev/zero 0600 0 0 c 1 5
 dir /root 0700 0 0
 }}}
  
-  Now change to *_linux-obj_* directory at the work directory. And use `make menuconfig` to change the *CONFIG_INITRAMFS_SOURCE* option.
+  Now change to *_/home/guohr/worktest/linux_* directory at the work directory. And use `make menuconfig` to change the *CONFIG_INITRAMFS_SOURCE* option.
 {{{
-cd linux-obj
+cd /home/guohr/worktest/linux
 make menuconfig
 select "General setup -> Initramfs source file(s)"
 set "/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
@@ -42,7 +42,7 @@ save and quite
 }}}
   while `/home/guohr/worktest/initramfs_list` is the full path of that initramfs list file and `/home/guohr/worktest/export` is the target root directory in which contains your applications.
 
-  Tips: you can edit *.config* file located at linux-obj directly. Just set
+  Tips: you can edit *.config* file located at *_/home/guohr/worktest/linux_* directly. Just set
 {{{
 CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktest/export"
 }}}
@@ -50,7 +50,7 @@ CONFIG_INITRAMFS_SOURCE="/home/guohr/worktest/initramfs_list /home/guohr/worktes
 
 === 2. Build Linux kernel image ===
 
-  At *_linux-obj_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
+  At *_/home/guohr/worktest/linux_* directory, type `make` and you will get the linux runnable image with target root file system embedded.
 {{{
 guohr@ghr-notebook-01:~/worktest/linux-obj$ make
   CHK     include/linux/version.h
