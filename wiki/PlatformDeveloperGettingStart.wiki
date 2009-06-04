@@ -181,9 +181,15 @@ svn co http://tmlinux.googlecode.com/svn/trunk/filesystem
 Second, install it to the target root filesystem directory (Let suppose the directory *_/home/guohr/workdir/tmlinux/export_* contains the whole content of the target root filesystem):
 {{{
 mkdir /home/guohr/workdir/tmlinux/export/
-cd /home/guohr/workdir/tmlinux/export/
-sudo /home/guohr/workdir/tmlinux/filesystem/fs-install
+cd /home/guohr/workdir/tmlinux/filesystem/
+vi Makefile
 }}}
+
+And then, set *_TARGET_ROOTFS=/home/guohr/workdir/tmlinux/export/_*. At directory *_/home/guohr/workdir/tmlinux/filesystem/_*
+{{{
+make
+}}}
+
 
 Now the basic files should be installed into the target root filesystem (*_/home/guohr/workdir/tmlinux/export_*)
 
