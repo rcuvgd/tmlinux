@@ -68,3 +68,16 @@ copy test script to target root filesystem
 {{{
 cp runltpmsh.sh /home/guohr/workdir/tmlinux/export/opt/ltp-base/
 }}}
+
+==5. execute LTP==
+Now boot up trimedia machine. 
+
+Before run LTP testcases, you need to tell *runltpmsh.sh* which testcase set you want to execute. To do that, you need to set *CMDFILE* in *runltpmsh.sh*. For example, you want to run testcases in syscalls01, you should set *CMDFILE="syscalls01"*
+
+To execute ltp, at your trimedia machine's console
+{{{
+cd /opt/ltp-base/
+./runltpmsh.sh
+}}}
+
+the raw testresult will print on the screen,  and test result file will be located at /*tmp/ltp-$(pid)/* directory.
