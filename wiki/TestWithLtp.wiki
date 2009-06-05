@@ -1,5 +1,3 @@
-# This page describes how to test tmlinux using ltp.
-
 = Introduction =
 
 This page describes how to test tmlinux using LTP. The Linux™ Test Project (LTP) is a joint project started by SGI™ and maintained by IBM®, that has a goal to deliver test suites to the open source community that validate the reliability, robustness, and stability of Linux. The LTP testsuite contains a collection of tools for testing the Linux kernel and related features. For more information, please goto http://ltp.sourceforge.net
