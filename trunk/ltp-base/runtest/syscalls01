@@ -1,0 +1,303 @@
+#DESCRIPTION:Kernel system calls
+abort01 ulimit -c 1024;abort01
+
+accept01 accept01
+accept4_01 accept4_01
+
+access01 access01
+access02 access02
+access03 access03
+access04 access04
+access05 access05
+
+acct01 acct01
+acct02 acct02
+
+adjtimex01 adjtimex01
+adjtimex02 adjtimex02
+
+alarm01 alarm01
+alarm02 alarm02
+alarm03 alarm03
+alarm05 alarm05
+alarm06 alarm06
+alarm07 alarm07
+
+asyncio02 asyncio02
+
+bind01 bind01
+bind02 bind02
+
+brk01 brk01
+
+capget01 capget01
+capget02 capget02
+
+capset01 capset01
+capset02 capset02
+
+chdir01 chdir01
+chdir01A symlink01 -T chdir01
+chdir02 chdir02
+chdir03 chdir03
+chdir04 chdir04
+
+chmod01 chmod01
+chmod01A symlink01 -T chmod01
+chmod02 chmod02
+chmod03 chmod03
+chmod04 chmod04
+chmod05 cp -p $LTPROOT/testcases/bin/change_owner $TMP;chmod05 
+chmod06 cp -p $LTPROOT/testcases/bin/change_owner $TMP;chmod06
+chmod07 chmod07
+
+chown01 chown01
+chown01_16 chown01_16
+chown02 chown02
+chown02_16 chown02_16
+chown03 export change_owner=$LTPROOT/testcases/bin/change_owner;chown03
+chown03_16 export change_owner=$LTPROOT/testcases/bin/change_owner;chown03_16
+chown04 cp -p $LTPROOT/testcases/bin/change_owner $TMP;chown04
+chown04_16 cp -p $LTPROOT/testcases/bin/change_owner $TMP;chown04_16
+chown05 chown05
+chown05_16 chown05_16
+
+chroot01 chroot01
+chroot02 chroot02
+chroot03 chroot03
+chroot04 chroot04
+
+
+clone01 clone01
+clone02 clone02
+clone03 clone03
+clone04 clone04
+clone05 clone05
+clone06 clone06
+clone07 clone07
+
+close01 close01
+close02 close02
+close08 close08
+
+confstr01 confstr01
+
+connect01 connect01
+
+creat01 creat01
+creat03 creat03
+creat04 creat04
+creat05 creat05
+creat06 creat06
+creat07 creat07 -F $LTPROOT/testcases/bin/test1
+creat08 creat08
+creat09 creat09
+
+dup01 dup01
+dup02 dup02
+dup03 dup03
+dup04 dup04
+dup05 dup05
+dup06 dup06
+dup07 dup07
+
+dup201 dup201
+dup202 dup202
+dup203 dup203
+dup204 dup204
+dup205 dup205
+
+dup3_01 dup3_01
+
+epoll_create2_01 epoll_create2_01
+epoll01 epoll-ltp
+
+eventfd01 eventfd01
+
+eventfd2_01 eventfd2_01
+eventfd2_02 eventfd2_02
+
+execl01 execl01
+execle01 execle01
+execlp01 execlp01
+
+execv01 execv01
+execve01 execve01
+execve02 execve02 -F $LTPROOT/testcases/bin/test3
+execve03 execve03
+execve04 cp -f $LTPROOT/testcases/bin/test3 $TMP; execve04 -F test3
+execve05 execve05 -F $LTPROOT/testcases/bin/test3
+execve06 execve06 20 $LTPROOT/testcases/bin/execve06 $LTPROOT/testcases/bin/execve06 4
+execvp01 execvp01
+
+exit01 exit01
+exit02 exit02
+
+#faccessat test cases
+faccessat01 faccessat01
+
+#fallocate test cases
+fallocate01 fallocate01
+fallocate02 fallocate02
+fallocate03 fallocate03
+
+#posix_fadvise test cases
+posix_fadvise01                      posix_fadvise01
+posix_fadvise01_64                posix_fadvise01_64
+posix_fadvise02                      posix_fadvise02
+posix_fadvise02_64                posix_fadvise02_64
+posix_fadvise03                      posix_fadvise03
+posix_fadvise03_64                posix_fadvise03_64
+posix_fadvise04                      posix_fadvise04
+posix_fadvise04_64                posix_fadvise04_64
+
+fchdir01 fchdir01
+fchdir02 fchdir02
+fchdir03 fchdir03
+
+fchmod01 fchmod01
+fchmod02 fchmod02
+fchmod03 fchmod03
+fchmod04 fchmod04
+fchmod05 cp -p $LTPROOT/testcases/bin/change_owner $TMP;fchmod05 
+fchmod06 cp -p $LTPROOT/testcases/bin/change_owner $TMP;fchmod06
+fchmod07 fchmod07
+
+#fchmodat test cases
+fchmodat01 fchmodat01
+
+fchown01 fchown01
+fchown01_16 fchown01_16
+fchown02 fchown02
+fchown02_16 fchown02_16
+fchown03 cp -p $LTPROOT/testcases/bin/change_owner $TMP;fchown03
+fchown03_16 cp -p $LTPROOT/testcases/bin/change_owner $TMP;fchown03_16
+fchown04 export change_owner=$LTPROOT/testcases/bin/change_owner;fchown04
+fchown04_16 export change_owner=$LTPROOT/testcases/bin/change_owner;fchown04_16
+fchown05 fchown05
+fchown05_16 fchown05_16
+
+#fchownat test case
+fchownat01 fchownat01
+
+fcntl01 fcntl01
+fcntl01_64 fcntl01_64
+fcntl02 fcntl02
+fcntl02_64 fcntl02_64
+fcntl03 fcntl03
+fcntl03_64 fcntl03_64
+fcntl04 fcntl04
+fcntl04_64 fcntl04_64
+fcntl05 fcntl05
+fcntl05_64 fcntl05_64
+fcntl06 fcntl06
+fcntl06_64 fcntl06_64
+fcntl07 fcntl07
+fcntl07_64 fcntl07_64
+fcntl07B fcntl07B
+fcntl07B_64 fcntl07B_64
+fcntl08 fcntl08
+fcntl08_64 fcntl08_64
+fcntl09 fcntl09
+fcntl09_64 fcntl09_64
+fcntl10 fcntl10
+fcntl10_64 fcntl10_64
+fcntl11 fcntl11
+fcntl11_64 fcntl11_64
+fcntl12 fcntl12
+fcntl12_64 fcntl12_64
+fcntl13 fcntl13
+fcntl13_64 fcntl13_64
+fcntl14 fcntl14
+fcntl14_64 fcntl14_64
+fcntl15 fcntl15
+fcntl15_64 fcntl15_64
+fcntl16 fcntl16
+fcntl16_64 fcntl16_64
+fcntl17 fcntl17
+fcntl17_64 fcntl17_64
+fcntl18 fcntl18
+fcntl18_64 fcntl18_64
+fcntl19 fcntl19
+fcntl19_64 fcntl19_64
+fcntl20 fcntl20
+fcntl20_64 fcntl20_64
+fcntl21 fcntl21
+fcntl21_64 fcntl21_64
+fcntl22 fcntl22
+fcntl22_64 fcntl22_64
+fcntl23 fcntl23
+fcntl23_64 fcntl23_64
+fcntl24 fcntl24
+fcntl24_64 fcntl24_64
+fcntl25 fcntl25
+fcntl25_64 fcntl25_64
+fcntl26 fcntl26
+fcntl26_64 fcntl26_64
+fcntl27 fcntl27
+fcntl27_64 fcntl27_64
+fcntl28 fcntl28
+fcntl28_64 fcntl28_64
+
+fdatasync01 fdatasync01
+fdatasync02 fdatasync02
+
+flock01 flock01
+flock02 flock02
+flock03 flock03
+flock04 flock04
+flock05 flock05
+flock06 flock06
+
+fmtmsg01 fmtmsg01
+
+fork01 fork01
+fork02 fork02
+fork03 fork03
+fork04 fork04
+fork05 fork05
+fork06 fork06
+fork07 fork07
+fork08 fork08
+fork09 fork09
+fork10 fork10
+fork11 fork11
+
+fpathconf01 fpathconf01
+
+fstat01 fstat01
+fstat01_64 fstat01_64
+fstat02 fstat02
+fstat02_64 fstat02_64
+fstat03 fstat03
+fstat03_64 fstat03_64
+fstat04 fstat04
+fstat04_64 fstat04_64
+fstat05 fstat05
+fstat05_64 fstat05_64
+
+#fstatat64/newfstatat test cases
+fstatat01 fstatat01
+fstatat01_64 fstatat01_64
+
+fstatfs01 fstatfs01
+fstatfs01_64 fstatfs01_64
+fstatfs02 fstatfs02
+fstatfs02_64 fstatfs02_64
+
+fsync01 fsync01
+fsync02 fsync02
+fsync03 fsync03
+
+ftruncate01 ftruncate01
+ftruncate01_64 ftruncate01_64
+ftruncate02 ftruncate02
+ftruncate02_64 ftruncate02_64
+ftruncate03 ftruncate03
+ftruncate03_64 ftruncate03_64
+ftruncate04 ftruncate04
+ftruncate04_64 ftruncate04_64
+
+#futimesat test cases
+futimesat01 futimesat01
+
