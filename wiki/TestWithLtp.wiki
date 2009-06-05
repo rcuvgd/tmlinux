@@ -5,7 +5,29 @@ This page describes how to test tmlinux using LTP. The Linux™ Test Project (LT
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==1. checkout LTP==
+checkout LTP using the following command:
+{{{
+svn checkout http://tmlinux.googlecode.com/svn/trunk/ltp-base
+}}}
+
+Let's suppose you checkout ltp-base at *_/home/guohr/workdir/tmlinux/ltp-base_*
+
+==2. Set compiler and PATH environment==
+Edit *_Makefile_* at *_/home/guohr/workdir/tmlinux/ltp-base/_* and set CROSS_COMPILE as the compiler prefix you are using.
+
+For PNX1500 nohost, you should set CROSS_COMPIL as *_trimedia-gss-linux-tcs-pnx1500el_fp64-uclibc-_*
+
+And then set PATH environment variable, so that shell can find the compiler you are using.
+For PNX1500 nohost, you should set PATH using the following command:
+{{{
+export PATH=$PATH:/home/guohr/workdir/tmlinux/sysroots/pnx1500_nohost_uclibc/x86-linux2/
+}}}
+
+==3. Build and Install LTP==
+Now build and install ltp using the following commands:
+{{{
+cd /home/guohr/workdir/tmlinux/ltp-base
+make uclinux
+sudo make uclinux_install
+}}}
