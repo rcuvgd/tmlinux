@@ -9,8 +9,8 @@ This page describes which devices have been validated on which board.
 
 == MBE MDS1500==
 
-||  device name  ||  vendor ID || device ID || chip URL || note    ||
-||  [http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16 rtl8139]      ||  0x10EC    || 0x8139    ||         ||         ||
-||  [http://www.moschip.com/mcs9835.php MCS9835]      ||            ||           ||           ||        ||
+||  device name  ||  vendor ID || device ID || chip description || note    ||
+||  [http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16 rtl8139] ||  0x10EC || 0x8139    ||   Realtek RTL8139 Family PCI Fast Ethernet NIC      ||         ||
+||  [http://www.moschip.com/mcs9835.php MCS9835]      || 0x9710 || 0x9835  ||  2 serial, 1 LPT port PCI Card         ||     || 
 
 == HTC EDVR1500==
