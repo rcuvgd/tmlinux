@@ -1,0 +1,12 @@
+#summary This page describes how to make sure new members have the right permission.
+
+= Introduction =
+
+This page tells new members of tmlinux, how to make sure they have the right permission
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
