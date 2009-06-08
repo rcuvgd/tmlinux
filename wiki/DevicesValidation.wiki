@@ -10,7 +10,7 @@ This page describes which devices have been validated on which board.
 == MBE MDS1500==
 
 ||  device name  ||  vendor ID || device ID || chip URL || note    ||
-||  rtl8139      ||  0x10EC    || 0x8139    || http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16        ||         ||
-||  MCS9835      ||            ||           || http://www.moschip.com/mcs9835.php          ||        ||
+||  [http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16 rtl8139]      ||  0x10EC    || 0x8139    ||         ||         ||
+||  [http://www.moschip.com/mcs9835.php MCS9835]      ||            ||           ||           ||        ||
 
 == HTC EDVR1500==
