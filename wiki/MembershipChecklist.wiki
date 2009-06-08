@@ -2,11 +2,35 @@
 
 = Introduction =
 
-This page tells new members of tmlinux, how to make sure they have the right permission
+This page tells new members of tmlinux, how to make sure they have the right permission. <br>
+To validate your membership of tmlinux, you need to make sure:
+ # You can checkin source code.
+ # You can submit an issue.
+ # You can edit wiki.
+
+By the way, if you want to checkin linux kernel source code to git repos, you need to register at http://www.github.com. And then tell me your account. I will enable your membership of linux-2.6-trimedia.
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+==1 checkin source code==
+
+ # Login http://www.google.com using your google account
+ # open at http://code.google.com/p/tmlinux/source/checkout, and you will find the message "When prompted, enter your generated googlecode.com password.". Click googlecode.com password link, you will find your password
+ # checkout source code (e.g: uClibc) using the following command:
+svn checkout https://tmlinux.googlecode.com/svn/trunk/ tmlinux --username $<your google account email address>
+ # Add a very simple file and commit using svn client.
+ # If succeed, it means that you have the right perrmision to checkin source code. If failed, please write email to me.
+
+==2 submit an issue==
+
+ # Login http://www.google.com using your google account.
+ # open http://code.google.com/p/tmlinux/issues/list. And then click "New issue".
+ # write something at summary and description and then click "Submit issue".
+ # If success, it means that you have the right permission to submit an issue. If failed, please write email to me.
+
+==3 edit wiki ==
+
+ # login http://www.google.com using your google account.
+ # Open http://code.google.com/p/tmlinux/wiki/TriMedia. And then click "Edit this page".
+ # Write some information and click "Submit"
+ # If success, it means that you have the right permission to edit wiki. If failed, please write email to me.
