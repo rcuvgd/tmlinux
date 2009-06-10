@@ -7,7 +7,7 @@ This page describes which devices have been validated on which board.
 
 = Details =
 
-== MBE MDS1500==
+== [http://www.mds.com MDS MBE1500]==
 
 ||  *device name*  ||  *vendor ID* || *device ID* || *chip description* || *note*    ||
 ||  [http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16 rtl8139] ||  0x10EC || 0x8139    ||   Realtek RTL8139 Family PCI Fast Ethernet NIC      ||         ||
