@@ -20,12 +20,15 @@ Note 2: MCS9835 can not work on interrupt mode but poll mode. <br>
 == [http://www.fjhtc.com HTC EDVR1500]==
 ||  *device name*  ||  *vendor ID* || *device ID* || *chip description* || *note*    ||
 ||  [http://www.realtek.com.tw/products/productsView.aspx?Langid=1&PNid=14&PFid=6&Level=5&Conn=4&ProdID=16 rtl8139] ||  0x10EC || 0x8139    ||   Realtek RTL8139 Family PCI Fast Ethernet NIC      ||         ||
-||  AN983B ||  0x1317 || 0x0985    ||  ADMTek  PCI Fast Ethernet NIC      ||         ||
-||  VT6105 ||  0x1106 || 0x3106    || VIA  PCI Fast Ethernet NIC      ||         ||
-||  DP83815 ||  0x100b || 0x0020    ||  National PCI Fast Ethernet NIC      ||         ||
+||  AN983B ||  0x1317 || 0x0985    ||  ADMTek  PCI Fast Ethernet NIC      || see note 2||
+||  VT6105 ||  0x1106 || 0x3106    || VIA  PCI Fast Ethernet NIC      ||see note 2||
+||  DP83815 ||  0x100b || 0x0020    ||  National PCI Fast Ethernet NIC      ||see note 2||
+||  I82559 ||  0x8086 || 0x1209    ||  Intel PCI Fast Ethernet NIC      ||see note 3||
 ||  [http://www.moschip.com/mcs9835.php MCS9835]      || 0x9710 || 0x9835  ||  2 serial, 1 LPT port PCI Card         || see note 1    || 
 ||  [http://www.ite.com.tw IT8212F]      || 0x1283 || 0x8212  || 2 IDE channels PCI Card         || || 
 ||  CMD649      || 0x1095 || 0x0649  || 2 IDE channels PCI Card         || || 
 ||  siimage 680  || 0x1095 || 0x0680  || 2 IDE channels PCI Card         || || 
 
 Note 1: LPT port of MCS9835 has not been validated.<br>
+Note 2: You must set rx_copybreak>1518 to close zero-copy.
+Note 3: If you use the eepro100.c driver, must close zero-copy. It's nothing to do if you use the e100.c drier.
