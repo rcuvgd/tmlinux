@@ -30,5 +30,5 @@ Note 2: MCS9835 can not work on interrupt mode but poll mode. <br>
 ||  siimage 680  || 0x1095 || 0x0680  || 2 IDE channels PCI Card         || || 
 
 Note 1: LPT port of MCS9835 has not been validated.<br>
-Note 2: You must set rx_copybreak>1518 to close zero-copy.
-Note 3: If you use the eepro100.c driver, must close zero-copy. It's nothing to do if you use the e100.c drier.
+Note 2: You must set rx_copybreak>1518 to close zero-copy.<br>
+Note 3: If you use the eepro100.c driver, must close zero-copy. It's nothing to do if you use the e100.c drier.<br>
